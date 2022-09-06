@@ -1,0 +1,14 @@
+C:\Users\Fabricio Barrios\source\repos\Libraries\Libraries\obj\Debug\netcoreapp3.1\Libraries.csproj.AssemblyReference.cache
+C:\Users\Fabricio Barrios\source\repos\Libraries\Libraries\obj\Debug\netcoreapp3.1\Libraries.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Fabricio Barrios\source\repos\Libraries\Libraries\obj\Debug\netcoreapp3.1\Libraries.AssemblyInfoInputs.cache
+C:\Users\Fabricio Barrios\source\repos\Libraries\Libraries\obj\Debug\netcoreapp3.1\Libraries.AssemblyInfo.cs
+C:\Users\Fabricio Barrios\source\repos\Libraries\Libraries\obj\Debug\netcoreapp3.1\Libraries.csproj.CoreCompileInputs.cache
+C:\Users\Fabricio Barrios\source\repos\Libraries\Libraries\bin\Debug\netcoreapp3.1\Libraries.exe
+C:\Users\Fabricio Barrios\source\repos\Libraries\Libraries\bin\Debug\netcoreapp3.1\Libraries.deps.json
+C:\Users\Fabricio Barrios\source\repos\Libraries\Libraries\bin\Debug\netcoreapp3.1\Libraries.runtimeconfig.json
+C:\Users\Fabricio Barrios\source\repos\Libraries\Libraries\bin\Debug\netcoreapp3.1\Libraries.runtimeconfig.dev.json
+C:\Users\Fabricio Barrios\source\repos\Libraries\Libraries\bin\Debug\netcoreapp3.1\Libraries.dll
+C:\Users\Fabricio Barrios\source\repos\Libraries\Libraries\bin\Debug\netcoreapp3.1\Libraries.pdb
+C:\Users\Fabricio Barrios\source\repos\Libraries\Libraries\obj\Debug\netcoreapp3.1\Libraries.dll
+C:\Users\Fabricio Barrios\source\repos\Libraries\Libraries\obj\Debug\netcoreapp3.1\Libraries.pdb
+C:\Users\Fabricio Barrios\source\repos\Libraries\Libraries\obj\Debug\netcoreapp3.1\Libraries.genruntimeconfig.cache

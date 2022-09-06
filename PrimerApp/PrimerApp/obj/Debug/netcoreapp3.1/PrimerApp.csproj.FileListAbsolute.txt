@@ -1,0 +1,14 @@
+C:\Users\Fabricio Barrios\source\repos\PrimerApp\PrimerApp\obj\Debug\netcoreapp3.1\PrimerApp.csproj.AssemblyReference.cache
+C:\Users\Fabricio Barrios\source\repos\PrimerApp\PrimerApp\obj\Debug\netcoreapp3.1\PrimerApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Fabricio Barrios\source\repos\PrimerApp\PrimerApp\obj\Debug\netcoreapp3.1\PrimerApp.AssemblyInfoInputs.cache
+C:\Users\Fabricio Barrios\source\repos\PrimerApp\PrimerApp\obj\Debug\netcoreapp3.1\PrimerApp.AssemblyInfo.cs
+C:\Users\Fabricio Barrios\source\repos\PrimerApp\PrimerApp\obj\Debug\netcoreapp3.1\PrimerApp.csproj.CoreCompileInputs.cache
+C:\Users\Fabricio Barrios\source\repos\PrimerApp\PrimerApp\bin\Debug\netcoreapp3.1\PrimerApp.exe
+C:\Users\Fabricio Barrios\source\repos\PrimerApp\PrimerApp\bin\Debug\netcoreapp3.1\PrimerApp.deps.json
+C:\Users\Fabricio Barrios\source\repos\PrimerApp\PrimerApp\bin\Debug\netcoreapp3.1\PrimerApp.runtimeconfig.json
+C:\Users\Fabricio Barrios\source\repos\PrimerApp\PrimerApp\bin\Debug\netcoreapp3.1\PrimerApp.runtimeconfig.dev.json
+C:\Users\Fabricio Barrios\source\repos\PrimerApp\PrimerApp\bin\Debug\netcoreapp3.1\PrimerApp.dll
+C:\Users\Fabricio Barrios\source\repos\PrimerApp\PrimerApp\bin\Debug\netcoreapp3.1\PrimerApp.pdb
+C:\Users\Fabricio Barrios\source\repos\PrimerApp\PrimerApp\obj\Debug\netcoreapp3.1\PrimerApp.dll
+C:\Users\Fabricio Barrios\source\repos\PrimerApp\PrimerApp\obj\Debug\netcoreapp3.1\PrimerApp.pdb
+C:\Users\Fabricio Barrios\source\repos\PrimerApp\PrimerApp\obj\Debug\netcoreapp3.1\PrimerApp.genruntimeconfig.cache
