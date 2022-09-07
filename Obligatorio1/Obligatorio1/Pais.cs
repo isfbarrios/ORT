@@ -16,18 +16,6 @@ namespace Obligatorio1
             this.nombre = nombre;
             this.codigo = codigo;
         }
-        public int Id
-        {
-            get { return this.id; }
-        }
-        public String Nombre
-        {
-            get { return this.nombre; }
-        }
-        public String Codigo
-        {
-            get { return this.codigo; }
-        }
         public static bool ValidarNombre(String nombre)
         {
             return Utils.ValidLength(nombre, 1);
@@ -39,6 +27,20 @@ namespace Obligatorio1
         public bool EsPaisVacio()
         {
             return (this.nombre.Length == 0 && this.codigo.Length == 0);
+        }
+
+        //Getters y Setters
+        public int Id
+        {
+            get { return this.id; }
+        }
+        public String Nombre
+        {
+            get { return this.nombre; }
+        }
+        public String Codigo
+        {
+            get { return this.codigo; }
         }
     }
 }

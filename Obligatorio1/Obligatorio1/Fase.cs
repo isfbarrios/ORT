@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Obligatorio1
 {
-    class Fase
+    public enum Fase
     {
+        FASE_DE_GRUPOS,
+        FASE_ELIMINATORIA
     }
 }

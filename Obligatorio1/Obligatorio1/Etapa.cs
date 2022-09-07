@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Obligatorio1
 {
-    class Etapa
+    public enum Etapa
     {
+        OCTAVOS,
+        CUARTOS,
+        SEMIFINAL,
+        FINAL
     }
 }

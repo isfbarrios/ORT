@@ -14,7 +14,20 @@ namespace Obligatorio1
         //Estos puede que no sean para agregar acá
         private Fase fase;
         private Etapa etapa;
-        
+
+        public Partido() {}
+
+        public Partido(Seleccion seleccion, DateTime fecha, Resultado resultado, Fase fase, Etapa etapa)
+        {
+            this.seleccion = seleccion;
+            this.fecha = fecha;
+            this.finalizado = false;
+            this.resultado = resultado;
+            this.fase = fase;
+            this.etapa = etapa;
+        }
+
+        //Getters & Setters
         public int Id
         {
             get { return this.id; }
