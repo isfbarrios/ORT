@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Obligatorio1
+namespace Dominio
 {
-    public enum Fase
+    enum Fase
     {
         FASE_DE_GRUPOS,
         FASE_ELIMINATORIA

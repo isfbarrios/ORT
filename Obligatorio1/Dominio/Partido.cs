@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Obligatorio1
+namespace Dominio
 {
     class Partido
     {
@@ -15,7 +15,7 @@ namespace Obligatorio1
         private Fase fase;
         private Etapa etapa;
 
-        public Partido() {}
+        public Partido() { }
 
         public Partido(Seleccion seleccion, DateTime fecha, Resultado resultado, Fase fase, Etapa etapa)
         {

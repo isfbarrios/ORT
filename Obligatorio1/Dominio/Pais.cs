@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Obligatorio1
+namespace Dominio
 {
     class Pais
     {
@@ -10,7 +10,7 @@ namespace Obligatorio1
         private String nombre;
         private String codigo;
 
-        public Pais() {}
+        public Pais() { }
         public Pais(String nombre, String codigo)
         {
             this.nombre = nombre;

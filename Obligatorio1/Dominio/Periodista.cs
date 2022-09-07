@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Obligatorio1
+namespace Dominio
 {
     class Periodista
     {
@@ -13,8 +13,7 @@ namespace Obligatorio1
         private String password;
         private List<Resena> resenas;
 
-
-        public Periodista() {}
+        public Periodista() { }
 
         public Periodista(String nombre, String apellido, String mail, String password)
         {
@@ -32,7 +31,8 @@ namespace Obligatorio1
             {
                 Resena resena = new Resena(this, fecha, titulo, contenido);
                 resenas.Add(resena);
-                Program.resenas.Add(resena);
+                Administradora
+                Administradora.Resenas.Add(resena);
             }
 
             return retVal;

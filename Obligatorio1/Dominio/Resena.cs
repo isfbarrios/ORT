@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Obligatorio1
+namespace Dominio
 {
     class Resena
     {
@@ -13,9 +13,9 @@ namespace Obligatorio1
         private String titulo;
         private String contenido;
 
-        public Resena() {}
+        public Resena() { }
 
-        public Resena(Periodista periodista, DateTime fecha, String titulo, String contenido) 
+        public Resena(Periodista periodista, DateTime fecha, String titulo, String contenido)
         {
             this.periodista = periodista;
             this.fecha = fecha;

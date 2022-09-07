@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Obligatorio1
+namespace Dominio
 {
-    class Resultado
+    enum Pie
     {
+        DERECHO,
+        IZQUIERDO,
+        AMBOS
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Obligatorio1
+namespace Dominio
 {
     class Seleccion
     {
@@ -10,7 +10,7 @@ namespace Obligatorio1
         private Pais pais;
         private List<Jugador> jugadores;
 
-        public Seleccion() {}
+        public Seleccion() { }
         public Seleccion(Pais pais)
         {
             this.pais = pais;
