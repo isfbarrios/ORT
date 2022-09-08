@@ -31,8 +31,8 @@ namespace Dominio
             {
                 Resena resena = new Resena(this, fecha, titulo, contenido);
                 resenas.Add(resena);
-                Administradora
-                Administradora.Resenas.Add(resena);
+
+                Administradora.Instance.Resenas.Add(resena);
             }
 
             return retVal;
