@@ -6,15 +6,20 @@ namespace Dominio
 {
     class Seleccion
     {
+        //Atributos
         private int id;
         private Pais pais;
         private List<Jugador> jugadores;
 
-        public Seleccion() { }
-        public Seleccion(Pais pais)
+        //Constructores
+        public Seleccion() {}
+        public Seleccion(Pais pais, List<Jugador> jugadores)
         {
             this.pais = pais;
+            this.jugadores = jugadores;
         }
+
+        //Getters && Setters
         public int Id
         {
             get { return this.id; }

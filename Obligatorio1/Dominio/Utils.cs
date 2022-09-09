@@ -68,5 +68,11 @@ namespace Dominio
             if (a.Length >= b) return true;
             return false;
         }
+        public static int autoIncrementoId(List<Object> lista)
+        {
+            int retVal = 1;
+            retVal = lista.Count > 0 ? lista.Count : retVal;
+            return retVal;
+        }
     }
 }

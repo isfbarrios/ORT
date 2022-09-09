@@ -23,6 +23,18 @@ namespace Dominio
             this.password = password;
         }
 
+        public bool crearPeriodista(String nombre, String apellido, String mail, String password)
+        {
+            bool retVal = false;
+            if (ValidarNombre(nombre, apellido) && ValidarMail(mail) && ValidarPassword(password))
+            {
+                Periodista periodista = new Periodista(nombre, apellido, mail, password);
+                Administradora.Instance.Periodistas.Add(periodista);
+                retVal = true;
+            }
+            return retVal;
+        }
+
         public bool crearResena(String titulo, String contenido)
         {
             bool retVal = false;
@@ -41,22 +53,27 @@ namespace Dominio
         /// <summary>
         /// Valida que el password cumpla con el largo requerido.
         /// </summary>
-        public static bool ValidPassword(String pass)
+        public static bool ValidarPassword(String pass)
         {
             return Utils.ValidLength(pass, 8);
         }
         /// <summary>
         /// Valida que el mail contenga un @, pero no se encuentre en la primer o última posición.
         /// </summary>
-        public static bool ValidMail(String mail)
+        public static bool ValidarMail(String mail)
         {
             if (mail.Length > 0 && mail.IndexOf("@") > 0)
             {
-                if (!mail.StartsWith("@") && !mail.EndsWith("@"))
-                {
-                    return true;
-                }
+                if (!mail.StartsWith("@") && !mail.EndsWith("@")) return true;
             }
+            return false;
+        }
+        /// <summary>
+        /// Valida que el nombre completo del periodista sea valido.
+        /// </summary>
+        public static bool ValidarNombre(String nombre, String apellido)
+        {
+            if (nombre.Length > 0 && apellido.Length > 0) return true;
             return false;
         }
 

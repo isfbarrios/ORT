@@ -6,6 +6,7 @@ namespace Dominio
 {
     class Jugador
     {
+        //Atributos
         private int id;
         private String nombre;
         private int numeroCamiseta;
@@ -17,6 +18,20 @@ namespace Dominio
         private Pais nacionalidad;
         private Categoria categoria;
 
+        //Constructores
+        public Jugador() {}
+
+        public Jugador(String nombre, int numeroCamiseta, DateTime fechaNacimiento, int alturaCM, Pie pieHabil, Pais nacionalidad)
+        {
+            this.nombre = nombre;
+            this.numeroCamiseta = numeroCamiseta;
+            this.fechaNacimiento = fechaNacimiento;
+            this.alturaCM = alturaCM;
+            this.pieHabil = pieHabil;
+            this.nacionalidad = nacionalidad;
+        }
+
+        //Getters && Setters
         public int Id
         {
             get { return this.id; }
@@ -75,5 +90,6 @@ namespace Dominio
         {
             return (alturaCM > 0);
         }
+
     }
 }
