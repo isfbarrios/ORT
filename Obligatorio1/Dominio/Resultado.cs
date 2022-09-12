@@ -6,5 +6,8 @@ namespace Dominio
 {
     class Resultado
     {
+        private int id;
+        private Partido partido;
+
     }
 }

@@ -6,6 +6,8 @@ namespace Dominio
 {
     class Resena
     {
+        //Atributos
+        private static int autoIncrementId;
         private int id;
         private Periodista periodista;
         private Partido partido;
@@ -13,10 +15,15 @@ namespace Dominio
         private String titulo;
         private String contenido;
 
-        public Resena() { }
+        //Constructores
+        public Resena() 
+        {
+            this.id = ++autoIncrementId;
+        }
 
         public Resena(Periodista periodista, DateTime fecha, String titulo, String contenido)
         {
+            this.id = ++autoIncrementId;
             this.periodista = periodista;
             this.fecha = fecha;
             this.titulo = titulo;

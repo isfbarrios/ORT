@@ -6,16 +6,25 @@ namespace Dominio
 {
     class Pais
     {
+        //Atributos
+        private static int autoIncrementId;
         private int id;
         private String nombre;
         private String codigo;
-
-        public Pais() { }
+        
+        //Constructores
+        public Pais() 
+        {
+            this.id = ++autoIncrementId;
+        }
         public Pais(String nombre, String codigo)
         {
+            this.id = ++autoIncrementId;
             this.nombre = nombre;
             this.codigo = codigo;
         }
+
+        //Funcionalidades
         public static bool ValidarNombre(String nombre)
         {
             return Utils.ValidLength(nombre, 1);

@@ -16,21 +16,6 @@ namespace Dominio
         private static List<Resultado> resultados = new List<Resultado>();
         private static List<Resena> resenas = new List<Resena>();
 
-        private static int paisId;
-        private static int seleccionId;
-        private static int jugadorId;
-        private static int partidoId;
-        private static int resultadoId;
-        private static int resenaId;
-
-        public int PaisId
-        {
-            get
-            {
-                return Administradora.paisId++;
-            }
-        }
-
         private Administradora() { }
 
         public static Administradora Instance
@@ -41,6 +26,7 @@ namespace Dominio
                 return instance;
             }
         }
+        //Getters & Setters
         public List<Pais> Paises { get; }
         public List<Seleccion> Selecciones { get; }
         public List<Jugador> Jugadores { get; }
@@ -48,6 +34,5 @@ namespace Dominio
         public List<Resultado> Resultados { get; }
         public List<Resena> Resenas { get; }
         public List<Periodista> Periodistas { get; }
-
     }
 }

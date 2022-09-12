@@ -6,6 +6,8 @@ namespace Dominio
 {
     class Periodista
     {
+        //Atributos
+        private static int autoIncrementId;
         private int id;
         private String nombre;
         private String apellido;
@@ -13,10 +15,15 @@ namespace Dominio
         private String password;
         private List<Resena> resenas;
 
-        public Periodista() { }
+        //Constructores
+        public Periodista() 
+        {
+            this.id = ++autoIncrementId;
+        }
 
         public Periodista(String nombre, String apellido, String mail, String password)
         {
+            this.id = ++autoIncrementId;
             this.nombre = nombre;
             this.apellido = apellido;
             this.mail = mail;

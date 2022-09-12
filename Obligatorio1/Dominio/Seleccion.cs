@@ -7,14 +7,19 @@ namespace Dominio
     class Seleccion
     {
         //Atributos
+        private static int autoIncrementId;
         private int id;
         private Pais pais;
         private List<Jugador> jugadores;
 
         //Constructores
-        public Seleccion() {}
+        public Seleccion()
+        {
+            this.id = ++autoIncrementId;
+        }
         public Seleccion(Pais pais, List<Jugador> jugadores)
         {
+            this.id = ++autoIncrementId;
             this.pais = pais;
             this.jugadores = jugadores;
         }

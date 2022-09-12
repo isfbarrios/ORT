@@ -7,6 +7,7 @@ namespace Dominio
     class Jugador
     {
         //Atributos
+        private static int autoIncrementId;
         private int id;
         private String nombre;
         private int numeroCamiseta;
@@ -19,10 +20,14 @@ namespace Dominio
         private Categoria categoria;
 
         //Constructores
-        public Jugador() {}
+        public Jugador() 
+        {
+            this.id = ++autoIncrementId;
+        }
 
         public Jugador(String nombre, int numeroCamiseta, DateTime fechaNacimiento, int alturaCM, Pie pieHabil, Pais nacionalidad)
         {
+            this.id = ++autoIncrementId;
             this.nombre = nombre;
             this.numeroCamiseta = numeroCamiseta;
             this.fechaNacimiento = fechaNacimiento;

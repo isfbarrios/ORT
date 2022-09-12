@@ -6,6 +6,8 @@ namespace Dominio
 {
     class Partido
     {
+        //Atributos
+        private static int autoIncrementId;
         private int id;
         private Seleccion seleccion;
         private DateTime fecha;
@@ -15,10 +17,15 @@ namespace Dominio
         private Fase fase;
         private Etapa etapa;
 
-        public Partido() { }
+        //Constructores
+        public Partido() 
+        {
+            this.id = ++autoIncrementId;
+        }
 
         public Partido(Seleccion seleccion, DateTime fecha, Resultado resultado, Fase fase, Etapa etapa)
         {
+            this.id = ++autoIncrementId;
             this.seleccion = seleccion;
             this.fecha = fecha;
             this.finalizado = false;
