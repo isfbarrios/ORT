@@ -10,14 +10,15 @@ namespace Dominio
         private static int autoIncrementId;
         private int id;
         private String nombre;
-        private int numeroCamiseta;
+        private String numeroCamiseta;
         private DateTime fechaNacimiento;
         private int alturaCM;
         private Pie pieHabil;
-        private float valorMercado;
+        private int valorMercado;
         private Moneda moneda;
         private Pais nacionalidad;
         private Categoria categoria;
+        private Posicion posicion;
 
         //Constructores
         public Jugador() 
@@ -25,15 +26,24 @@ namespace Dominio
             this.id = ++autoIncrementId;
         }
 
-        public Jugador(String nombre, int numeroCamiseta, DateTime fechaNacimiento, int alturaCM, Pie pieHabil, Pais nacionalidad)
+        public Jugador(String numeroCamiseta, String nombre, DateTime fechaNacimiento, 
+            int alturaCM, Pie pieHabil, int valorMercado, Moneda moneda, Pais nacionalidad, Posicion posicion)
         {
             this.id = ++autoIncrementId;
-            this.nombre = nombre;
             this.numeroCamiseta = numeroCamiseta;
+            this.nombre = nombre;
             this.fechaNacimiento = fechaNacimiento;
             this.alturaCM = alturaCM;
             this.pieHabil = pieHabil;
+            this.valorMercado = valorMercado;
+            this.moneda = moneda;
             this.nacionalidad = nacionalidad;
+            this.posicion = posicion;
+        }
+
+        public static void AltaJugador(Jugador jugador)
+        {
+           Administradora.Instance.Jugadores.Add(jugador);
         }
 
         //Getters && Setters
@@ -45,7 +55,11 @@ namespace Dominio
         {
             get { return this.nombre; }
         }
-        public int NumeroCamiseta
+        public Posicion Posicion
+        {
+            get { return this.posicion; }
+        }
+        public String NumeroCamiseta
         {
             get { return this.numeroCamiseta; }
         }
@@ -61,7 +75,7 @@ namespace Dominio
         {
             get { return this.pieHabil; }
         }
-        public float ValorMercado
+        public int ValorMercado
         {
             get { return this.valorMercado; }
         }

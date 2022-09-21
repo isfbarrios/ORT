@@ -25,6 +25,10 @@ namespace Dominio
         }
 
         //Funcionalidades
+        public static void AltaPais(Pais pais)
+        {
+            Administradora.Instance.Paises.Add(pais);
+        }
         public static bool ValidarNombre(String nombre)
         {
             return Utils.ValidLength(nombre, 1);
@@ -36,6 +40,15 @@ namespace Dominio
         public bool EsPaisVacio()
         {
             return (this.nombre.Length == 0 && this.codigo.Length == 0);
+        }
+
+        public static Pais GetPais(String nombre)
+        {
+            foreach (Pais pais in Administradora.Instance.Paises)
+            {
+                if (pais.Nombre == nombre) return pais;
+            }
+            return null;
         }
 
         //Getters y Setters

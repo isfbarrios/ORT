@@ -17,11 +17,57 @@ namespace Dominio
         {
             this.id = ++autoIncrementId;
         }
-        public Seleccion(Pais pais, List<Jugador> jugadores)
+        public Seleccion(Pais pais)
         {
             this.id = ++autoIncrementId;
             this.pais = pais;
-            this.jugadores = jugadores;
+        }
+        //
+        private void PrecargaSelecciones()
+        {
+            //Contamos con países y jugadores, la seleccion debe armar para cada pais una seleccion
+            foreach (Pais pais in Administradora.Instance.Paises)
+            {
+                //Se crea una seleccion por cada país en la lista.
+                Seleccion nuevaSeleccion = new Seleccion(pais);
+                List<Jugador> jugadores = ListarJugadores(pais);
+                //Recorro los jugadores de dicha selección
+                foreach (Jugador j in jugadores)
+                {
+                    nuevaSeleccion.AgregarJugador(j);
+                }
+                AltaSeleccion(nuevaSeleccion);
+            }
+        }
+
+        /// <summary>
+        /// Retorna todos los jugadores de una selección, a partir del país del jugador.
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns>Lista de jugadores del país seleccionado</returns>
+        private List<Jugador> ListarJugadores(Pais pais)
+        {
+            List<Jugador> jugadores = new List<Jugador>();
+            foreach (Jugador j in Jugadores)
+            {
+               /*
+                if (j.Pais.Nombre.Equals(p.Nombre))
+                {
+                    _misJugadores.Add(j);
+                }
+               */
+            }
+            return jugadores;
+        }
+
+        private bool AgregarJugador(Jugador jugador)
+        {
+            return true;
+        }
+
+        private bool AltaSeleccion(Seleccion seleccion)
+        {
+            return true;
         }
 
         //Getters && Setters

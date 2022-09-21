@@ -4,10 +4,11 @@ using System.Text;
 
 namespace Dominio
 {
-    enum Pie
+    public enum Pie
     {
+        NO_DEFINIDO,
+        AMBIDIESTRO,
         DERECHO,
-        IZQUIERDO,
-        AMBOS
+        IZQUIERDO
     }
 }

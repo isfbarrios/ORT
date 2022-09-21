@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Dominio
 {
-    enum Moneda
+    public enum Moneda
     {
-        EUROS,
-        DOLARES
+        EUROS
     }
 }
