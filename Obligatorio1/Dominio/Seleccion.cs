@@ -22,52 +22,65 @@ namespace Dominio
             this.id = ++autoIncrementId;
             this.pais = pais;
         }
-        //
-        private void PrecargaSelecciones()
+
+        /// <summary>
+        /// Genera el alta de la Seleccion en el sistema.
+        /// </summary>
+        private bool AltaSeleccion(Seleccion seleccion)
+        {
+            bool retVal = false;
+            //Si el pais es valido y tiene al menos once jugadores, lo guardo
+            if (this.EsSeleccionValida())
+            {
+                Administradora.Instance.Selecciones.Add(seleccion);
+                retVal = true;
+            }
+            return retVal;
+        }
+        /// <summary>
+        /// Realiza la precarga de datos de Seleccion en el sistema.
+        /// </summary>
+        public void PrecargaSelecciones()
         {
             //Contamos con países y jugadores, la seleccion debe armar para cada pais una seleccion
             foreach (Pais pais in Administradora.Instance.Paises)
             {
                 //Se crea una seleccion por cada país en la lista.
                 Seleccion nuevaSeleccion = new Seleccion(pais);
+
                 List<Jugador> jugadores = ListarJugadores(pais);
+
                 //Recorro los jugadores de dicha selección
                 foreach (Jugador j in jugadores)
                 {
-                    nuevaSeleccion.AgregarJugador(j);
+                    nuevaSeleccion.Jugadores.Add(j);
                 }
                 AltaSeleccion(nuevaSeleccion);
             }
         }
-
+        /// <summary>
+        /// Retorna TRUE o FALSE si la seleccion es valida o no, respectivamente.
+        /// </summary>
+        public bool EsSeleccionValida()
+        {
+            return (!this.Pais.EsPaisVacio() && this.Jugadores.Count > +11);
+        }
         /// <summary>
         /// Retorna todos los jugadores de una selección, a partir del país del jugador.
         /// </summary>
-        /// <param name="p"></param>
         /// <returns>Lista de jugadores del país seleccionado</returns>
         private List<Jugador> ListarJugadores(Pais pais)
         {
-            List<Jugador> jugadores = new List<Jugador>();
-            foreach (Jugador j in Jugadores)
+            List<Jugador> selJugadores = new List<Jugador>();
+
+            foreach (Jugador j in Administradora.Instance.Jugadores)
             {
-               /*
-                if (j.Pais.Nombre.Equals(p.Nombre))
+                if (j.Pais.Equals(pais))
                 {
-                    _misJugadores.Add(j);
+                    selJugadores.Add(j);
                 }
-               */
             }
-            return jugadores;
-        }
-
-        private bool AgregarJugador(Jugador jugador)
-        {
-            return true;
-        }
-
-        private bool AltaSeleccion(Seleccion seleccion)
-        {
-            return true;
+            return selJugadores;
         }
 
         //Getters && Setters

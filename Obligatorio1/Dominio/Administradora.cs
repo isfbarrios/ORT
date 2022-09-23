@@ -43,7 +43,7 @@ namespace Dominio
             {
                 //Alta de jugadores
                 PreLoadJugadores();
-                PreLoadPais
+                PreLoadPais();
             }
             catch (Exception)
             {

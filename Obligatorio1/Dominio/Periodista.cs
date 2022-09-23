@@ -30,18 +30,28 @@ namespace Dominio
             this.password = password;
         }
 
-        public bool crearPeriodista(String nombre, String apellido, String mail, String password)
+        /// <summary>
+        /// Genera el alta del Periodista en el sistema.
+        /// </summary>
+        private bool AltaSeleccion(Seleccion seleccion)
+        {
+            //Si el pais es valido y tiene al menos once jugadores, lo guardo
+            return true;
+        }
+        public bool AltaPeriodista(Periodista periodista)
         {
             bool retVal = false;
-            if (ValidarNombre(nombre, apellido) && ValidarMail(mail) && ValidarPassword(password))
+            if (periodista.ValidarNombre() && periodista.ValidarMail() && periodista.ValidarPassword())
             {
-                Periodista periodista = new Periodista(nombre, apellido, mail, password);
                 Administradora.Instance.Periodistas.Add(periodista);
                 retVal = true;
             }
             return retVal;
         }
 
+        /// <summary>
+        /// Genera un nuevo objeto Resena en el sistema.
+        /// </summary>
         public bool crearResena(String titulo, String contenido)
         {
             bool retVal = false;
@@ -50,37 +60,35 @@ namespace Dominio
             {
                 Resena resena = new Resena(this, fecha, titulo, contenido);
                 resenas.Add(resena);
-
                 Administradora.Instance.Resenas.Add(resena);
             }
-
             return retVal;
         }
 
         /// <summary>
         /// Valida que el password cumpla con el largo requerido.
         /// </summary>
-        public static bool ValidarPassword(String pass)
+        public bool ValidarPassword()
         {
-            return Utils.ValidLength(pass, 8);
+            return Utils.ValidLength(this.Password, 8);
         }
         /// <summary>
         /// Valida que el mail contenga un @, pero no se encuentre en la primer o última posición.
         /// </summary>
-        public static bool ValidarMail(String mail)
+        public bool ValidarMail()
         {
-            if (mail.Length > 0 && mail.IndexOf("@") > 0)
+            if (this.Mail.Length > 0 && this.Mail.IndexOf("@") > 0)
             {
-                if (!mail.StartsWith("@") && !mail.EndsWith("@")) return true;
+                if (!this.Mail.StartsWith("@") && !this.Mail.EndsWith("@")) return true;
             }
             return false;
         }
         /// <summary>
         /// Valida que el nombre completo del periodista sea valido.
         /// </summary>
-        public static bool ValidarNombre(String nombre, String apellido)
+        public bool ValidarNombre()
         {
-            if (nombre.Length > 0 && apellido.Length > 0) return true;
+            if (this.Nombre.Length > 0 && this.Apellido.Length > 0) return true;
             return false;
         }
 

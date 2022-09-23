@@ -4,10 +4,9 @@ using System.Text;
 
 namespace Dominio
 {
-    class Resultado
+    public enum Resultado
     {
-        private int id;
-        private Partido partido;
+        PENDIENTE
 
     }
 }

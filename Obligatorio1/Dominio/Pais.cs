@@ -25,28 +25,35 @@ namespace Dominio
         }
 
         //Funcionalidades
+
+        /// <summary>
+        /// Genera el alta del Pais en el sistema.
+        /// </summary>
         public static void AltaPais(Pais pais)
         {
-            Administradora.Instance.Paises.Add(pais);
-        }
-        public static bool ValidarNombre(String nombre)
-        {
-            return Utils.ValidLength(nombre, 1);
-        }
-        public static bool ValidarCodigo(String codigo)
-        {
-            return (codigo.Length == 3);
-        }
-        public bool EsPaisVacio()
-        {
-            return (this.nombre.Length == 0 && this.codigo.Length == 0);
+            //Si código tiene tres caracteres y al menos uno, lo guardo
+            if (!pais.EsPaisVacio())
+            {
+                Administradora.Instance.Paises.Add(pais);
+            }
         }
 
+        /// <summary>
+        /// Valida que el objeto sea valido.
+        /// </summary>
+        public bool EsPaisVacio()
+        {
+            return (this.Nombre.Length == 0 && !(this.Codigo.Length == 3));
+        }
+
+        /// <summary>
+        /// Retorna el Pais correspondiente mediante su nombre.
+        /// </summary>
         public static Pais GetPais(String nombre)
         {
             foreach (Pais pais in Administradora.Instance.Paises)
             {
-                if (pais.Nombre == nombre) return pais;
+                if (pais.Nombre.Equals(nombre)) return pais;
             }
             return null;
         }

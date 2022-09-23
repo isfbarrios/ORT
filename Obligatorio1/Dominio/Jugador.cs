@@ -9,15 +9,14 @@ namespace Dominio
         //Atributos
         private static int autoIncrementId;
         private int id;
-        private String nombre;
         private String numeroCamiseta;
+        private String nombre;
         private DateTime fechaNacimiento;
         private int alturaCM;
         private Pie pieHabil;
         private int valorMercado;
         private Moneda moneda;
-        private Pais nacionalidad;
-        private Categoria categoria;
+        private Pais pais;
         private Posicion posicion;
 
         //Constructores
@@ -27,7 +26,7 @@ namespace Dominio
         }
 
         public Jugador(String numeroCamiseta, String nombre, DateTime fechaNacimiento, 
-            int alturaCM, Pie pieHabil, int valorMercado, Moneda moneda, Pais nacionalidad, Posicion posicion)
+            int alturaCM, Pie pieHabil, int valorMercado, Moneda moneda, Pais pais, Posicion posicion)
         {
             this.id = ++autoIncrementId;
             this.numeroCamiseta = numeroCamiseta;
@@ -37,13 +36,51 @@ namespace Dominio
             this.pieHabil = pieHabil;
             this.valorMercado = valorMercado;
             this.moneda = moneda;
-            this.nacionalidad = nacionalidad;
+            this.pais = pais;
             this.posicion = posicion;
         }
 
+        /// <summary>
+        /// Genera el alta del Jugador en el sistema.
+        /// </summary>
         public static void AltaJugador(Jugador jugador)
         {
-           Administradora.Instance.Jugadores.Add(jugador);
+           if (jugador.ValidarNombre() && jugador.ValidarNumeroCamiseta() && jugador.ValidarFechaNacimiento())
+            {
+                if (jugador.ValidarAlturaCM() && !jugador.Pais.EsPaisVacio() && jugador.Posicion.ToString().Length > 0 && jugador.ValorMercado > 0)
+                    Administradora.Instance.Jugadores.Add(jugador);
+            }
+        }
+
+        public bool ValidarNombre()
+        {
+            return (Utils.ValidLength(this.Nombre, 0));
+        }
+        public bool ValidarNumeroCamiseta()
+        {
+            return (Utils.ValidLength(this.NumeroCamiseta, 0));
+        }
+        public bool ValidarFechaNacimiento()
+        {
+            //Date example
+            //DateTime.Parse("1992-09-02");
+            //DateTime thisDate1 = new DateTime(2011, 6, 10); thisDate1.ToString("MMMM dd, yyyy");
+            return (DateTime.Now.ToString("yyyy-MM-dd").Length == this.FechaNacimiento.ToString("dd-MM-yyyy").Length);
+        }
+        /// <summary>
+        /// Valida que la altura del jugador sea valida.
+        /// </summary>
+        public bool ValidarAlturaCM()
+        {
+            return (this.AlturaCM > 0);
+        }
+
+        /// <summary>
+        /// Retorna la categoria correspondiente al valor de mercado del jugador.
+        /// </summary>
+        public TipoCategoria GetCategoria()
+        {
+            return Categoria.AsignarCategoria(this);
         }
 
         //Getters && Setters
@@ -83,32 +120,9 @@ namespace Dominio
         {
             get { return this.moneda; }
         }
-        public Pais Nacionalidad
+        public Pais Pais
         {
-            get { return this.nacionalidad; }
+            get { return this.pais; }
         }
-        public Categoria Categoria
-        {
-            get { return this.categoria; }
-        }
-        public static bool ValidarNombre(String nombre)
-        {
-            return (Utils.ValidLength(nombre, 0));
-        }
-        public static bool ValidarNumeroCamiseta(int numeroCamiseta)
-        {
-            return (numeroCamiseta > 0);
-        }
-        public static bool ValidarFechaNacimiento(DateTime fechaNacimiento)
-        {
-            //Date example
-            //DateTime thisDate1 = new DateTime(2011, 6, 10); thisDate1.ToString("MMMM dd, yyyy")
-            return (DateTime.Now.ToString("dd-MM-yyyy").Length == fechaNacimiento.ToString().Length);
-        }
-        public static bool ValidarAlturaCM(int alturaCM)
-        {
-            return (alturaCM > 0);
-        }
-
     }
 }

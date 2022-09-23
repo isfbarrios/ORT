@@ -9,10 +9,12 @@ namespace Dominio
         //Atributos
         private static int autoIncrementId;
         private int id;
-        private Seleccion seleccion;
+        private Seleccion local;
+        private Seleccion visitante;
         private DateTime fecha;
         private bool finalizado;
         private Resultado resultado;
+        private List<Incidente> incidentes;
         //Estos puede que no sean para agregar acá
         private Fase fase;
         private Etapa etapa;
@@ -23,15 +25,42 @@ namespace Dominio
             this.id = ++autoIncrementId;
         }
 
-        public Partido(Seleccion seleccion, DateTime fecha, Resultado resultado, Fase fase, Etapa etapa)
+        public Partido(Seleccion local, Seleccion visitante, DateTime fecha, List<Incidente> incidentes, Fase fase, Etapa etapa)
         {
             this.id = ++autoIncrementId;
-            this.seleccion = seleccion;
+            this.local = local;
+            this.visitante = visitante;
             this.fecha = fecha;
-            this.finalizado = false;
-            this.resultado = resultado;
+            this.finalizado = false; //Por defecto, no finalizado
+            this.incidentes = incidentes;
+            this.resultado = Resultado.PENDIENTE;
             this.fase = fase;
             this.etapa = etapa;
+        }
+
+        //Funcionalidades
+        private bool AltaPartido(Partido partido)
+        {
+            bool retVal = false;
+            if (partido.Local.EsSeleccionValida() && partido.Visitante.EsSeleccionValida())
+            {
+                Administradora.Instance.Partidos.Add(partido);
+                retVal = true;
+            }
+            return retVal;
+        }
+
+        private bool ValidarFechaDePartido()
+        {
+            bool retVal = false;
+            DateTime dateFrom = Convert.ToDateTime("20/11/2022");
+            DateTime dateTo = Convert.ToDateTime("18/12/2022");
+
+            if (this.Fecha >= dateFrom && this.Fecha <= dateTo)
+            {
+                retVal = true;
+            }
+            return retVal;
         }
 
         //Getters & Setters
@@ -39,10 +68,15 @@ namespace Dominio
         {
             get { return this.id; }
         }
-        public Seleccion Seleccion
+        public Seleccion Local
         {
-            get { return this.seleccion; }
-            set { this.seleccion = value; }
+            get { return this.local; }
+            set { this.local = value; }
+        }
+        public Seleccion Visitante
+        {
+            get { return this.visitante; }
+            set { this.visitante = value; }
         }
         public DateTime Fecha
         {
@@ -61,6 +95,10 @@ namespace Dominio
         public Fase Fase
         {
             get { return this.fase; }
+        }
+        public List<Incidente> Incidentes
+        {
+            get { return this.incidentes; }
         }
         public Etapa Etapa
         {
