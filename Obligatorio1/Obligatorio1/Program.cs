@@ -14,7 +14,8 @@ namespace Obligatorio1
                 Console.WriteLine("Acceda mediante el menu a la opcion deseada.\n\n" +
                     "1 ) Alta Periodista.\n" +
                     "2 ) Listar Periodistas.\n" +
-                    "3 ) Salir");
+                    "3 ) Crear Reseña.\n" +
+                    "0 ) Salir");
 
                 int.TryParse(Console.ReadLine(), out seleccion);
 
@@ -26,14 +27,57 @@ namespace Obligatorio1
                         else Console.WriteLine("Alta de periodista exitosa.");
                         break;
                     case 2:
-                        //Ejercicio 2
+                        Program.ListarPeriodistas();
+                        break;
+                    case 3:
+                        Program.CrearResena();
                         break;
                     default:
-                        //Salir
-                        seleccion = 0;
+                        seleccion = 0; //Salir
                         break;
                 }
             }
+        }
+        private static bool CrearResena()
+        {
+            bool retVal = false;
+            String titulo = "", contenido = "";
+            String[] descripciones = { "Título", "Contenido" };
+
+            Console.WriteLine("Para crear una nueva reseña, complete los siguientes datos:");
+
+            //Recorrida según cantidad de campos a completar (titulo, contenido).
+            for (int i = 0; i <= 1; i++)
+            {
+                bool datosValidos = false;
+                //Por cada uno solicito los datos hasta que el resultado sea correcto (datosValidos = Tue).
+                do
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            datosValidos = SolicitarDatos(ref titulo, descripciones[i]);
+                            break;
+                        case 1:
+                            datosValidos = SolicitarDatos(ref contenido, descripciones[i]);
+                            break;
+                    }
+                }
+                while (!datosValidos);
+            }
+            if (titulo.Length != 0 && contenido.Length != 0)
+            {
+                //Debo obtener el id de periodista al menos, o ver como generar el objeto correspondiente para que quede asociado
+                retVal = Resena.AltaResena(new Resena(new Periodista(), titulo, contenido));
+            }
+            return retVal;
+        }
+
+        private static bool ListarPeriodistas()
+        {
+            bool retVal = false;
+
+            return retVal;
         }
 
         private static bool AltaPeriodista()
@@ -54,16 +98,16 @@ namespace Obligatorio1
                     switch (i)
                     {
                         case 0:
-                            datosValidos = SolicitarDatosPeriodista(ref nombre, descripciones[i]);
+                            datosValidos = SolicitarDatos(ref nombre, descripciones[i]);
                             break;
                         case 1:
-                            datosValidos = SolicitarDatosPeriodista(ref apellido, descripciones[i]);
+                            datosValidos = SolicitarDatos(ref apellido, descripciones[i]);
                             break;
                         case 2:
-                            datosValidos = SolicitarDatosPeriodista(ref mail, descripciones[i]);
+                            datosValidos = SolicitarDatos(ref mail, descripciones[i]);
                             break;
                         case 3:
-                            datosValidos = SolicitarDatosPeriodista(ref password, descripciones[i]);
+                            datosValidos = SolicitarDatos(ref password, descripciones[i]);
                             break;
                     }
                 }
@@ -78,7 +122,7 @@ namespace Obligatorio1
             return retVal;
         }
 
-        public static bool SolicitarDatosPeriodista(ref String contenedor, String descripcion)
+        private static bool SolicitarDatos(ref String contenedor, String descripcion)
         {
             bool retVal = false;
             do

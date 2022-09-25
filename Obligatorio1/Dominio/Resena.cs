@@ -21,13 +21,26 @@ namespace Dominio
             this.id = ++autoIncrementId;
         }
 
-        public Resena(Periodista periodista, DateTime fecha, String titulo, String contenido)
+        public Resena(Periodista periodista, String titulo, String contenido)
         {
             this.id = ++autoIncrementId;
             this.periodista = periodista;
-            this.fecha = fecha;
+            this.fecha = new DateTime(DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year);
             this.titulo = titulo;
             this.contenido = contenido;
+        }
+        /// <summary>
+        /// Genera el alta del Periodista en el sistema.
+        /// </summary>
+        public static bool AltaResena(Resena resena)
+        {
+            bool retVal = false;
+            if (resena.Id != 0)
+            {
+                Administradora.Instance.Resenas.Add(resena);
+                retVal = true;
+            }
+            return retVal;
         }
 
         //Getters & Setters
