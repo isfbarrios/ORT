@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Pais
+    public class Pais
     {
         //Atributos
         private static int autoIncrementId;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Jugador
+    public class Jugador
     {
         //Atributos
         private static int autoIncrementId;

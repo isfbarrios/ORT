@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Incidente
+    public class Incidente
     {
         //Atributos
         private static int autoIncrementId;

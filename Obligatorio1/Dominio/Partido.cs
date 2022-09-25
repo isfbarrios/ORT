@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Partido
+    public class Partido
     {
         //Atributos
         private static int autoIncrementId;
@@ -39,7 +39,7 @@ namespace Dominio
         }
 
         //Funcionalidades
-        private bool AltaPartido(Partido partido)
+        public static bool AltaPartido(Partido partido)
         {
             bool retVal = false;
             if (partido.Local.EsSeleccionValida() && partido.Visitante.EsSeleccionValida())

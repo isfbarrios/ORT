@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Resena
+    public class Resena
     {
         //Atributos
         private static int autoIncrementId;

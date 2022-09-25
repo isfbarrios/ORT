@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Seleccion
+    public class Seleccion
     {
         //Atributos
         private static int autoIncrementId;
@@ -26,11 +26,11 @@ namespace Dominio
         /// <summary>
         /// Genera el alta de la Seleccion en el sistema.
         /// </summary>
-        private bool AltaSeleccion(Seleccion seleccion)
+        public static bool AltaSeleccion(Seleccion seleccion)
         {
             bool retVal = false;
             //Si el pais es valido y tiene al menos once jugadores, lo guardo
-            if (this.EsSeleccionValida())
+            if (seleccion.EsSeleccionValida())
             {
                 Administradora.Instance.Selecciones.Add(seleccion);
                 retVal = true;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Periodista
+    public class Periodista
     {
         //Atributos
         private static int autoIncrementId;
@@ -13,7 +13,7 @@ namespace Dominio
         private String apellido;
         private String mail;
         private String password;
-        private List<Resena> resenas;
+        private List<Resena> listaResenas;
 
         //Constructores
         public Periodista() 
@@ -28,17 +28,13 @@ namespace Dominio
             this.apellido = apellido;
             this.mail = mail;
             this.password = password;
+            this.listaResenas = new List<Resena>();
         }
 
         /// <summary>
         /// Genera el alta del Periodista en el sistema.
         /// </summary>
-        private bool AltaSeleccion(Seleccion seleccion)
-        {
-            //Si el pais es valido y tiene al menos once jugadores, lo guardo
-            return true;
-        }
-        public bool AltaPeriodista(Periodista periodista)
+        public static bool AltaPeriodista(Periodista periodista)
         {
             bool retVal = false;
             if (periodista.ValidarNombre() && periodista.ValidarMail() && periodista.ValidarPassword())
@@ -59,7 +55,7 @@ namespace Dominio
             if (titulo.Length > 0 && contenido.Length > 0)
             {
                 Resena resena = new Resena(this, fecha, titulo, contenido);
-                resenas.Add(resena);
+                listaResenas.Add(resena);
                 Administradora.Instance.Resenas.Add(resena);
             }
             return retVal;
@@ -117,9 +113,9 @@ namespace Dominio
             get { return this.password; }
             set { this.password = value; }
         }
-        public List<Resena> Resenas
+        public List<Resena> ListaResenas
         {
-            get { return this.resenas; }
+            get { return this.listaResenas; }
         }
     }
 }

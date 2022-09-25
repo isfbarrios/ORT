@@ -29,13 +29,33 @@ namespace Dominio
 
 
         //Getters & Setters
-        public List<Pais> Paises { get; }
-        public List<Seleccion> Selecciones { get; }
-        public List<Jugador> Jugadores { get; }
-        public List<Partido> Partidos { get; }
-        public List<Resultado> Resultados { get; }
-        public List<Resena> Resenas { get; }
-        public List<Periodista> Periodistas { get; }
+        public List<Pais> Paises {
+            get { return paises; } 
+        }
+        public List<Seleccion> Selecciones
+        {
+            get { return selecciones; }
+        }
+        public List<Jugador> Jugadores
+        {
+            get { return jugadores; }
+        }
+        public List<Partido> Partidos
+        {
+            get { return partidos; }
+        }
+        public List<Resultado> Resultados
+        {
+            get { return resultados; }
+        }
+        public List<Resena> Resenas
+        {
+            get { return resenas; }
+        }
+        public List<Periodista> Periodistas
+        {
+            get { return periodistas; }
+        }
         
         public static void PreLoad()
         {
@@ -43,7 +63,7 @@ namespace Dominio
             {
                 //Alta de jugadores
                 PreLoadJugadores();
-                PreLoadPais();
+                PreLoadPaises();
             }
             catch (Exception)
             {
@@ -57,7 +77,7 @@ namespace Dominio
         {
 
         }
-        public static void PreLoadPais()
+        public static void PreLoadPaises()
         {
             Pais.AltaPais(new Pais("Catar", "QAT"));
             Pais.AltaPais(new Pais("Alemania", "DEU"));
