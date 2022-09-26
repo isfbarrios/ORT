@@ -26,6 +26,22 @@ namespace Dominio
             this.minuto = minuto;
             this.partido = partido;
         }
+        
+        public static bool AltaIncidente(Incidente incidente)
+        {
+            bool retVal = false;
+
+            /*
+             * Validaciones:
+             * 1 - Amonestaciones: no acumular más de dos sobre un mismo jugador.
+             * 2 - Expulsiones: no acumular más de una sobre un mismo jugador.
+            */
+
+
+            return retVal;
+        }
+        
+
 
         //Getters && Setters
         public int Id {
