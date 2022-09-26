@@ -19,7 +19,7 @@ namespace Dominio
             this.id = ++autoIncrementId;
         }
 
-        public Incidente(TipoIncidente tipoIncidente, int minuto, Partido partido)
+        public Incidente(TipoIncidente tipoIncidente, Partido partido, int minuto = -1)
         {
             this.id = ++autoIncrementId;
             this.tipoIncidente = tipoIncidente;

@@ -8,35 +8,69 @@ namespace Obligatorio1
     {
         static void Main(string[] args)
         {
+            //Precarga de datos
+            Administradora.PreLoad();
             int seleccion = -1;
+            //Construccion del menú
             while (seleccion != 0)
             {
                 Console.WriteLine("Acceda mediante el menu a la opcion deseada.\n\n" +
                     "1 ) Alta Periodista.\n" +
                     "2 ) Listar Periodistas.\n" +
                     "3 ) Crear Reseña.\n" +
+                    "4 ) Asignar valor de referencia para categorías.\n" +
                     "0 ) Salir");
 
                 int.TryParse(Console.ReadLine(), out seleccion);
-
-                switch (seleccion)
-                {
-                    case 1:
-                        bool caseOne = Program.AltaPeriodista();
-                        if (!caseOne) Console.WriteLine("No se pudo dar de alta. Intente nuevamente.");
-                        else Console.WriteLine("Alta de periodista exitosa.");
-                        break;
-                    case 2:
-                        Program.ListarPeriodistas();
-                        break;
-                    case 3:
-                        Program.CrearResena();
-                        break;
-                    default:
-                        seleccion = 0; //Salir
-                        break;
-                }
+                //Ejecuto las acciones según corresponda
+                Program.OpcionesDeMenu(seleccion);
             }
+        }
+
+        private static void OpcionesDeMenu(int seleccion)
+        {
+            switch (seleccion)
+            {
+                case 1:
+                    bool caseOne = Program.AltaPeriodista();
+                    if (!caseOne) Console.WriteLine("No se pudo dar de alta. Intente nuevamente.");
+                    else Console.WriteLine("Alta de periodista exitosa.");
+                    break;
+                case 2:
+                    Program.ListarPeriodistas();
+                    break;
+                case 3:
+                    Program.CrearResena();
+                    break;
+                case 4:
+
+                    break;
+                default:
+                    seleccion = 0; //Salir
+                    break;
+            }
+        }
+        private static bool AsignarReferenciaCategoria()
+        {
+            bool retVal = false;
+            String valorReferencia = "";
+            String[] descripciones = { "Valor Referencia" };
+
+            Console.WriteLine($"Ingrese un nuevo {descripciones[0]}:");
+
+            bool datosValidos = false;
+            //Solicito el nuevo valor hasta que el resultado sea correcto (datosValidos = Tue).
+            do
+            {
+                datosValidos = SolicitarDatos(ref valorReferencia, descripciones[0]);
+            }
+            while (!datosValidos);
+            if (valorReferencia.Length != 0)
+            {
+                //Guardo el nuevo valor dado que es un dato estático, si se actualiza, retorno TRUE.
+                retVal = (Categoria.setMinimoParaVip(valorReferencia));
+            }
+            return retVal;
         }
         private static bool CrearResena()
         {
@@ -68,7 +102,7 @@ namespace Obligatorio1
             if (titulo.Length != 0 && contenido.Length != 0)
             {
                 //Debo obtener el id de periodista al menos, o ver como generar el objeto correspondiente para que quede asociado
-                retVal = Resena.AltaResena(new Resena(new Periodista(), titulo, contenido));
+                retVal = Resena.AltaResena(new Resena(new Periodista(), new Partido(), titulo, contenido));
             }
             return retVal;
         }
@@ -122,6 +156,9 @@ namespace Obligatorio1
             return retVal;
         }
 
+        /// <summary>
+        /// Método para solicitar los datos al usuario
+        /// </summary>
         private static bool SolicitarDatos(ref String contenedor, String descripcion)
         {
             bool retVal = false;

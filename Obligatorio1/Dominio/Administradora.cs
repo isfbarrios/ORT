@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Administradora
+    public class Administradora
     {
         private static Administradora instance;
 
@@ -16,6 +16,8 @@ namespace Dominio
         private static List<Resultado> resultados = new List<Resultado>();
         private static List<Resena> resenas = new List<Resena>();
 
+        private int minimoParaVIP = 0;
+
         private Administradora() { }
 
         public static Administradora Instance
@@ -26,7 +28,6 @@ namespace Dominio
                 return instance;
             }
         }
-
 
         //Getters & Setters
         public List<Pais> Paises {
@@ -56,26 +57,31 @@ namespace Dominio
         {
             get { return periodistas; }
         }
-        
+
+        public int MinimoParaVIP
+        {
+            get { return minimoParaVIP; }
+            set { this.minimoParaVIP = value; }
+        }
+
+        //Métodos de precarga de datos
         public static void PreLoad()
         {
             try
             {
                 //Alta de jugadores
-                PreLoadJugadores();
                 PreLoadPaises();
+                PreLoadJugadores();
+                PreLoadSelecciones();
             }
             catch (Exception)
             {
                 throw new Exception();
             }
         }
-
-
-        //Métodos de precarga de datos
         public static void PreLoadSelecciones()
         {
-
+           Seleccion.PrecargaSelecciones();
         }
         public static void PreLoadPaises()
         {

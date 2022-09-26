@@ -21,11 +21,12 @@ namespace Dominio
             this.id = ++autoIncrementId;
         }
 
-        public Resena(Periodista periodista, String titulo, String contenido)
+        public Resena(Periodista periodista, Partido partido, String titulo, String contenido)
         {
             this.id = ++autoIncrementId;
             this.periodista = periodista;
-            this.fecha = new DateTime(DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year);
+            this.fecha = DateTime.Now;
+            this.partido = partido;
             this.titulo = titulo;
             this.contenido = contenido;
         }

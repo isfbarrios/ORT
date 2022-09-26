@@ -6,12 +6,13 @@ namespace Dominio
 {
     public class Categoria
     {
-        private int minimoParaVIP;
-
-        public int MinimoParaVip
+        public static bool setMinimoParaVip(String value)
         {
-            get { return this.minimoParaVIP; }
-            set { this.minimoParaVIP = value; }
+            int oldValue = Administradora.Instance.MinimoParaVIP;
+            Administradora.Instance.MinimoParaVIP = int.Parse(value);
+
+            //Retorno TRUE si el valor se actualizo, caso contrario, retorno FALSE
+            return (Administradora.Instance.MinimoParaVIP == oldValue);
         }
 
         /// <summary>

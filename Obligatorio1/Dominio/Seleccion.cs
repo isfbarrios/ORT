@@ -40,7 +40,7 @@ namespace Dominio
         /// <summary>
         /// Realiza la precarga de datos de Seleccion en el sistema.
         /// </summary>
-        public void PrecargaSelecciones()
+        public static void PrecargaSelecciones()
         {
             //Contamos con países y jugadores, la seleccion debe armar para cada pais una seleccion
             foreach (Pais pais in Administradora.Instance.Paises)
@@ -69,7 +69,7 @@ namespace Dominio
         /// Retorna todos los jugadores de una selección, a partir del país del jugador.
         /// </summary>
         /// <returns>Lista de jugadores del país seleccionado</returns>
-        private List<Jugador> ListarJugadores(Pais pais)
+        private static List<Jugador> ListarJugadores(Pais pais)
         {
             List<Jugador> selJugadores = new List<Jugador>();
 

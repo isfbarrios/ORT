@@ -54,7 +54,7 @@ namespace Dominio
             DateTime fecha = DateTime.Now;
             if (titulo.Length > 0 && contenido.Length > 0)
             {
-                Resena resena = new Resena(this, fecha, titulo, contenido);
+                Resena resena = new Resena(this, new Partido(), titulo, contenido);
                 listaResenas.Add(resena);
                 Administradora.Instance.Resenas.Add(resena);
             }
