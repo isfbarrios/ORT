@@ -12,6 +12,7 @@ namespace Dominio
         private static List<Seleccion> selecciones = new List<Seleccion>();
         private static List<Jugador> jugadores = new List<Jugador>();
         private static List<Partido> partidos = new List<Partido>();
+        private static List<Incidente> incidentes = new List<Incidente>();
         private static List<Periodista> periodistas = new List<Periodista>();
         private static List<Resultado> resultados = new List<Resultado>();
         private static List<Resena> resenas = new List<Resena>();
@@ -28,7 +29,76 @@ namespace Dominio
                 return instance;
             }
         }
+        /// <summary>
+        /// Retorna el listado de incidencias ocurridas en un partido determinado.
+        /// </summary>
+        public List<Incidente> GetIncidentes(Partido partido)
+        {
+            List<Incidente> partidoIncidentes = new List<Incidente>();
 
+            foreach (Incidente incidente in this.Incidentes)
+            {
+                if (incidente.Partido.Equals(partido)) partidoIncidentes.Add(incidente);
+            }
+            return partidoIncidentes;
+        }
+        /// <summary>
+        /// Retorna el listado de jugadores con al menos una expulsión.
+        /// </summary>
+        public List<Jugador> GetIncidentes(Jugador jugador)
+        {
+            List<Jugador> jugadorIncidentes = new List<Jugador>();
+
+            foreach (Incidente incidente in this.Incidentes)
+            {
+                if (incidente.Jugador.Equals(jugador) && Incidente.EsTarjetaRoja(incidente)) jugadorIncidentes.Add(jugador);
+            }
+            return jugadorIncidentes;
+        }
+        /// <summary>
+        /// Retorna el listado de incidencias sobre un jugador ocurridas en un partido determinado .
+        /// </summary>
+        public List<Incidente> GetIncidentes(Partido partido, Jugador jugador)
+        {
+            List<Incidente> jugadorPartidoIncidentes = new List<Incidente>();
+            List<Incidente> partidoIncidentes = GetIncidentes(partido);
+
+            foreach (Incidente incidente in partidoIncidentes)
+            {
+                if (incidente.Jugador.Equals(jugador)) jugadorPartidoIncidentes.Add(incidente);
+            }
+            return jugadorPartidoIncidentes;
+        }
+        /// <summary>
+        /// Retorna el listado de partidos disputados por un jugador determinado.
+        /// </summary>
+        public List<Partido> GetPartidos(Jugador jugador)
+        {
+            List<Partido> jugadorPartidos = new List<Partido>();
+
+            foreach (Partido partido in this.Partidos)
+            {
+                List<Jugador> jugadores = this.TotalJugadoresPartidos(partido);
+
+                foreach (Jugador jPartido in jugadores)
+                {
+                    if (jPartido.Equals(jugador)) jugadorPartidos.Add(partido);
+                }
+            }
+            return jugadorPartidos;
+        }
+        /// <summary>
+        /// Retorna el listado de jugadores que disputaron un determinado partido.
+        /// </summary>
+        public List<Jugador> TotalJugadoresPartidos(Partido partido)
+        {
+            List<Jugador> jugadores = new List<Jugador>();
+            //Agrego todos los jugadores del equipo local, más los del equipo visitante.
+            jugadores.AddRange(partido.Local.Jugadores);
+            jugadores.AddRange(partido.Visitante.Jugadores);
+
+            return jugadores;
+        }
         //Getters & Setters
         public List<Pais> Paises {
             get { return paises; } 
@@ -56,6 +126,10 @@ namespace Dominio
         public List<Periodista> Periodistas
         {
             get { return periodistas; }
+        }
+        public List<Incidente> Incidentes
+        {
+            get { return incidentes; }
         }
 
         public int MinimoParaVIP

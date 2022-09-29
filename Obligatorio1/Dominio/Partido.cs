@@ -42,14 +42,20 @@ namespace Dominio
         public static bool AltaPartido(Partido partido)
         {
             bool retVal = false;
-            if (partido.Local.EsSeleccionValida() && partido.Visitante.EsSeleccionValida())
+            if (Partido.EsPartidoValido(partido))
             {
                 Administradora.Instance.Partidos.Add(partido);
                 retVal = true;
             }
             return retVal;
         }
-
+        /// <summary>
+        /// Retorna TRUE si el partido cumple con la condicion de tener Selecciones validas para Local y Visitante.
+        /// </summary>
+        public static bool EsPartidoValido(Partido partido)
+        {
+            return (partido.Local.EsSeleccionValida() && partido.Visitante.EsSeleccionValida());
+        }
         private bool ValidarFechaDePartido()
         {
             bool retVal = false;
