@@ -82,7 +82,20 @@ namespace Dominio
             }
             return selJugadores;
         }
-
+        /// <summary>
+        /// Retorna TRUE si la selección jugó este partido (independientemente si era local o visitante).
+        /// </summary>
+        public bool JugadoPorEstaSeleccion(Partido partido)
+        {
+            return (partido.Local.Equals(this) || partido.Visitante.Equals(this));
+        }
+        /// <summary>
+        /// Retorna TRUE si el jugador recibido por parámetro es parte de esta selección.
+        /// </summary>
+        public bool JugadorDeSeleccion(Jugador jugador)
+        {
+            return (this.Pais.Equals(jugador.Pais));
+        }
         //Getters && Setters
         public int Id
         {

@@ -81,6 +81,25 @@ namespace Dominio
         {
             return (incidente.TipoIncidente.Equals(TipoIncidente.GOL));
         }
+        /// <summary>
+        /// Retorna el total de incidencias, de un determinado tipo en un partido.
+        /// </summary>
+        public List<Incidente> TotalIncidenciasPartido(Partido partido, TipoIncidente tipoIncidente = TipoIncidente.GOL)
+        {
+            List<Incidente> retVal = new List<Incidente>();
+            //Recorro el listado de incidencias del partido
+            foreach (Incidente incidente in Administradora.Instance.Incidentes)
+            {
+                //Valido que el incidente coincida con el recibido por parámetro.
+                if (incidente.TipoIncidente.Equals(tipoIncidente))
+                {
+                    //Si lo es, valido que tenga incidencias de gol
+
+
+                }
+            }
+            return retVal;
+        }
         //Getters && Setters
         public int Id {
             get {return this.id;} 

@@ -74,7 +74,18 @@ namespace Dominio
         {
             return (this.AlturaCM > 0);
         }
+        /// <summary>
+        /// Retorna el listado de jugadores que disputaron un determinado partido.
+        /// </summary>
+        public static List<Jugador> TotalJugadoresPartidos(Partido partido)
+        {
+            List<Jugador> jugadores = new List<Jugador>();
+            //Agrego todos los jugadores del equipo local, más los del equipo visitante.
+            jugadores.AddRange(partido.Local.Jugadores);
+            jugadores.AddRange(partido.Visitante.Jugadores);
 
+            return jugadores;
+        }
         /// <summary>
         /// Retorna la categoria correspondiente al valor de mercado del jugador.
         /// </summary>

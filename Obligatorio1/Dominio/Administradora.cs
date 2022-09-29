@@ -45,8 +45,12 @@ namespace Dominio
         /// <summary>
         /// Retorna el listado de jugadores con al menos una expulsión.
         /// </summary>
-        public List<Jugador> GetIncidentes(Jugador jugador)
+        public List<Jugador> GetJugadoresExpulsados(Jugador jugador)
         {
+            /*
+             * FALTA IMPLEMENTAR EL ORDENADO PARA EL RETORNO. SEGUN LA LETRA, SE DEBE RETORNAR DE DOS FORMAS DIFERENTES. 
+             */
+
             List<Jugador> jugadorIncidentes = new List<Jugador>();
 
             foreach (Incidente incidente in this.Incidentes)
@@ -56,7 +60,7 @@ namespace Dominio
             return jugadorIncidentes;
         }
         /// <summary>
-        /// Retorna el listado de incidencias sobre un jugador ocurridas en un partido determinado .
+        /// Retorna el listado de incidencias sobre un jugador ocurridas en un partido determinado.
         /// </summary>
         public List<Incidente> GetIncidentes(Partido partido, Jugador jugador)
         {
@@ -78,7 +82,7 @@ namespace Dominio
 
             foreach (Partido partido in this.Partidos)
             {
-                List<Jugador> jugadores = this.TotalJugadoresPartidos(partido);
+                List<Jugador> jugadores = Jugador.TotalJugadoresPartidos(partido);
 
                 foreach (Jugador jPartido in jugadores)
                 {
@@ -88,16 +92,36 @@ namespace Dominio
             return jugadorPartidos;
         }
         /// <summary>
-        /// Retorna el listado de jugadores que disputaron un determinado partido.
+        /// Retorna el partido con más goles, disputado por una seleccion determinada.
         /// </summary>
-        public List<Jugador> TotalJugadoresPartidos(Partido partido)
+        public Partido GetPartidos(Seleccion seleccion)
         {
-            List<Jugador> jugadores = new List<Jugador>();
-            //Agrego todos los jugadores del equipo local, más los del equipo visitante.
-            jugadores.AddRange(partido.Local.Jugadores);
-            jugadores.AddRange(partido.Visitante.Jugadores);
+            Partido retPartido = new Partido();
+            foreach (Partido partido in this.Partidos)
+            {
+                //Si el partido actual tuvo a esta selección como local o visitante, entro.
+                if (seleccion.JugadoPorEstaSeleccion(partido))
+                {
+                    //if 
+                }
+            }
+            return retPartido;
+        }
+        public int TotalGolesPartido(Partido partido, Seleccion seleccion)
+        {
+            int retVal = 0;
+            List<Jugador> jugadores = Jugador.TotalJugadoresPartidos(partido);
+            //Recorro el listado de jugadores del partido
+            foreach (Jugador jugador in jugadores) {
+                //Valido que el jugador iterado corresponda a la seleccion que quiero validar
+                if (seleccion.JugadorDeSeleccion(jugador))
+                {
+                    //Si lo es, valido que tenga incidencias de gol
 
-            return jugadores;
+
+                }
+            }
+            return retVal;
         }
         //Getters & Setters
         public List<Pais> Paises {
