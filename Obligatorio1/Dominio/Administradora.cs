@@ -117,7 +117,7 @@ namespace Dominio
                 if (seleccion.JugadorDeSeleccion(jugador))
                 {
                     //Si lo es, valido que tenga incidencias de gol
-
+                    int auxVal = Incidente.TotalIncidenciasPartido(partido).Count;
 
                 }
             }

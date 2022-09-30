@@ -84,7 +84,7 @@ namespace Dominio
         /// <summary>
         /// Retorna el total de incidencias, de un determinado tipo en un partido.
         /// </summary>
-        public List<Incidente> TotalIncidenciasPartido(Partido partido, TipoIncidente tipoIncidente = TipoIncidente.GOL)
+        public static List<Incidente> TotalIncidenciasPartido(Partido partido, TipoIncidente tipoIncidente = TipoIncidente.GOL)
         {
             List<Incidente> retVal = new List<Incidente>();
             //Recorro el listado de incidencias del partido
@@ -93,9 +93,8 @@ namespace Dominio
                 //Valido que el incidente coincida con el recibido por parámetro.
                 if (incidente.TipoIncidente.Equals(tipoIncidente))
                 {
-                    //Si lo es, valido que tenga incidencias de gol
-
-
+                    //Si lo es, agrego la incidencia
+                    retVal.Add(incidente);
                 }
             }
             return retVal;
