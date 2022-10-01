@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Dominio
 {
-    public enum Etapa
+    public class Etapa
+    {
+
+    }
+    public enum TipoEtapa
     {
         OCTAVOS,
         CUARTOS,

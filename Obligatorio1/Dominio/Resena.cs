@@ -12,8 +12,8 @@ namespace Dominio
         private Periodista periodista;
         private Partido partido;
         private DateTime fecha;
-        private String titulo;
-        private String contenido;
+        private string titulo;
+        private string contenido;
 
         //Constructores
         public Resena() 
@@ -21,7 +21,7 @@ namespace Dominio
             this.id = ++autoIncrementId;
         }
 
-        public Resena(Periodista periodista, Partido partido, String titulo, String contenido)
+        public Resena(Periodista periodista, Partido partido, string titulo, string contenido)
         {
             this.id = ++autoIncrementId;
             this.periodista = periodista;
@@ -61,11 +61,11 @@ namespace Dominio
         {
             get { return this.fecha; }
         }
-        public String Titulo
+        public string Titulo
         {
             get { return this.titulo; }
         }
-        public String Contenido
+        public string Contenido
         {
             get { return this.contenido; }
         }

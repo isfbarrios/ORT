@@ -9,15 +9,15 @@ namespace Dominio
         //Atributos
         private static int autoIncrementId;
         private int id;
-        private String nombre;
-        private String codigo;
+        private string nombre;
+        private string codigo;
         
         //Constructores
         public Pais() 
         {
             this.id = ++autoIncrementId;
         }
-        public Pais(String nombre, String codigo)
+        public Pais(string nombre, string codigo)
         {
             this.id = ++autoIncrementId;
             this.nombre = nombre;
@@ -49,7 +49,7 @@ namespace Dominio
         /// <summary>
         /// Retorna el Pais correspondiente mediante su nombre.
         /// </summary>
-        public static Pais GetPais(String nombre)
+        public static Pais GetPais(string nombre)
         {
             foreach (Pais pais in Administradora.Instance.Paises)
             {
@@ -63,11 +63,11 @@ namespace Dominio
         {
             get { return this.id; }
         }
-        public String Nombre
+        public string Nombre
         {
             get { return this.nombre; }
         }
-        public String Codigo
+        public string Codigo
         {
             get { return this.codigo; }
         }

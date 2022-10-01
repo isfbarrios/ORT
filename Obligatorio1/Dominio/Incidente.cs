@@ -53,7 +53,7 @@ namespace Dominio
             bool retVal = true;
             int amonestacion = 0, expulsion = 0;
             //Traigo los Incidentes ya filtrados por Partido y Jugador.
-            List<Incidente> jugadorPartidoIncidentes = Administradora.Instance.GetIncidentes(this.Partido, this.Jugador);
+            List<Incidente> jugadorPartidoIncidentes = GetIncidentes(this.Partido, this.Jugador);
 
             foreach (Incidente incidente in jugadorPartidoIncidentes)
             {
@@ -99,6 +99,34 @@ namespace Dominio
             }
             return retVal;
         }
+        /// <summary>
+        /// Retorna el listado de incidencias sobre un jugador ocurridas en un partido determinado.
+        /// </summary>
+        public List<Incidente> GetIncidentes(Partido partido, Jugador jugador)
+        {
+            List<Incidente> jugadorPartidoIncidentes = new List<Incidente>();
+            List<Incidente> partidoIncidentes = GetIncidentes(partido);
+
+            foreach (Incidente incidente in partidoIncidentes)
+            {
+                if (incidente.Jugador.Equals(jugador)) jugadorPartidoIncidentes.Add(incidente);
+            }
+            return jugadorPartidoIncidentes;
+        }
+        /// <summary>
+        /// Retorna el listado de incidencias ocurridas en un partido determinado.
+        /// </summary>
+        public List<Incidente> GetIncidentes(Partido partido)
+        {
+            List<Incidente> partidoIncidentes = new List<Incidente>();
+
+            foreach (Incidente incidente in Administradora.Instance.Incidentes)
+            {
+                if (incidente.Partido.Equals(partido)) partidoIncidentes.Add(incidente);
+            }
+            return partidoIncidentes;
+        }
+
         //Getters && Setters
         public int Id {
             get {return this.id;} 

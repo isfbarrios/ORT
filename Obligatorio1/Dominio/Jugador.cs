@@ -9,8 +9,8 @@ namespace Dominio
         //Atributos
         private static int autoIncrementId;
         private int id;
-        private String numeroCamiseta;
-        private String nombre;
+        private string numeroCamiseta;
+        private string nombre;
         private DateTime fechaNacimiento;
         private int alturaCM;
         private Pie pieHabil;
@@ -25,7 +25,7 @@ namespace Dominio
             this.id = ++autoIncrementId;
         }
 
-        public Jugador(String numeroCamiseta, String nombre, DateTime fechaNacimiento, 
+        public Jugador(string numeroCamiseta, string nombre, DateTime fechaNacimiento, 
             int alturaCM, Pie pieHabil, int valorMercado, Moneda moneda, Pais pais, Posicion posicion)
         {
             this.id = ++autoIncrementId;
@@ -51,7 +51,23 @@ namespace Dominio
                     Administradora.Instance.Jugadores.Add(jugador);
             }
         }
+        /// <summary>
+        /// Retorna el listado de jugadores con al menos una expulsión.
+        /// </summary>
+        public List<Jugador> GetJugadoresExpulsados(Jugador jugador)
+        {
+            /*
+             * FALTA IMPLEMENTAR EL ORDENADO PARA EL RETORNO. SEGUN LA LETRA, SE DEBE RETORNAR DE DOS FORMAS DIFERENTES. 
+             */
 
+            List<Jugador> jugadorIncidentes = new List<Jugador>();
+
+            foreach (Incidente incidente in Administradora.Instance.Incidentes)
+            {
+                if (incidente.Jugador.Equals(jugador) && Incidente.EsTarjetaRoja(incidente)) jugadorIncidentes.Add(jugador);
+            }
+            return jugadorIncidentes;
+        }
         public bool ValidarNombre()
         {
             return (Utils.ValidLength(this.Nombre, 0));
@@ -99,7 +115,7 @@ namespace Dominio
         {
             get { return this.id; }
         }
-        public String Nombre
+        public string Nombre
         {
             get { return this.nombre; }
         }
@@ -107,7 +123,7 @@ namespace Dominio
         {
             get { return this.posicion; }
         }
-        public String NumeroCamiseta
+        public string NumeroCamiseta
         {
             get { return this.numeroCamiseta; }
         }

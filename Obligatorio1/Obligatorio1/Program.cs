@@ -53,8 +53,8 @@ namespace Obligatorio1
         private static bool AsignarReferenciaCategoria()
         {
             bool retVal = false;
-            String valorReferencia = "";
-            String[] descripciones = { "Valor Referencia" };
+            string valorReferencia = "";
+            string[] descripciones = { "Valor Referencia" };
 
             Console.WriteLine($"Ingrese un nuevo {descripciones[0]}:");
 
@@ -75,8 +75,8 @@ namespace Obligatorio1
         private static bool CrearResena()
         {
             bool retVal = false;
-            String titulo = "", contenido = "";
-            String[] descripciones = { "Título", "Contenido" };
+            string titulo = "", contenido = "";
+            string[] descripciones = { "Título", "Contenido" };
 
             Console.WriteLine("Para crear una nueva reseña, complete los siguientes datos:");
 
@@ -117,8 +117,8 @@ namespace Obligatorio1
         private static bool AltaPeriodista()
         {
             bool retVal = false;
-            String nombre = "", apellido = "", mail = "", password = "";
-            String[] descripciones = {"Nombre", "Apellido", "Mail", "Password"};
+            string nombre = "", apellido = "", mail = "", password = "";
+            string[] descripciones = {"Nombre", "Apellido", "Mail", "Password"};
 
             Console.WriteLine("Para dar de alta un nuevo periodista, complete los siguientes datos:");
 
@@ -159,7 +159,7 @@ namespace Obligatorio1
         /// <summary>
         /// Método para solicitar los datos al usuario
         /// </summary>
-        private static bool SolicitarDatos(ref String contenedor, String descripcion)
+        private static bool SolicitarDatos(ref string contenedor, string descripcion)
         {
             bool retVal = false;
             do

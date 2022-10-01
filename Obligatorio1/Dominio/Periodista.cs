@@ -9,10 +9,10 @@ namespace Dominio
         //Atributos
         private static int autoIncrementId;
         private int id;
-        private String nombre;
-        private String apellido;
-        private String mail;
-        private String password;
+        private string nombre;
+        private string apellido;
+        private string mail;
+        private string password;
         private List<Resena> listaResenas;
 
         //Constructores
@@ -21,7 +21,7 @@ namespace Dominio
             this.id = ++autoIncrementId;
         }
 
-        public Periodista(String nombre, String apellido, String mail, String password)
+        public Periodista(string nombre, string apellido, string mail, string password)
         {
             this.id = ++autoIncrementId;
             this.nombre = nombre;
@@ -48,7 +48,7 @@ namespace Dominio
         /// <summary>
         /// Genera un nuevo objeto Resena en el sistema.
         /// </summary>
-        public bool crearResena(String titulo, String contenido)
+        public bool crearResena(string titulo, string contenido)
         {
             bool retVal = false;
             DateTime fecha = DateTime.Now;
@@ -93,22 +93,22 @@ namespace Dominio
         {
             get { return this.id; }
         }
-        public String Nombre
+        public string Nombre
         {
             get { return this.nombre; }
             set { this.nombre = value; }
         }
-        public String Apellido
+        public string Apellido
         {
             get { return this.apellido; }
             set { this.apellido = value; }
         }
-        public String Mail
+        public string Mail
         {
             get { return this.mail; }
             set { this.mail = value; }
         }
-        public String Password
+        public string Password
         {
             get { return this.password; }
             set { this.password = value; }

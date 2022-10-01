@@ -8,6 +8,6 @@ namespace Dominio
     {
         TARJETA_AMARILLA,
         TARJETA_ROJA,
-        GOL;
+        GOL
     }
 }

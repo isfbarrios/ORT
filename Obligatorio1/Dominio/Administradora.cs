@@ -17,9 +17,16 @@ namespace Dominio
         private static List<Resultado> resultados = new List<Resultado>();
         private static List<Resena> resenas = new List<Resena>();
 
+        private Dictionary<string, List<Seleccion>> seleccionesPorGrupo = new Dictionary<string, List<Seleccion>>();
+        private Dictionary<string, List<Partido>> partidosPorGrupo = new Dictionary<string, List<Partido>>();
+
         private int minimoParaVIP = 0;
 
-        private Administradora() { }
+        private Administradora() 
+        {
+            //Precarga de datos obligatoria.
+            PreLoad();
+        }
 
         public static Administradora Instance
         {
@@ -28,100 +35,6 @@ namespace Dominio
                 if (instance == null) instance = new Administradora();
                 return instance;
             }
-        }
-        /// <summary>
-        /// Retorna el listado de incidencias ocurridas en un partido determinado.
-        /// </summary>
-        public List<Incidente> GetIncidentes(Partido partido)
-        {
-            List<Incidente> partidoIncidentes = new List<Incidente>();
-
-            foreach (Incidente incidente in this.Incidentes)
-            {
-                if (incidente.Partido.Equals(partido)) partidoIncidentes.Add(incidente);
-            }
-            return partidoIncidentes;
-        }
-        /// <summary>
-        /// Retorna el listado de jugadores con al menos una expulsión.
-        /// </summary>
-        public List<Jugador> GetJugadoresExpulsados(Jugador jugador)
-        {
-            /*
-             * FALTA IMPLEMENTAR EL ORDENADO PARA EL RETORNO. SEGUN LA LETRA, SE DEBE RETORNAR DE DOS FORMAS DIFERENTES. 
-             */
-
-            List<Jugador> jugadorIncidentes = new List<Jugador>();
-
-            foreach (Incidente incidente in this.Incidentes)
-            {
-                if (incidente.Jugador.Equals(jugador) && Incidente.EsTarjetaRoja(incidente)) jugadorIncidentes.Add(jugador);
-            }
-            return jugadorIncidentes;
-        }
-        /// <summary>
-        /// Retorna el listado de incidencias sobre un jugador ocurridas en un partido determinado.
-        /// </summary>
-        public List<Incidente> GetIncidentes(Partido partido, Jugador jugador)
-        {
-            List<Incidente> jugadorPartidoIncidentes = new List<Incidente>();
-            List<Incidente> partidoIncidentes = GetIncidentes(partido);
-
-            foreach (Incidente incidente in partidoIncidentes)
-            {
-                if (incidente.Jugador.Equals(jugador)) jugadorPartidoIncidentes.Add(incidente);
-            }
-            return jugadorPartidoIncidentes;
-        }
-        /// <summary>
-        /// Retorna el listado de partidos disputados por un jugador determinado.
-        /// </summary>
-        public List<Partido> GetPartidos(Jugador jugador)
-        {
-            List<Partido> jugadorPartidos = new List<Partido>();
-
-            foreach (Partido partido in this.Partidos)
-            {
-                List<Jugador> jugadores = Jugador.TotalJugadoresPartidos(partido);
-
-                foreach (Jugador jPartido in jugadores)
-                {
-                    if (jPartido.Equals(jugador)) jugadorPartidos.Add(partido);
-                }
-            }
-            return jugadorPartidos;
-        }
-        /// <summary>
-        /// Retorna el partido con más goles, disputado por una seleccion determinada.
-        /// </summary>
-        public Partido GetPartidos(Seleccion seleccion)
-        {
-            Partido retPartido = new Partido();
-            foreach (Partido partido in this.Partidos)
-            {
-                //Si el partido actual tuvo a esta selección como local o visitante, entro.
-                if (seleccion.JugadoPorEstaSeleccion(partido))
-                {
-                    //if 
-                }
-            }
-            return retPartido;
-        }
-        public int TotalGolesPartido(Partido partido, Seleccion seleccion)
-        {
-            int retVal = 0;
-            List<Jugador> jugadores = Jugador.TotalJugadoresPartidos(partido);
-            //Recorro el listado de jugadores del partido
-            foreach (Jugador jugador in jugadores) {
-                //Valido que el jugador iterado corresponda a la seleccion que quiero validar
-                if (seleccion.JugadorDeSeleccion(jugador))
-                {
-                    //Si lo es, valido que tenga incidencias de gol
-                    int auxVal = Incidente.TotalIncidenciasPartido(partido).Count;
-
-                }
-            }
-            return retVal;
         }
         //Getters & Setters
         public List<Pais> Paises {
@@ -155,13 +68,19 @@ namespace Dominio
         {
             get { return incidentes; }
         }
-
         public int MinimoParaVIP
         {
             get { return minimoParaVIP; }
             set { this.minimoParaVIP = value; }
         }
-
+        public Dictionary<string, List<Seleccion>> SeleccionesPorGrupo
+        {
+            get { return this.seleccionesPorGrupo; }
+        }
+        public Dictionary<string, List<Partido>> PartidoPorGrupo
+        {
+            get { return this.partidosPorGrupo; }
+        }
         //Métodos de precarga de datos
         public static void PreLoad()
         {

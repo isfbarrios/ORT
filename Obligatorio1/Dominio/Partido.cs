@@ -15,9 +15,8 @@ namespace Dominio
         private bool finalizado;
         private Resultado resultado;
         private List<Incidente> incidentes;
-        //Estos puede que no sean para agregar acá
-        private Fase fase;
-        private Etapa etapa;
+        private TipoFase tipoFase;
+        private TipoEtapa tipoEtapa;
 
         //Constructores
         public Partido() 
@@ -25,7 +24,7 @@ namespace Dominio
             this.id = ++autoIncrementId;
         }
 
-        public Partido(Seleccion local, Seleccion visitante, DateTime fecha, List<Incidente> incidentes, Fase fase, Etapa etapa)
+        public Partido(Seleccion local, Seleccion visitante, DateTime fecha, List<Incidente> incidentes, TipoFase tipoFase, TipoEtapa tipoEtapa)
         {
             this.id = ++autoIncrementId;
             this.local = local;
@@ -34,8 +33,8 @@ namespace Dominio
             this.finalizado = false; //Por defecto, no finalizado
             this.incidentes = incidentes;
             this.resultado = Resultado.PENDIENTE;
-            this.fase = fase;
-            this.etapa = etapa;
+            this.tipoFase = tipoFase;
+            this.tipoEtapa = tipoEtapa;
         }
 
         //Funcionalidades
@@ -55,6 +54,64 @@ namespace Dominio
         public static bool EsPartidoValido(Partido partido)
         {
             return (partido.Local.EsSeleccionValida() && partido.Visitante.EsSeleccionValida());
+        }
+        /// <summary>
+        /// Retorna el partido con más goles, disputado por una seleccion determinada.
+        /// </summary>
+        public Partido GetPartidos(Seleccion seleccion)
+        {
+            int golesPartido = 0;
+            Partido retPartido = new Partido();
+            foreach (Partido partido in Administradora.Instance.Partidos)
+            {
+                //Si el partido actual tuvo a esta selección como local o visitante, entro.
+                if (seleccion.JugadoPorEstaSeleccion(partido))
+                {
+                    int aux = TotalGolesPartido(partido, seleccion);
+
+                    if (aux >= golesPartido) golesPartido = aux;
+                }
+            }
+            return retPartido;
+        }
+        /// <summary>
+        /// Retorna el listado de partidos disputados por un jugador determinado.
+        /// </summary>
+        public List<Partido> GetPartidos(Jugador jugador)
+        {
+            List<Partido> jugadorPartidos = new List<Partido>();
+
+            foreach (Partido partido in Administradora.Instance.Partidos)
+            {
+                List<Jugador> jugadores = Jugador.TotalJugadoresPartidos(partido);
+
+                foreach (Jugador jPartido in jugadores)
+                {
+                    if (jPartido.Equals(jugador)) jugadorPartidos.Add(partido);
+                }
+            }
+            return jugadorPartidos;
+        }
+        /// <summary>
+        /// Retorna el total de goles de una seleccion, para un partido determinado.
+        /// </summary>
+        public int TotalGolesPartido(Partido partido, Seleccion seleccion)
+        {
+            int retVal = 0;
+            List<Jugador> jugadores = Jugador.TotalJugadoresPartidos(partido);
+            //Recorro el listado de jugadores del partido.
+            foreach (Jugador jugador in jugadores)
+            {
+                //Valido que el jugador iterado corresponda a la seleccion que quiero validar.
+                if (seleccion.JugadorDeSeleccion(jugador))
+                {
+                    //Si lo es, valido que tenga incidencias de gol.
+                    int auxVal = Incidente.TotalIncidenciasPartido(partido).Count;
+                    //Acumulo el resultado.
+                    retVal += auxVal;
+                }
+            }
+            return retVal;
         }
         private bool ValidarFechaDePartido()
         {
@@ -98,17 +155,17 @@ namespace Dominio
             get { return this.resultado; }
             set { this.resultado = value; }
         }
-        public Fase Fase
+        public TipoFase TipoFase
         {
-            get { return this.fase; }
+            get { return this.tipoFase; }
         }
         public List<Incidente> Incidentes
         {
             get { return this.incidentes; }
         }
-        public Etapa Etapa
+        public TipoEtapa TipoEtapa
         {
-            get { return this.etapa; }
+            get { return this.tipoEtapa; }
         }
     }
 }

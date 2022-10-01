@@ -6,7 +6,7 @@ namespace Dominio
 {
     public class Categoria
     {
-        public static bool setMinimoParaVip(String value)
+        public static bool setMinimoParaVip(string value)
         {
             int oldValue = Administradora.Instance.MinimoParaVIP;
             Administradora.Instance.MinimoParaVIP = int.Parse(value);
@@ -30,7 +30,7 @@ namespace Dominio
         public static TipoCategoria AsignarCategoria(Jugador j)
         {
             return (j.ValorMercado.CompareTo(
-                new Categoria().minimoParaVIP) > 0 
+                Administradora.Instance.MinimoParaVIP) > 0 
                 ? TipoCategoria.VIP 
                 : TipoCategoria.ESTANDAR);
         }
