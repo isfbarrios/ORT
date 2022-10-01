@@ -77,38 +77,38 @@ namespace Dominio
 
         public static void PreLoadPaises()
         {
-            Pais.AltaPais(new Pais("Catar", "QAT"));
-            Pais.AltaPais(new Pais("Alemania", "DEU"));
-            Pais.AltaPais(new Pais("Dinamarca", "DNK"));
-            Pais.AltaPais(new Pais("Brasil", "BRA"));
-            Pais.AltaPais(new Pais("Francia", "FRA"));
-            Pais.AltaPais(new Pais("Bélgica", "BEL"));
-            Pais.AltaPais(new Pais("Croacia", "HRV"));
-            Pais.AltaPais(new Pais("España", "ESP"));
-            Pais.AltaPais(new Pais("Serbia", "SRB"));
-            Pais.AltaPais(new Pais("Inglaterra", "GBR"));
-            Pais.AltaPais(new Pais("Suiza", "CHE"));
-            Pais.AltaPais(new Pais("Países Bajos", "NLD"));
-            Pais.AltaPais(new Pais("Argentina", "ARG"));
-            Pais.AltaPais(new Pais("Irán", "IRN"));
-            Pais.AltaPais(new Pais("Corea del Sur", "KOR"));
-            Pais.AltaPais(new Pais("Japón", "JPN"));
-            Pais.AltaPais(new Pais("Arabia Saudita", "SAU"));
-            Pais.AltaPais(new Pais("Ecuador", "ECU"));
-            Pais.AltaPais(new Pais("Uruguay", "URY"));
-            Pais.AltaPais(new Pais("Canadá", "CAN"));
-            Pais.AltaPais(new Pais("Ghana", "GHA"));
-            Pais.AltaPais(new Pais("Senegal", "SEN"));
-            Pais.AltaPais(new Pais("Marruecos", "MAR"));
-            Pais.AltaPais(new Pais("Túnez", "TUN"));
-            Pais.AltaPais(new Pais("Portugal", "PRT"));
-            Pais.AltaPais(new Pais("Polonia", "POL"));
-            Pais.AltaPais(new Pais("Camerún", "CMR"));
-            Pais.AltaPais(new Pais("México", "MEX"));
-            Pais.AltaPais(new Pais("Estados Unidos", "USA"));
-            Pais.AltaPais(new Pais("Gales", "WLS"));
-            Pais.AltaPais(new Pais("Australia", "AUS"));
-            Pais.AltaPais(new Pais("Costa Rica", "CRI"));
+            AltaPais(new Pais("Catar", "QAT"));
+            AltaPais(new Pais("Alemania", "DEU"));
+            AltaPais(new Pais("Dinamarca", "DNK"));
+            AltaPais(new Pais("Brasil", "BRA"));
+            AltaPais(new Pais("Francia", "FRA"));
+            AltaPais(new Pais("Bélgica", "BEL"));
+            AltaPais(new Pais("Croacia", "HRV"));
+            AltaPais(new Pais("España", "ESP"));
+            AltaPais(new Pais("Serbia", "SRB"));
+            AltaPais(new Pais("Inglaterra", "GBR"));
+            AltaPais(new Pais("Suiza", "CHE"));
+            AltaPais(new Pais("Países Bajos", "NLD"));
+            AltaPais(new Pais("Argentina", "ARG"));
+            AltaPais(new Pais("Irán", "IRN"));
+            AltaPais(new Pais("Corea del Sur", "KOR"));
+            AltaPais(new Pais("Japón", "JPN"));
+            AltaPais(new Pais("Arabia Saudita", "SAU"));
+            AltaPais(new Pais("Ecuador", "ECU"));
+            AltaPais(new Pais("Uruguay", "URY"));
+            AltaPais(new Pais("Canadá", "CAN"));
+            AltaPais(new Pais("Ghana", "GHA"));
+            AltaPais(new Pais("Senegal", "SEN"));
+            AltaPais(new Pais("Marruecos", "MAR"));
+            AltaPais(new Pais("Túnez", "TUN"));
+            AltaPais(new Pais("Portugal", "PRT"));
+            AltaPais(new Pais("Polonia", "POL"));
+            AltaPais(new Pais("Camerún", "CMR"));
+            AltaPais(new Pais("México", "MEX"));
+            AltaPais(new Pais("Estados Unidos", "USA"));
+            AltaPais(new Pais("Gales", "WLS"));
+            AltaPais(new Pais("Australia", "AUS"));
+            AltaPais(new Pais("Costa Rica", "CRI"));
         }
     }
 }

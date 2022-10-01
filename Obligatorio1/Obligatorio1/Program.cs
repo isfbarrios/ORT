@@ -26,6 +26,7 @@ namespace Obligatorio1
                         "2 ) Listar Periodistas.\n" +
                         "3 ) Crear Reseña.\n" +
                         "4 ) Asignar valor de referencia para categorías.\n" +
+                        "5 ) Buscar jugador por su Id.\n" +
                         "0 ) Salir");
 
                     int.TryParse(Console.ReadLine(), out seleccion);
@@ -57,9 +58,37 @@ namespace Obligatorio1
                     //Modificar valor referencia categoría
                     Program.AsignarReferenciaCategoria();
                     break;
+                case 5:
+                    //Buscar jugador por su Id
+                    Program.BuscarJugador();
+                    break;
                 default:
                     seleccion = 0; //Salir
                     break;
+            }
+        }
+        private static bool BuscarJugador()
+        {
+            bool retVal = false;
+            string id = "";
+            string[] descripciones = { "Id" };
+
+            Console.WriteLine($"Ingrese un nuevo {descripciones[0]}:");
+
+            bool datosValidos = false;
+
+            do
+            {
+                datosValidos = SolicitarDatos(ref id, descripciones[0]);
+            }
+            while (datosValidos);
+
+            if (id.Length > 0)
+            {
+                retVal = true;
+
+                //Voy a buscar el jugador
+
             }
         }
         private static bool AsignarReferenciaCategoria()

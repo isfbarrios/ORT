@@ -20,7 +20,6 @@ namespace Dominio
         {
             this.id = ++autoIncrementId;
         }
-
         public Periodista(string nombre, string apellido, string mail, string password)
         {
             this.id = ++autoIncrementId;
@@ -30,7 +29,6 @@ namespace Dominio
             this.password = password;
             this.listaResenas = new List<Resena>();
         }
-
         /// <summary>
         /// Genera el alta del Periodista en el sistema.
         /// </summary>
@@ -44,7 +42,6 @@ namespace Dominio
             }
             return retVal;
         }
-
         /// <summary>
         /// Genera un nuevo objeto Resena en el sistema.
         /// </summary>
@@ -65,10 +62,13 @@ namespace Dominio
         /// </summary>
         public bool ValidarPassword() => Utils.ValidLength(this.Password, 8);
         /// <summary>
-        /// Valida que el mail contenga un @, pero no se encuentre en la primer o última posición.
+        /// Valida que el mail contenga un @, pero no se encuentre en la primer o última posición y que no este usado.
         /// </summary>
-        public bool ValidarMail() => (this.Mail.Length > 0 && this.Mail.IndexOf("@") > 0 && !this.Mail.StartsWith("@") && !this.Mail.EndsWith("@") && !ValidarMailRepetido(this.Mail));
-        private bool ValidarMailRepetido(String mail)
+        public bool ValidarMail() => (Utils.ValidMail(this.Mail) && !ValidarMail(this.Mail));
+        /// <summary>
+        /// Valida únicamente que el mail no este repetido entre los usados por aquellos Periodistas ya registrados.
+        /// </summary>
+        private bool ValidarMail(String mail)
         {
             bool retVal = false;
             foreach (Periodista periodista in Administradora.Instance.Periodistas) 
@@ -120,7 +120,7 @@ namespace Dominio
         }
         public static void PrecargaPeriodistas()
         {
-            Periodista.AltaPeriodista(new Periodista("Fabricio", "Barrios", "fabribarriosesi@gmail.com", "nosoyreal1234"));
+            AltaPeriodista(new Periodista("Fabricio", "Barrios", "fabribarriosesi@gmail.com", "nosoyreal1234"));
         }
     }
 }

@@ -164,30 +164,31 @@ namespace Dominio
         {
             get { return this.etapa; }
         }
-    }
-    public static void PrecargaPartidos()
-    {
-        //Partidos fase de grupos
-        //Grupo A
-        Partido.AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[1], DateTime.Parse("2022-11-22"), Etapa.FASE_GRUPOS));
-        Partido.AltaPartido(new Partido(Administradora.Instance.Selecciones[2], Administradora.Instance.Selecciones[3], DateTime.Parse("2022-11-23"), Etapa.FASE_GRUPOS));
-        //Grupo B
-        Partido.AltaPartido(new Partido(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[5], DateTime.Parse("2022-11-24"), Etapa.FASE_GRUPOS));
-        Partido.AltaPartido(new Partido(Administradora.Instance.Selecciones[6], Administradora.Instance.Selecciones[7], DateTime.Parse("2022-11-25"), Etapa.FASE_GRUPOS));
-        //Grupo C
-        Partido.AltaPartido(new Partido(Administradora.Instance.Selecciones[8], Administradora.Instance.Selecciones[9], DateTime.Parse("2022-11-26"), Etapa.FASE_GRUPOS));
-        Partido.AltaPartido(new Partido(Administradora.Instance.Selecciones[10], Administradora.Instance.Selecciones[11], DateTime.Parse("2022-11-27"), Etapa.FASE_GRUPOS));
-        //Grupo D
-        Partido.AltaPartido(new Partido(Administradora.Instance.Selecciones[12], Administradora.Instance.Selecciones[13], DateTime.Parse("2022-11-28"), Etapa.FASE_GRUPOS));
-        Partido.AltaPartido(new Partido(Administradora.Instance.Selecciones[14], Administradora.Instance.Selecciones[15], DateTime.Parse("2022-11-29"), Etapa.FASE_GRUPOS));
-        //Grupo E
-        Partido.AltaPartido(new Partido(Administradora.Instance.Selecciones[16], Administradora.Instance.Selecciones[17], DateTime.Parse("2022-11-30"), Etapa.FASE_GRUPOS));
-        Partido.AltaPartido(new Partido(Administradora.Instance.Selecciones[18], Administradora.Instance.Selecciones[19], DateTime.Parse("2022-12-01"), Etapa.FASE_GRUPOS));
-        //Grupo F
-        Partido.AltaPartido(new Partido(Administradora.Instance.Selecciones[20], Administradora.Instance.Selecciones[21], DateTime.Parse("2022-12-02"), Etapa.FASE_GRUPOS));
-        Partido.AltaPartido(new Partido(Administradora.Instance.Selecciones[22], Administradora.Instance.Selecciones[23], DateTime.Parse("2022-12-03"), Etapa.FASE_GRUPOS));
+        
+        public static void PreLoadPartidos()
+        {
+            //Partidos fase de grupos
+            //Grupo A
+            AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[1], DateTime.Parse("2022-11-22"), Etapa.FASE_GRUPOS));
+            AltaPartido(new Partido(Administradora.Instance.Selecciones[2], Administradora.Instance.Selecciones[3], DateTime.Parse("2022-11-23"), Etapa.FASE_GRUPOS));
+            //Grupo B
+            AltaPartido(new Partido(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[5], DateTime.Parse("2022-11-24"), Etapa.FASE_GRUPOS));
+            AltaPartido(new Partido(Administradora.Instance.Selecciones[6], Administradora.Instance.Selecciones[7], DateTime.Parse("2022-11-25"), Etapa.FASE_GRUPOS));
+            //Grupo C
+            AltaPartido(new Partido(Administradora.Instance.Selecciones[8], Administradora.Instance.Selecciones[9], DateTime.Parse("2022-11-26"), Etapa.FASE_GRUPOS));
+            AltaPartido(new Partido(Administradora.Instance.Selecciones[10], Administradora.Instance.Selecciones[11], DateTime.Parse("2022-11-27"), Etapa.FASE_GRUPOS));
+            //Grupo D
+            AltaPartido(new Partido(Administradora.Instance.Selecciones[12], Administradora.Instance.Selecciones[13], DateTime.Parse("2022-11-28"), Etapa.FASE_GRUPOS));
+            AltaPartido(new Partido(Administradora.Instance.Selecciones[14], Administradora.Instance.Selecciones[15], DateTime.Parse("2022-11-29"), Etapa.FASE_GRUPOS));
+            //Grupo E
+            AltaPartido(new Partido(Administradora.Instance.Selecciones[16], Administradora.Instance.Selecciones[17], DateTime.Parse("2022-11-30"), Etapa.FASE_GRUPOS));
+            AltaPartido(new Partido(Administradora.Instance.Selecciones[18], Administradora.Instance.Selecciones[19], DateTime.Parse("2022-12-01"), Etapa.FASE_GRUPOS));
+            //Grupo F
+            AltaPartido(new Partido(Administradora.Instance.Selecciones[20], Administradora.Instance.Selecciones[21], DateTime.Parse("2022-12-02"), Etapa.FASE_GRUPOS));
+            AltaPartido(new Partido(Administradora.Instance.Selecciones[22], Administradora.Instance.Selecciones[23], DateTime.Parse("2022-12-03"), Etapa.FASE_GRUPOS));
 
-        //Partidos eliminatorias
-        Partido.AltaPartido(new Partido(Administradora.Instance.Selecciones[22], Administradora.Instance.Selecciones[23], DateTime.Parse("2022-12-03"), Etapa.FASE_GRUPOS));
+            //Partidos eliminatorias
+            AltaPartido(new Partido(Administradora.Instance.Selecciones[22], Administradora.Instance.Selecciones[23], DateTime.Parse("2022-12-03"), Etapa.FASE_GRUPOS));
+        }
     }
 }
