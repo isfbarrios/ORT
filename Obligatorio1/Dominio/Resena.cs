@@ -43,7 +43,10 @@ namespace Dominio
             }
             return retVal;
         }
-
+        /// <summary>
+        /// Retorna el objecto en formato string.
+        /// </summary>
+        public override string ToString() => ($"Nombre {this.Periodista.Nombre} {this.Titulo} - Mail {this.Contenido}");
         //Getters & Setters
         public int Id
         {

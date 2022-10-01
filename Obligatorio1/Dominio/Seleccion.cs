@@ -97,6 +97,11 @@ namespace Dominio
         {
             return (this.Pais.Equals(jugador.Pais));
         }
+        /// <summary>
+        /// Retorna el objecto en formato string.
+        /// </summary>
+        public override string ToString() => ($"Nombre {this.Pais.Nombre} [{this.Pais.Codigo}].");
+        
         //Getters && Setters
         public int Id
         {

@@ -57,7 +57,10 @@ namespace Dominio
             }
             return null;
         }
-
+        /// <summary>
+        /// Retorna el objecto en formato string.
+        /// </summary>
+        public override string ToString() => ($"País {this.Nombre} [{this.Codigo}.");
         //Getters y Setters
         public int Id
         {

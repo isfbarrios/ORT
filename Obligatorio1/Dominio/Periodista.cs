@@ -60,37 +60,35 @@ namespace Dominio
             }
             return retVal;
         }
-
         /// <summary>
         /// Valida que el password cumpla con el largo requerido.
         /// </summary>
-        public bool ValidarPassword()
-        {
-            return Utils.ValidLength(this.Password, 8);
-        }
+        public bool ValidarPassword() => Utils.ValidLength(this.Password, 8);
         /// <summary>
         /// Valida que el mail contenga un @, pero no se encuentre en la primer o última posición.
         /// </summary>
-        public bool ValidarMail()
+        public bool ValidarMail() => (this.Mail.Length > 0 && this.Mail.IndexOf("@") > 0 && !this.Mail.StartsWith("@") && !this.Mail.EndsWith("@") && !ValidarMailRepetido(this.Mail));
+        private bool ValidarMailRepetido(String mail)
         {
-            if (this.Mail.Length > 0 && this.Mail.IndexOf("@") > 0)
+            bool retVal = false;
+            foreach (Periodista periodista in Administradora.Instance.Periodistas) 
             {
-                if (!this.Mail.StartsWith("@") && !this.Mail.EndsWith("@")) return true;
+                if (mail.Equals(periodista.Mail))
+                {
+                    retVal = true;
+                    break;
+                }
             }
-            return false;
+            return retVal;
         }
         /// <summary>
         /// Valida que el nombre completo del periodista sea valido.
         /// </summary>
-        public bool ValidarNombre()
-        {
-            if (this.Nombre.Length > 0 && this.Apellido.Length > 0) return true;
-            return false;
-        }
-        public override string ToString()
-        {
-            return ($"Nombre {this.Nombre} {this.Apellido} - Mail {this.Mail}");
-        }
+        public bool ValidarNombre() => (this.Nombre.Length > 0 && this.Apellido.Length > 0);
+        /// <summary>
+        /// Retorna el objecto en formato string.
+        /// </summary>
+        public override string ToString() => ($"Nombre {this.Nombre} {this.Apellido} - Mail {this.Mail}");
         //Getters & Setters
         public int Id
         {
@@ -119,6 +117,10 @@ namespace Dominio
         public List<Resena> ListaResenas
         {
             get { return this.listaResenas; }
+        }
+        public static void PrecargaPeriodistas()
+        {
+            Periodista.AltaPeriodista(new Periodista("Fabricio", "Barrios", "fabribarriosesi@gmail.com", "nosoyreal1234"));
         }
     }
 }

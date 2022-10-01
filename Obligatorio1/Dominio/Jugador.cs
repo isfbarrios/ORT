@@ -24,7 +24,10 @@ namespace Dominio
         {
             this.id = ++autoIncrementId;
         }
-
+        /// <summary>
+        /// Retorna el objecto en formato string.
+        /// </summary>
+        public override string ToString() => ($"Nombre {this.Nombre} [{this.Pais.Codigo}]. Camiseta {this.NumeroCamiseta} - Posición {this.Posicion}.");
         public Jugador(string numeroCamiseta, string nombre, DateTime fechaNacimiento, 
             int alturaCM, Pie pieHabil, int valorMercado, Moneda moneda, Pais pais, Posicion posicion)
         {
@@ -68,14 +71,15 @@ namespace Dominio
             }
             return jugadorIncidentes;
         }
-        public bool ValidarNombre()
-        {
-            return (Utils.ValidLength(this.Nombre, 0));
-        }
-        public bool ValidarNumeroCamiseta()
-        {
-            return (Utils.ValidLength(this.NumeroCamiseta, 0));
-        }
+        /// <summary>
+        /// Retorna TRUE si el nombre del Jugador es valido.
+        /// </summary>
+        public bool ValidarNombre() => (Utils.ValidLength(this.Nombre, 0));
+        /// <summary>
+        /// Retorna TRUE si el número de camiseta del Jugador es valido.
+        /// </summary>
+        /// <returns></returns>
+        public bool ValidarNumeroCamiseta() => (Utils.ValidLength(this.NumeroCamiseta, 0));
         public bool ValidarFechaNacimiento()
         {
             //Date example
@@ -84,12 +88,9 @@ namespace Dominio
             return (DateTime.Now.ToString("yyyy-MM-dd").Length == this.FechaNacimiento.ToString("dd-MM-yyyy").Length);
         }
         /// <summary>
-        /// Valida que la altura del jugador sea valida.
+        /// Retorna TRUE si la altura del jugador es valida.
         /// </summary>
-        public bool ValidarAlturaCM()
-        {
-            return (this.AlturaCM > 0);
-        }
+        public bool ValidarAlturaCM() => (this.AlturaCM > 0);
         /// <summary>
         /// Retorna el listado de jugadores que disputaron un determinado partido.
         /// </summary>

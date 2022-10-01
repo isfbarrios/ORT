@@ -71,18 +71,18 @@ namespace Dominio
 
             return retVal;
         }
-        public static bool EsTarjetaRoja(Incidente incidente)
-        {
-            return (incidente.TipoIncidente.Equals(TipoIncidente.TARJETA_ROJA));
-        }
-        public static bool EsTarjetaAmarilla(Incidente incidente)
-        {
-            return (incidente.TipoIncidente.Equals(TipoIncidente.TARJETA_AMARILLA));
-        }
-        public static bool EsGol(Incidente incidente)
-        {
-            return (incidente.TipoIncidente.Equals(TipoIncidente.GOL));
-        }
+        /// <summary>
+        /// Retorna TRUE si el incidente corresponde a una expulsión.
+        /// </summary>
+        public static bool EsTarjetaRoja(Incidente incidente) => (incidente.TipoIncidente.Equals(TipoIncidente.TARJETA_ROJA));
+        /// <summary>
+        /// Retorna TRUE si el incidente corresponde a una amonestación.
+        /// </summary>
+        public static bool EsTarjetaAmarilla(Incidente incidente) => (incidente.TipoIncidente.Equals(TipoIncidente.TARJETA_AMARILLA));
+        /// <summary>
+        /// Retorna TRUE si el incidente corresponde a un gol.
+        /// </summary>
+        public static bool EsGol(Incidente incidente) => (incidente.TipoIncidente.Equals(TipoIncidente.GOL));
         /// <summary>
         /// Retorna el total de incidencias, de un determinado tipo en un partido.
         /// </summary>
@@ -128,7 +128,10 @@ namespace Dominio
             }
             return partidoIncidentes;
         }
-
+        /// <summary>
+        /// Retorna el objecto en formato string.
+        /// </summary>
+        public override string ToString() => $"Jugador {this.Jugador.Nombre} {this.TipoIncidente.ToString()}" + (this.Minuto > -1 ? $" - Minuto {this.Minuto}'." : ".");
         //Getters && Setters
         public int Id {
             get {return this.id;} 
