@@ -87,7 +87,10 @@ namespace Dominio
             if (this.Nombre.Length > 0 && this.Apellido.Length > 0) return true;
             return false;
         }
-
+        public override string ToString()
+        {
+            return ($"Nombre {this.Nombre} {this.Apellido} - Mail {this.Mail}");
+        }
         //Getters & Setters
         public int Id
         {

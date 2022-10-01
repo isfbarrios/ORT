@@ -38,6 +38,8 @@ namespace Dominio
             if (Partido.EsPartidoValido(incidente.Partido))
             {
                 retVal = incidente.ValidarIncidente();
+                //Guardo el incidente en la lista genérica y a su vez, en la lista específica de ese partido
+                incidente.Partido.Incidentes.Add(incidente);
                 Administradora.Instance.Incidentes.Add(incidente);
             }
 

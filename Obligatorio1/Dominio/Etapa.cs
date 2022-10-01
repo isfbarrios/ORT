@@ -4,12 +4,9 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Etapa
+    public enum Etapa
     {
-
-    }
-    public enum TipoEtapa
-    {
+        FASE_GRUPOS,
         OCTAVOS,
         CUARTOS,
         SEMIFINAL,

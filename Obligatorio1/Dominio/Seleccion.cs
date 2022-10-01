@@ -21,6 +21,7 @@ namespace Dominio
         {
             this.id = ++autoIncrementId;
             this.pais = pais;
+            this.jugadores = new List<Jugador>();
         }
 
         /// <summary>
@@ -108,7 +109,6 @@ namespace Dominio
         public List<Jugador> Jugadores
         {
             get { return this.jugadores; }
-            set { this.jugadores = value; }
         }
         public bool ValidarSeleccionado()
         {

@@ -15,8 +15,7 @@ namespace Dominio
         private bool finalizado;
         private Resultado resultado;
         private List<Incidente> incidentes;
-        private TipoFase tipoFase;
-        private TipoEtapa tipoEtapa;
+        private Etapa etapa;
 
         //Constructores
         public Partido() 
@@ -24,17 +23,16 @@ namespace Dominio
             this.id = ++autoIncrementId;
         }
 
-        public Partido(Seleccion local, Seleccion visitante, DateTime fecha, List<Incidente> incidentes, TipoFase tipoFase, TipoEtapa tipoEtapa)
+        public Partido(Seleccion local, Seleccion visitante, DateTime fecha, Etapa etapa)
         {
             this.id = ++autoIncrementId;
             this.local = local;
             this.visitante = visitante;
             this.fecha = fecha;
             this.finalizado = false; //Por defecto, no finalizado
-            this.incidentes = incidentes;
             this.resultado = Resultado.PENDIENTE;
-            this.tipoFase = tipoFase;
-            this.tipoEtapa = tipoEtapa;
+            this.etapa = etapa;
+            this.incidentes = new List<Incidente>();
         }
 
         //Funcionalidades
@@ -125,7 +123,10 @@ namespace Dominio
             }
             return retVal;
         }
-
+        public override string ToString()
+        {
+            return ($"Fecha {this.Fecha} - {this.Local.Pais.Nombre} (Local) vs {this.Visitante.Pais.Nombre} (Visitante) - {this.Etapa.ToString()}");
+        }
         //Getters & Setters
         public int Id
         {
@@ -155,17 +156,13 @@ namespace Dominio
             get { return this.resultado; }
             set { this.resultado = value; }
         }
-        public TipoFase TipoFase
-        {
-            get { return this.tipoFase; }
-        }
         public List<Incidente> Incidentes
         {
             get { return this.incidentes; }
         }
-        public TipoEtapa TipoEtapa
+        public Etapa Etapa
         {
-            get { return this.tipoEtapa; }
+            get { return this.etapa; }
         }
     }
 }

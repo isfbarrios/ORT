@@ -8,23 +8,31 @@ namespace Obligatorio1
     {
         static void Main(string[] args)
         {
-            //Precarga de datos
+            //Precarga de datos obligatoria.
             Administradora.PreLoad();
-            int seleccion = -1;
-            //Construccion del menú
-            while (seleccion != 0)
-            {
-                Console.WriteLine("Acceda mediante el menu a la opcion deseada.\n\n" +
-                    "1 ) Alta Periodista.\n" +
-                    "2 ) Listar Periodistas.\n" +
-                    "3 ) Crear Reseña.\n" +
-                    "4 ) Asignar valor de referencia para categorías.\n" +
-                    "0 ) Salir");
 
-                int.TryParse(Console.ReadLine(), out seleccion);
-                //Ejecuto las acciones según corresponda
-                Program.OpcionesDeMenu(seleccion);
-            }
+            //Simulación del Login.
+            //Se asume que las credenciales serán: id (usuario) y password (contraseña).
+            Program.Login();
+
+            if (Administradora.session_user != "" & Administradora.session_pass != "")
+            {
+                //Construccion del menú
+                int seleccion = -1;
+                while (seleccion != 0)
+                {
+                    Console.WriteLine("Acceda mediante el menu a la opcion deseada.\n\n" +
+                        "1 ) Alta Periodista.\n" +
+                        "2 ) Listar Periodistas.\n" +
+                        "3 ) Crear Reseña.\n" +
+                        "4 ) Asignar valor de referencia para categorías.\n" +
+                        "0 ) Salir");
+
+                    int.TryParse(Console.ReadLine(), out seleccion);
+                    //Ejecuto las acciones según corresponda
+                    Program.OpcionesDeMenu(seleccion);
+                }
+            } 
         }
 
         private static void OpcionesDeMenu(int seleccion)
@@ -32,18 +40,22 @@ namespace Obligatorio1
             switch (seleccion)
             {
                 case 1:
+                    //Alta Periodista
                     bool caseOne = Program.AltaPeriodista();
                     if (!caseOne) Console.WriteLine("No se pudo dar de alta. Intente nuevamente.");
                     else Console.WriteLine("Alta de periodista exitosa.");
                     break;
                 case 2:
+                    //Listar Periodistas
                     Program.ListarPeriodistas();
                     break;
                 case 3:
+                    //Alta Reseña
                     Program.CrearResena();
                     break;
                 case 4:
-
+                    //Modificar valor referencia categoría
+                    Program.AsignarReferenciaCategoria();
                     break;
                 default:
                     seleccion = 0; //Salir
@@ -102,7 +114,9 @@ namespace Obligatorio1
             if (titulo.Length != 0 && contenido.Length != 0)
             {
                 //Debo obtener el id de periodista al menos, o ver como generar el objeto correspondiente para que quede asociado
-                retVal = Resena.AltaResena(new Resena(new Periodista(), new Partido(), titulo, contenido));
+                Resena resena = new Resena(new Periodista(), new Partido(), titulo, contenido);
+                Console.WriteLine($"Se creó la Reseña: {resena.ToString()}.");
+                retVal = Resena.AltaResena(resena);
             }
             return retVal;
         }
@@ -151,7 +165,48 @@ namespace Obligatorio1
 
             if (nombre.Length != 0 && apellido.Length != 0 && mail.Length != 0 && password.Length != 0)
             {
-                retVal = Periodista.AltaPeriodista(new Periodista(nombre, apellido, mail, password));
+                Periodista periodista = new Periodista(nombre, apellido, mail, password);
+                Console.WriteLine($"Se creó el Periodista: {periodista.ToString()}.");
+                retVal = Periodista.AltaPeriodista(periodista);
+            }
+            return retVal;
+        }
+
+        private static bool Login()
+        {
+            bool retVal = false;
+            string user = "", pass = "";
+            string[] descripciones = { "Usuario", "Contraseña" };
+
+            Console.WriteLine("Ingrese sus credenciales para acceder al sistema.");
+
+            //Recorrida según cantidad de campos a completar (nombre, apellido, mail y password).
+            for (int i = 0; i <= 1; i++)
+            {
+                bool datosValidos = false;
+                //Por cada uno solicito los datos hasta que el resultado sea correcto (datosValidos = Tue).
+                do
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            datosValidos = SolicitarDatos(ref user, descripciones[i]);
+                            break;
+                        case 1:
+                            datosValidos = SolicitarDatos(ref pass, descripciones[i]);
+                            break;
+                    }
+                }
+                while (!datosValidos);
+            }
+            //Si los campos son validos, almaceno las credenciales en las variables de la sesión.
+            if (user.Length != 0 && pass.Length != 0)
+            {
+                Administradora.session_user = user;
+                Administradora.session_pass = pass;
+
+                Console.WriteLine($"Acceso al sistema.");
+                retVal = true;
             }
             return retVal;
         }
