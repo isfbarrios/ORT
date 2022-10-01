@@ -73,7 +73,7 @@ namespace Dominio
         /// </summary>
         public static bool ValidMail(String a)
         {
-            return a.Length > 0 && a.IndexOf("@") > 0 && !a.StartsWith("@") && !a.EndsWith("@"));
+            return (a.Length > 0 && a.IndexOf("@") > 0 && !a.StartsWith("@") && !a.EndsWith("@"));
         }
         public static int autoIncrementoId(List<Object> lista)
         {
