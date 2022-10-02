@@ -6,7 +6,7 @@ namespace Dominio
 {
     public class Fase
     {
-        /*
+        
         public static bool DefinirFaseGrupos()
         {
             bool retVal = false;
@@ -32,10 +32,10 @@ namespace Dominio
             }
             return retVal;
         }
-        */
+        
         private static string GetFaseGupo(int id)
         {
-            String[] grupos = { "A", "B", "C", "D", "E", "F", "G", "H", "I" };
+            String[] grupos = { "A", "B", "C", "D", "E", "F", "G", "H" };
             return grupos[id];
         }
     }

@@ -38,11 +38,10 @@ namespace Dominio
             if (Partido.EsPartidoValido(incidente.Partido))
             {
                 retVal = incidente.ValidarIncidente();
-                //Guardo el incidente en la lista genérica y a su vez, en la lista específica de ese partido
+                //Guardo el incidente en la lista genérica y a su vez, en la lista específica de ese partido.
                 incidente.Partido.Incidentes.Add(incidente);
                 Administradora.Instance.Incidentes.Add(incidente);
             }
-
             return retVal;
         }
         /// <summary>
@@ -59,7 +58,7 @@ namespace Dominio
 
             foreach (Incidente incidente in jugadorPartidoIncidentes)
             {
-                //Si ya hay suficientes incidentes salgo del bucle
+                //Si ya hay suficientes incidentes salgo del bucle.
                 if (expulsion == 1 && amonestacion == 2) break;
 
                 if (Incidente.EsTarjetaAmarilla(incidente)) amonestacion++;
@@ -131,7 +130,7 @@ namespace Dominio
         /// <summary>
         /// Retorna el objecto en formato string.
         /// </summary>
-        public override string ToString() => $"Jugador {this.Jugador.Nombre} {this.TipoIncidente.ToString()}" + (this.Minuto > -1 ? $" - Minuto {this.Minuto}'." : ".");
+        public override string ToString() => $"Jugador {this.Jugador.Nombre} {this.TipoIncidente.ToString()}" + (this.Minuto > -1 ? $" - Minuto {this.Minuto}'" : "");
         //Getters && Setters
         public int Id {
             get {return this.id;} 

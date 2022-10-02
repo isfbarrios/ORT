@@ -10,9 +10,9 @@ namespace Obligatorio1
         {
             //Precarga de datos obligatoria.
             Administradora.PreLoad();
-
+            
             //Simulación del Login.
-            //Se asume que las credenciales serán: id (usuario) y password (contraseña).
+            //Se asume que las credenciales serán: mail (usuario) y password (contraseña).
             Program.Login();
 
             if (Administradora.session_user != "" & Administradora.session_pass != "")
@@ -23,10 +23,11 @@ namespace Obligatorio1
                 {
                     Console.WriteLine("Acceda mediante el menu a la opcion deseada.\n\n" +
                         "1 ) Alta Periodista.\n" +
-                        "2 ) Listar Periodistas.\n" +
+                        "2 ) Listar Jugadores expulsados.\n" +
                         "3 ) Crear Reseña.\n" +
                         "4 ) Asignar valor de referencia para categorías.\n" +
                         "5 ) Buscar jugador por su Id.\n" +
+                        "6 ) Listar partidos donde partició un jugador.\n" +
                         "0 ) Salir");
 
                     int.TryParse(Console.ReadLine(), out seleccion);
@@ -41,55 +42,89 @@ namespace Obligatorio1
             switch (seleccion)
             {
                 case 1:
+                    Console.Clear();
                     //Alta Periodista
-                    bool caseOne = Program.AltaPeriodista();
-                    if (!caseOne) Console.WriteLine("No se pudo dar de alta. Intente nuevamente.");
-                    else Console.WriteLine("Alta de periodista exitosa.");
+                    Console.WriteLine(AltaPeriodista());
                     break;
                 case 2:
+                    Console.Clear();
                     //Listar Periodistas
-                    Program.ListarPeriodistas();
+                    Console.WriteLine(ListarJugadoresExpulsados());
                     break;
                 case 3:
+                    Console.Clear();
                     //Alta Reseña
-                    Program.CrearResena();
+                    CrearResena();
                     break;
                 case 4:
+                    Console.Clear();
                     //Modificar valor referencia categoría
-                    Program.AsignarReferenciaCategoria();
+                    AsignarReferenciaCategoria();
                     break;
                 case 5:
+                    Console.Clear();
                     //Buscar jugador por su Id
-                    Program.BuscarJugador();
+                    BuscarJugador();
+                    break;
+                case 6:
+                    Console.Clear();
+                    //Buscar jugador por su Id y listo los partidos del mismo
+                    ListarPartidosJugador(BuscarJugador());
                     break;
                 default:
                     seleccion = 0; //Salir
                     break;
             }
         }
-        private static bool BuscarJugador()
+        //TODO: Falta terminar el método.
+        private static Jugador BuscarJugador()
         {
-            bool retVal = false;
             string id = "";
             string[] descripciones = { "Id" };
+            Jugador jugador = null;
 
             Console.WriteLine($"Ingrese un nuevo {descripciones[0]}:");
 
             bool datosValidos = false;
-
             do
             {
                 datosValidos = SolicitarDatos(ref id, descripciones[0]);
             }
-            while (datosValidos);
+            while (!datosValidos);
 
             if (id.Length > 0)
             {
-                retVal = true;
+                try
+                {
+                    jugador = Jugador.GetJugador(id);
 
-                //Voy a buscar el jugador
-
+                }
+                catch (Exception) {}
             }
+
+            if (jugador.Id == int.Parse(id)) Console.WriteLine($"\n{jugador.ToString()}.\n");
+            else Console.WriteLine("\nNo se pudo encontrar un jugador con ese Id.\n");
+
+            return jugador;
+        }
+        private static bool ListarPartidosJugador(Jugador jugador)
+        {
+            List<Partido> partidos = Jugador.GetPartidos(jugador);
+            string msg = "";
+            bool retVal = partidos.Count > 0 ? true : false;
+            
+            if (partidos.Count > 0)
+            {
+                foreach (Partido partido in partidos)
+                {
+                    msg += $"{partido.ToString()}.\n";
+                }
+            }
+            else msg = "\nEl jugador no partició en ningún partido hasta el momento.\n";
+
+            Console.WriteLine(msg);
+            
+            return retVal;
         }
         private static bool AsignarReferenciaCategoria()
         {
@@ -119,10 +154,10 @@ namespace Obligatorio1
             string titulo = "", contenido = "";
             string[] descripciones = { "Título", "Contenido" };
 
-            Console.WriteLine("Para crear una nueva reseña, complete los siguientes datos:");
+            Console.WriteLine("\nPara crear una nueva reseña, complete los siguientes datos:\n");
 
             //Recorrida según cantidad de campos a completar (titulo, contenido).
-            for (int i = 0; i <= 1; i++)
+            for (int i = 0; i < descripciones.Length; i++)
             {
                 bool datosValidos = false;
                 //Por cada uno solicito los datos hasta que el resultado sea correcto (datosValidos = Tue).
@@ -144,29 +179,39 @@ namespace Obligatorio1
             {
                 //Debo obtener el id de periodista al menos, o ver como generar el objeto correspondiente para que quede asociado
                 Resena resena = new Resena(new Periodista(), new Partido(), titulo, contenido);
-                Console.WriteLine($"Se creó la Reseña: {resena.ToString()}.");
+                Console.WriteLine($"\nSe creó la Reseña: {resena.ToString()}.\n");
                 retVal = Resena.AltaResena(resena);
             }
             return retVal;
         }
 
-        private static bool ListarPeriodistas()
+        private static string ListarJugadoresExpulsados()
         {
-            bool retVal = false;
+            string retVal = "\nNo se registraron expulsiones hasta el momento.\n";
+            List<Jugador> jugadoresExpulsados = Jugador.GetJugadoresExpulsados();
+           
+            if (jugadoresExpulsados.Count != 0)
+            {
+                retVal = "\nListado de jugadores con al menos una expulsión.\n";
+               
+                foreach (Jugador jugador in jugadoresExpulsados)
+                {
+                    Console.WriteLine($"{jugador.ToString()}.");
+                }
+            }
 
             return retVal;
         }
-
-        private static bool AltaPeriodista()
+        private static string AltaPeriodista()
         {
-            bool retVal = false;
-            string nombre = "", apellido = "", mail = "", password = "";
-            string[] descripciones = {"Nombre", "Apellido", "Mail", "Password"};
+            string retVal = "\nNo se pudo dar de alta. Intente nuevamente.\n";
+            string nombre = "", mail = "", password = "";
+            string[] descripciones = {"Nombre", "Mail", "Password"};
 
-            Console.WriteLine("Para dar de alta un nuevo periodista, complete los siguientes datos:");
+            Console.WriteLine("\nPara dar de alta un nuevo periodista, complete los siguientes datos:\n");
 
-            //Recorrida según cantidad de campos a completar (nombre, apellido, mail y password).
-            for (int i = 0; i <= 3; i++)
+            //Recorrida según cantidad de campos a completar (nombre, mail y password).
+            for (int i = 0; i < descripciones.Length; i++)
             {
                 bool datosValidos = false;
                 //Por cada uno solicito los datos hasta que el resultado sea correcto (datosValidos = Tue).
@@ -178,12 +223,9 @@ namespace Obligatorio1
                             datosValidos = SolicitarDatos(ref nombre, descripciones[i]);
                             break;
                         case 1:
-                            datosValidos = SolicitarDatos(ref apellido, descripciones[i]);
-                            break;
-                        case 2:
                             datosValidos = SolicitarDatos(ref mail, descripciones[i]);
                             break;
-                        case 3:
+                        case 2:
                             datosValidos = SolicitarDatos(ref password, descripciones[i]);
                             break;
                     }
@@ -192,11 +234,11 @@ namespace Obligatorio1
             }
             //Si los campos son validos, creo el objeto Periodista y lo paso a Periodista.AltaPeriodista() para el control especificado por la letra.
 
-            if (nombre.Length != 0 && apellido.Length != 0 && mail.Length != 0 && password.Length != 0)
+            if (nombre.Length != 0 && mail.Length != 0 && password.Length != 0)
             {
-                Periodista periodista = new Periodista(nombre, apellido, mail, password);
-                Console.WriteLine($"Se creó el Periodista: {periodista.ToString()}.");
-                retVal = Periodista.AltaPeriodista(periodista);
+                Periodista periodista = new Periodista(nombre, mail, password);
+
+                if (Periodista.AltaPeriodista(periodista)) retVal = $"\nSe creó el Periodista: {periodista.ToString()}.\n";
             }
             return retVal;
         }
@@ -207,10 +249,10 @@ namespace Obligatorio1
             string user = "", pass = "";
             string[] descripciones = { "Usuario", "Contraseña" };
 
-            Console.WriteLine("Ingrese sus credenciales para acceder al sistema.");
+            Console.WriteLine("\nIngrese sus credenciales para acceder al sistema.\n");
 
             //Recorrida según cantidad de campos a completar (nombre, apellido, mail y password).
-            for (int i = 0; i <= 1; i++)
+            for (int i = 0; i < descripciones.Length; i++)
             {
                 bool datosValidos = false;
                 //Por cada uno solicito los datos hasta que el resultado sea correcto (datosValidos = Tue).
@@ -234,7 +276,7 @@ namespace Obligatorio1
                 Administradora.session_user = user;
                 Administradora.session_pass = pass;
 
-                Console.WriteLine($"Acceso al sistema.");
+                Console.WriteLine("\nAcceso al sistema.\n");
                 retVal = true;
             }
             return retVal;

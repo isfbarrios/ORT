@@ -43,7 +43,7 @@ namespace Dominio
         /// </summary>
         public static void PrecargaSelecciones()
         {
-            //Contamos con países y jugadores, la seleccion debe armar para cada pais una seleccion
+            //Contamos con países y jugadores, la seleccion debe armar para cada pais una seleccion.
             foreach (Pais pais in Administradora.Instance.Paises)
             {
                 //Se crea una seleccion por cada país en la lista.
@@ -51,7 +51,7 @@ namespace Dominio
 
                 List<Jugador> jugadores = ListarJugadores(pais);
 
-                //Recorro los jugadores de dicha selección
+                //Recorro los jugadores de dicha selección.
                 foreach (Jugador j in jugadores)
                 {
                     nuevaSeleccion.Jugadores.Add(j);
@@ -69,7 +69,6 @@ namespace Dominio
         /// <summary>
         /// Retorna todos los jugadores de una selección, a partir del país del jugador.
         /// </summary>
-        /// <returns>Lista de jugadores del país seleccionado</returns>
         private static List<Jugador> ListarJugadores(Pais pais)
         {
             List<Jugador> selJugadores = new List<Jugador>();
@@ -100,8 +99,21 @@ namespace Dominio
         /// <summary>
         /// Retorna el objecto en formato string.
         /// </summary>
-        public override string ToString() => ($"Nombre {this.Pais.Nombre} [{this.Pais.Codigo}].");
-        
+        public override string ToString() => ($"Nombre {this.Pais.Nombre} [{this.Pais.Codigo}]");
+        /// <summary>
+        /// Retorna la selección a la que el jugador pertenece.
+        /// </summary>
+        public static Seleccion GetSeleccion(Jugador jugador)
+        {
+            Seleccion retVal = null;
+            foreach (Seleccion sel in Administradora.Instance.Selecciones)
+            {
+                if (sel.Pais.Equals(jugador.Pais)) retVal = sel;
+            }
+            if (retVal == null) retVal = new Seleccion();
+
+            return retVal;
+        }
         //Getters && Setters
         public int Id
         {

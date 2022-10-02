@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Dominio
 {
-    public class Periodista
+    public class Periodista:IComparable<Periodista>
     {
         //Atributos
         private static int autoIncrementId;
         private int id;
         private string nombre;
-        private string apellido;
         private string mail;
         private string password;
         private List<Resena> listaResenas;
@@ -20,11 +20,10 @@ namespace Dominio
         {
             this.id = ++autoIncrementId;
         }
-        public Periodista(string nombre, string apellido, string mail, string password)
+        public Periodista(string nombre, string mail, string password)
         {
             this.id = ++autoIncrementId;
             this.nombre = nombre;
-            this.apellido = apellido;
             this.mail = mail;
             this.password = password;
             this.listaResenas = new List<Resena>();
@@ -84,11 +83,18 @@ namespace Dominio
         /// <summary>
         /// Valida que el nombre completo del periodista sea valido.
         /// </summary>
-        public bool ValidarNombre() => (this.Nombre.Length > 0 && this.Apellido.Length > 0);
+        public bool ValidarNombre() => (this.Nombre.Length > 0 && this.Nombre.IndexOf(" ") > -1);
         /// <summary>
         /// Retorna el objecto en formato string.
         /// </summary>
-        public override string ToString() => ($"Nombre {this.Nombre} {this.Apellido} - Mail {this.Mail}");
+        public override string ToString() => ($"Nombre {this.Nombre} - Mail {this.Mail}");
+        /// <summary>
+        /// Define el tipo de ordenamiento que tendrá esta clase. Se ordena por Id.
+        /// </summary>
+        public int CompareTo([AllowNull] Periodista other)
+        {
+            return this.Id.CompareTo(other.Id);
+        }
         //Getters & Setters
         public int Id
         {
@@ -98,11 +104,6 @@ namespace Dominio
         {
             get { return this.nombre; }
             set { this.nombre = value; }
-        }
-        public string Apellido
-        {
-            get { return this.apellido; }
-            set { this.apellido = value; }
         }
         public string Mail
         {
@@ -118,9 +119,11 @@ namespace Dominio
         {
             get { return this.listaResenas; }
         }
-        public static void PrecargaPeriodistas()
+        public static void PreLoadPeriodistas()
         {
-            AltaPeriodista(new Periodista("Fabricio", "Barrios", "fabribarriosesi@gmail.com", "nosoyreal1234"));
+            AltaPeriodista(new Periodista("Fabricio Barrios", "fabriciobarrios@gmail.com", "nosoyreal1"));
+            AltaPeriodista(new Periodista("Federico Barrios", "federicobarrios@gmail.com", "nosoyreal2"));
+            AltaPeriodista(new Periodista("Fernando Barrios", "fernandobarrios@gmail.com", "nosoyreal3"));
         }
     }
 }

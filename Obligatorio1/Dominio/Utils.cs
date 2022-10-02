@@ -6,6 +6,15 @@ namespace Dominio
 {
     class Utils
     {
+        public static DateTime iniDate = new DateTime(2022, 11, 20);
+        public static DateTime endDate = new DateTime(2022, 12, 18);
+        public static Random gen;
+        
+        public static DateTime RandomDate()
+        {
+            Utils.gen = new Random();
+            return Utils.iniDate.AddDays(new Random().Next(29)).AddHours(gen.Next(0, 24)).AddMinutes(gen.Next(0, 60)).AddSeconds(gen.Next(0, 60));
+        }
         /// <summary>
         /// Retorna True el caracter 'b' aparece al menos una vez en 'a'.
         /// </summary>

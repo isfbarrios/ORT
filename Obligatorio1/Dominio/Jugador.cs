@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Dominio
 {
-    public class Jugador
+    public class Jugador:IComparable<Jugador>
     {
         //Atributos
         private static int autoIncrementId;
@@ -24,10 +25,6 @@ namespace Dominio
         {
             this.id = ++autoIncrementId;
         }
-        /// <summary>
-        /// Retorna el objecto en formato string.
-        /// </summary>
-        public override string ToString() => ($"Nombre {this.Nombre} [{this.Pais.Codigo}]. Camiseta {this.NumeroCamiseta} - Posición {this.Posicion}.");
         public Jugador(string numeroCamiseta, string nombre, DateTime fechaNacimiento, 
             int alturaCM, Pie pieHabil, int valorMercado, Moneda moneda, Pais pais, Posicion posicion)
         {
@@ -57,18 +54,16 @@ namespace Dominio
         /// <summary>
         /// Retorna el listado de jugadores con al menos una expulsión.
         /// </summary>
-        public List<Jugador> GetJugadoresExpulsados(Jugador jugador)
+        public static List<Jugador> GetJugadoresExpulsados()
         {
-            /*
-             * FALTA IMPLEMENTAR EL ORDENADO PARA EL RETORNO. SEGUN LA LETRA, SE DEBE RETORNAR DE DOS FORMAS DIFERENTES. 
-             */
-
             List<Jugador> jugadorIncidentes = new List<Jugador>();
-
+            //Recorro todos los incidentes y valido si es una expulsión.
             foreach (Incidente incidente in Administradora.Instance.Incidentes)
             {
-                if (incidente.Jugador.Equals(jugador) && Incidente.EsTarjetaRoja(incidente)) jugadorIncidentes.Add(jugador);
+                if (Incidente.EsTarjetaRoja(incidente)) jugadorIncidentes.Add(incidente.Jugador);
             }
+            //Ordeno la lista previo al retorno.
+            jugadorIncidentes.Sort();
             return jugadorIncidentes;
         }
         /// <summary>
@@ -76,7 +71,7 @@ namespace Dominio
         /// </summary>
         public static Jugador GetJugador(string id = "0")
         {
-            Jugador jugador = null;
+            Jugador jugador = new Jugador();
 
             foreach (Jugador j in Administradora.Instance.Jugadores)
             {
@@ -89,13 +84,17 @@ namespace Dominio
             return jugador;
         }
         /// <summary>
+        /// Retorna el objecto en formato string.
+        /// </summary>
+        public override string ToString() => ($"Nombre {this.Nombre} [{this.Pais.Codigo}]. Camiseta {this.NumeroCamiseta} - Posición {this.Posicion}");
+        /// <summary>
         /// Retorna TRUE si el nombre del Jugador es valido.
         /// </summary>
-        public bool ValidarNombre() => (Utils.ValidLength(this.Nombre, 0));
+        public bool ValidarNombre() => (this.Nombre.Length > 0 && this.Nombre.IndexOf(" ") > -1);
         /// <summary>
         /// Retorna TRUE si el número de camiseta del Jugador es valido.
         /// </summary>
-        public bool ValidarNumeroCamiseta() => (Utils.ValidLength(this.NumeroCamiseta, 0));
+        public bool ValidarNumeroCamiseta() => (this.NumeroCamiseta.Length > 0);
         /// <summary>
         /// Retorna TRUE si la fecha de nacimiento del Jugador es valida.
         /// </summary>
@@ -107,7 +106,7 @@ namespace Dominio
         /// <summary>
         /// Retorna el listado de jugadores que disputaron un determinado partido.
         /// </summary>
-        public static List<Jugador> TotalJugadoresPartidos(Partido partido)
+        public static List<Jugador> TotalJugadoresPartido(Partido partido)
         {
             List<Jugador> jugadores = new List<Jugador>();
             //Agrego todos los jugadores del equipo local, más los del equipo visitante.
@@ -120,7 +119,31 @@ namespace Dominio
         /// Retorna la categoria correspondiente al valor de mercado del jugador.
         /// </summary>
         public TipoCategoria GetCategoria() => Categoria.AsignarCategoria(this);
-
+        /// <summary>
+        /// Define el tipo de ordenamiento que tendrá esta clase. Primero se ordena por valor de mercado, en caso de coincidir, alfabeticamente.
+        /// </summary>
+        public int CompareTo([AllowNull] Jugador other)
+        {
+            int i = this.ValorMercado.CompareTo(other.ValorMercado);
+            //Si valorMercado es igual para ambos jugadores, ordeno alfabeticamente.
+            if (i == 0) i = this.Nombre.CompareTo(other.Nombre);
+            return i;
+        }
+        /// <summary>
+        /// Retorna el listado de partidos en los que participó un jugador determinado.
+        /// </summary>
+        public static List<Partido> GetPartidos(Jugador jugador)
+        {
+            List<Partido> partidosJugados = new List<Partido>();
+            //Traigo la selección a la que pertenece el jugador.
+            Seleccion seleccion = Seleccion.GetSeleccion(jugador);
+            //Recorro los partidos y me quedo con los jugados por dicha selección.
+            foreach (Partido partido in Administradora.Instance.Partidos)
+            {
+                if (seleccion.JugadoPorEstaSeleccion(partido)) partidosJugados.Add(partido);
+            }
+            return partidosJugados;
+        }
         //Getters && Setters
         public int Id
         {

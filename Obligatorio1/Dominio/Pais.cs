@@ -31,7 +31,7 @@ namespace Dominio
         /// </summary>
         public static void AltaPais(Pais pais)
         {
-            //Si código tiene tres caracteres y al menos uno, lo guardo
+            //Si código tiene tres caracteres y al menos uno, lo guardo.
             if (!pais.EsPaisVacio())
             {
                 Administradora.Instance.Paises.Add(pais);
@@ -60,7 +60,7 @@ namespace Dominio
         /// <summary>
         /// Retorna el objecto en formato string.
         /// </summary>
-        public override string ToString() => ($"País {this.Nombre} [{this.Codigo}.");
+        public override string ToString() => ($"País {this.Nombre} [{this.Codigo}");
         //Getters y Setters
         public int Id
         {
