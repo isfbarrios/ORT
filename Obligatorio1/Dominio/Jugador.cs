@@ -120,11 +120,12 @@ namespace Dominio
         /// </summary>
         public TipoCategoria GetCategoria() => Categoria.AsignarCategoria(this);
         /// <summary>
-        /// Define el tipo de ordenamiento que tendrá esta clase. Primero se ordena por valor de mercado, en caso de coincidir, alfabeticamente.
+        /// Define el tipo de ordenamiento que tendrá esta clase.<para/>
+        /// Primero se ordena por valor de mercado (descebdebte), en caso de coincidir, alfabeticamente (ascendente).
         /// </summary>
         public int CompareTo([AllowNull] Jugador other)
         {
-            int i = this.ValorMercado.CompareTo(other.ValorMercado);
+            int i = other.ValorMercado.CompareTo(this.ValorMercado);
             //Si valorMercado es igual para ambos jugadores, ordeno alfabeticamente.
             if (i == 0) i = this.Nombre.CompareTo(other.Nombre);
             return i;

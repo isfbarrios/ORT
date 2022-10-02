@@ -126,7 +126,7 @@ namespace Dominio
         /// <summary>
         /// Retorna el objecto en formato string.
         /// </summary>
-        public override string ToString() => ($"Fecha {this.Fecha} - {this.Local.Pais.Nombre} (Local) vs {this.Visitante.Pais.Nombre} (Visitante) - {this.Etapa.ToString()}");
+        public override string ToString() => ($"Partido Nº {this.Id}. Fecha {this.Fecha} - {this.Local.Pais.Nombre} (Local) vs {this.Visitante.Pais.Nombre} (Visitante) - {this.Etapa.ToString()}");
         //Getters & Setters
         public int Id
         {
@@ -167,7 +167,7 @@ namespace Dominio
         
         public static void PreLoadPartidos()
         {
-            //Partidos fase de grupos
+            //Partidos de fase de grupos
             //Grupo A - Ganadores Selecciones[0] y Selecciones[3]
             AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[1], Utils.RandomDate(), Etapa.FASE_GRUPOS));
             AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[2], Utils.RandomDate(), Etapa.FASE_GRUPOS));
@@ -182,68 +182,9 @@ namespace Dominio
             AltaPartido(new Partido(Administradora.Instance.Selecciones[5], Administradora.Instance.Selecciones[6], Utils.RandomDate(), Etapa.FASE_GRUPOS));
             AltaPartido(new Partido(Administradora.Instance.Selecciones[5], Administradora.Instance.Selecciones[7], Utils.RandomDate(), Etapa.FASE_GRUPOS));
             AltaPartido(new Partido(Administradora.Instance.Selecciones[6], Administradora.Instance.Selecciones[7], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            //Grupo C - Ganadores Selecciones[8] y Selecciones[11]
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[8], Administradora.Instance.Selecciones[9], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[8], Administradora.Instance.Selecciones[10], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[8], Administradora.Instance.Selecciones[11], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[9], Administradora.Instance.Selecciones[10], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[9], Administradora.Instance.Selecciones[11], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[10], Administradora.Instance.Selecciones[11], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            //Grupo D - Ganadores Selecciones[12] y Selecciones[15]
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[12], Administradora.Instance.Selecciones[13], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[12], Administradora.Instance.Selecciones[14], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[12], Administradora.Instance.Selecciones[15], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[13], Administradora.Instance.Selecciones[14], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[13], Administradora.Instance.Selecciones[15], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[14], Administradora.Instance.Selecciones[15], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            //Grupo E - Ganadores Selecciones[16] y Selecciones[19]
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[16], Administradora.Instance.Selecciones[17], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[16], Administradora.Instance.Selecciones[18], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[16], Administradora.Instance.Selecciones[19], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[17], Administradora.Instance.Selecciones[18], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[17], Administradora.Instance.Selecciones[19], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[18], Administradora.Instance.Selecciones[19], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            //Grupo F - Ganadores Selecciones[20] y Selecciones[23]
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[20], Administradora.Instance.Selecciones[21], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[20], Administradora.Instance.Selecciones[22], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[20], Administradora.Instance.Selecciones[23], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[21], Administradora.Instance.Selecciones[22], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[21], Administradora.Instance.Selecciones[23], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[22], Administradora.Instance.Selecciones[23], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            //Grupo G - Ganadores Selecciones[24] y Selecciones[27]
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[24], Administradora.Instance.Selecciones[25], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[24], Administradora.Instance.Selecciones[26], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[24], Administradora.Instance.Selecciones[27], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[25], Administradora.Instance.Selecciones[26], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[25], Administradora.Instance.Selecciones[27], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[26], Administradora.Instance.Selecciones[27], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            //Grupo H - Ganadores Selecciones[28] y Selecciones[31]
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[28], Administradora.Instance.Selecciones[29], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[28], Administradora.Instance.Selecciones[30], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[28], Administradora.Instance.Selecciones[31], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[29], Administradora.Instance.Selecciones[30], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[29], Administradora.Instance.Selecciones[31], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[30], Administradora.Instance.Selecciones[31], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            //Partidos eliminatorias
-            //Octavos de final
+            //Partidos de eliminatorias
             AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[7], Utils.RandomDate(), Etapa.OCTAVOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[8], Administradora.Instance.Selecciones[15], Utils.RandomDate(), Etapa.OCTAVOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[16], Administradora.Instance.Selecciones[23], Utils.RandomDate(), Etapa.OCTAVOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[24], Administradora.Instance.Selecciones[31], Utils.RandomDate(), Etapa.OCTAVOS));
             AltaPartido(new Partido(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[3], Utils.RandomDate(), Etapa.OCTAVOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[12], Administradora.Instance.Selecciones[11], Utils.RandomDate(), Etapa.OCTAVOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[20], Administradora.Instance.Selecciones[19], Utils.RandomDate(), Etapa.OCTAVOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[28], Administradora.Instance.Selecciones[27], Utils.RandomDate(), Etapa.OCTAVOS));
-            //Cuartos de final
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[15], Utils.RandomDate(), Etapa.CUARTOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[23], Administradora.Instance.Selecciones[31], Utils.RandomDate(), Etapa.CUARTOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[3], Administradora.Instance.Selecciones[12], Utils.RandomDate(), Etapa.CUARTOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[19], Administradora.Instance.Selecciones[27], Utils.RandomDate(), Etapa.CUARTOS));
-            //Semifinal
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[31], Utils.RandomDate(), Etapa.SEMIFINAL));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[12], Administradora.Instance.Selecciones[19], Utils.RandomDate(), Etapa.SEMIFINAL));
-            //Semifinal
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[12], Administradora.Instance.Selecciones[19], Utils.RandomDate(), Etapa.FINAL));
         }
     }
 }

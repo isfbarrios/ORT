@@ -28,6 +28,7 @@ namespace Obligatorio1
                         "4 ) Asignar valor de referencia para categorías.\n" +
                         "5 ) Buscar jugador por su Id.\n" +
                         "6 ) Listar partidos donde partició un jugador.\n" +
+                        "7 ) Listar partidos disputados.\n" +
                         "0 ) Salir");
 
                     int.TryParse(Console.ReadLine(), out seleccion);
@@ -71,12 +72,31 @@ namespace Obligatorio1
                     //Buscar jugador por su Id y listo los partidos del mismo
                     ListarPartidosJugador(BuscarJugador());
                     break;
+                case 7:
+                    Console.Clear();
+                    //Lista los partidos disputados
+                    ListarPartidos();
+                    break;
                 default:
                     seleccion = 0; //Salir
                     break;
             }
         }
-        //TODO: Falta terminar el método.
+        public static bool ListarPartidos()
+        {
+            bool retVal = Administradora.Instance.Partidos.Count > 0 ? true : false;
+
+            Console.WriteLine("\n" + (retVal ? "Listado de partidos disputados." : "No se encontraron registros de partidos disputados.") + "\n");
+
+            if (retVal)
+            {
+                foreach (Partido partido in Administradora.Instance.Partidos)
+                {
+                    Console.WriteLine($"{partido.ToString()}.\n");
+                }
+            }
+            return retVal;
+        }
         private static Jugador BuscarJugador()
         {
             string id = "";

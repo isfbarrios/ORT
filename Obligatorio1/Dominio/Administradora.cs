@@ -96,6 +96,7 @@ namespace Dominio
                 Seleccion.PrecargaSelecciones();
                 Periodista.PreLoadPeriodistas();
                 Partido.PreLoadPartidos();
+                Incidente.PreLoadIncidentes();
             }
             catch (Exception e)
             {

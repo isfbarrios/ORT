@@ -151,5 +151,68 @@ namespace Dominio
         {
             get { return this.jugador; }
         }
+        public static void PreLoadIncidentes()
+        {
+            //Catar (Local) vs Alemania (Visitante)
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[0], Administradora.Instance.Jugadores[59], TipoIncidente.TARJETA_AMARILLA, 7));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[0], Administradora.Instance.Jugadores[79], TipoIncidente.TARJETA_AMARILLA, 22));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[0], Administradora.Instance.Jugadores[78], TipoIncidente.GOL, 26));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[0], Administradora.Instance.Jugadores[32], TipoIncidente.GOL, 44));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[0], Administradora.Instance.Jugadores[36], TipoIncidente.GOL, 87));
+            //Catar (Local) vs Dinamarca (Visitante)
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[1], Administradora.Instance.Jugadores[31], TipoIncidente.TARJETA_AMARILLA, 41));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[1], Administradora.Instance.Jugadores[158], TipoIncidente.TARJETA_ROJA, 63));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[1], Administradora.Instance.Jugadores[159], TipoIncidente.TARJETA_ROJA, 77));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[1], Administradora.Instance.Jugadores[161], TipoIncidente.TARJETA_AMARILLA, 79));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[1], Administradora.Instance.Jugadores[88], TipoIncidente.GOL, 80));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[1], Administradora.Instance.Jugadores[32], TipoIncidente.GOL, 81));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[1], Administradora.Instance.Jugadores[33], TipoIncidente.GOL, 85));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[1], Administradora.Instance.Jugadores[32], TipoIncidente.GOL, 87));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[1], Administradora.Instance.Jugadores[32], TipoIncidente.GOL, 88));
+            //Catar (Local) vs Brasil (Visitante)
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[2], Administradora.Instance.Jugadores[126], TipoIncidente.TARJETA_AMARILLA, 15));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[2], Administradora.Instance.Jugadores[124], TipoIncidente.GOL, 76));
+            //Alemania (Local) vs Dinamarca (Visitante)
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[3], Administradora.Instance.Jugadores[101], TipoIncidente.TARJETA_AMARILLA, 55));
+            //Alemania (Local) vs Brasil (Visitante)
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[4], Administradora.Instance.Jugadores[124], TipoIncidente.GOL, 12));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[4], Administradora.Instance.Jugadores[124], TipoIncidente.GOL, 16));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[4], Administradora.Instance.Jugadores[124], TipoIncidente.GOL, 33));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[4], Administradora.Instance.Jugadores[124], TipoIncidente.GOL, 61));
+            //Dinamarca (Local) vs Brasil (Visitante)
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[5], Administradora.Instance.Jugadores[88], TipoIncidente.TARJETA_AMARILLA, 2));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[5], Administradora.Instance.Jugadores[126], TipoIncidente.GOL, 44));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[5], Administradora.Instance.Jugadores[124], TipoIncidente.GOL, 63));
+            //Francia (Local) vs Bélgica (Visitante)
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[6], Administradora.Instance.Jugadores[132], TipoIncidente.TARJETA_AMARILLA, 12));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[6], Administradora.Instance.Jugadores[133], TipoIncidente.TARJETA_AMARILLA, 17));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[6], Administradora.Instance.Jugadores[151], TipoIncidente.GOL, 33));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[6], Administradora.Instance.Jugadores[154], TipoIncidente.GOL, 43));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[6], Administradora.Instance.Jugadores[154], TipoIncidente.GOL, 59));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[6], Administradora.Instance.Jugadores[160], TipoIncidente.GOL, 88));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[6], Administradora.Instance.Jugadores[160], TipoIncidente.TARJETA_ROJA, 89));
+            //Francia (Local) vs Croacia (Visitante)
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[7], Administradora.Instance.Jugadores[154], TipoIncidente.GOL, 11));
+            //Francia (Local) vs España (Visitante)
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[8], Administradora.Instance.Jugadores[215], TipoIncidente.GOL, 1));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[8], Administradora.Instance.Jugadores[224], TipoIncidente.GOL, 74));
+            //Bélgica (Local) vs Croacia (Visitante)
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[9], Administradora.Instance.Jugadores[157], TipoIncidente.TARJETA_AMARILLA, 37));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[9], Administradora.Instance.Jugadores[159], TipoIncidente.GOL, 41));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[9], Administradora.Instance.Jugadores[190], TipoIncidente.GOL, 44));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[9], Administradora.Instance.Jugadores[190], TipoIncidente.GOL, 63));
+            //Bélgica (Local) vs España (Visitante)
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[10], Administradora.Instance.Jugadores[224], TipoIncidente.GOL, 79));
+            //Croacia (Local) vs España (Visitante)
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[11], Administradora.Instance.Jugadores[182], TipoIncidente.TARJETA_AMARILLA, 12));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[11], Administradora.Instance.Jugadores[190], TipoIncidente.GOL, 53));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[11], Administradora.Instance.Jugadores[190], TipoIncidente.GOL, 77));
+            //Octavos
+            //Croacia (Local) vs España (Visitante)
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[48], Administradora.Instance.Jugadores[190], TipoIncidente.GOL, 86));
+            //Francia (Local) vs Brasil (Visitante)
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[49], Administradora.Instance.Jugadores[124], TipoIncidente.GOL, 17));
+            AltaIncidente(new Incidente(Administradora.Instance.Partidos[49], Administradora.Instance.Jugadores[124], TipoIncidente.TARJETA_AMARILLA, 34));
+        }
     }
 }
