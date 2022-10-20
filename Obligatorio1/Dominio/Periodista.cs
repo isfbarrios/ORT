@@ -44,7 +44,7 @@ namespace Dominio
         /// <summary>
         /// Genera un nuevo objeto Resena en el sistema.
         /// </summary>
-        public bool crearResena(string titulo, string contenido)
+        public bool CrearResena(string titulo, string contenido)
         {
             bool retVal = false;
             DateTime fecha = DateTime.Now;
