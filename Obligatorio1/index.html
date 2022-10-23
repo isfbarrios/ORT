@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bar-website</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -21,17 +23,17 @@
                 <nav class="navbar">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span class="nav-link-text">Noticias</span>
+                            <a class="nav-link" href="#novedades">
+                                <span class="nav-link-text">Novedades</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="#mas-comprados">
                                 <span class="nav-link-text">Más comprados</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="#reservas">
                                 <span class="nav-link-text">Reservas</span>
                             </a>
                         </li>
@@ -44,17 +46,16 @@
                         Bienvenidos!
                     </h1>
                     <p class="welcome-msg-description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Suspendisse a non tellus nibh. Et ullamcorper.
+                        Local renovado, nuevo sitio web, 
                     </p>
                 </div>
             </div>
         </div>
     </header>
-    <section class="section section-one">
+    <section id="novedades" class="section section-one">
         <div class="container news-container max-width-1400">
             <div class="row">
-                <div class="news-title">
+                <div class="news-title titles">
                     <h1 class="title">
                         Novedades
                     </h1>
@@ -68,17 +69,17 @@ Suspendisse a non tellus nibh. Et ullamcorper.
                                 </div>
                                 <div class="card-body">
                                     <div class="boddy-title">
-                                        <h2 class="title">Catálogo de bebidas</h2>
+                                        <h2 class="title">Nuevo catálogo de bebidas</h2>
                                     </div>
                                     <div class="body-paragh">
                                         <p class="paragh">
-                                            Ampliamos el catálogo de bebidas para que encuentres el trago ideal.<br/>
+                                            Ampliamos el catálogo de bebidas para que encuentres el trago ideal.
                                             En caso de que no lo encuentres, escribinos.
                                         </p>
                                     </div>
-                                    <div class="body-button">
-                                        <button class="button">Leer más</button>
-                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="button">Leer más</button>
                                 </div>
                             </div>
                         </div>
@@ -97,17 +98,16 @@ Suspendisse a non tellus nibh. Et ullamcorper.
                                 </div>
                                 <div class="card-body">
                                     <div class="boddy-title">
-                                        <h2 class="title">Catálogo de bebidas</h2>
+                                        <h2 class="title">Festeja tu cumpleaños con nosotros</h2>
                                     </div>
                                     <div class="body-paragh">
                                         <p class="paragh">
-                                            Ampliamos el catálogo de bebidas para que encuentres el trago ideal.<br/>
-                                            En caso de que no lo encuentres, escribinos.
+                                            Reserva todo el salón, o lo que precises y festeja tu cumpleaños acá.
                                         </p>
                                     </div>
-                                    <div class="body-button">
-                                        <button class="button">Leer más</button>
-                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="button">Leer más</button>
                                 </div>
                             </div>
                         </div>
@@ -116,10 +116,10 @@ Suspendisse a non tellus nibh. Et ullamcorper.
             </div>
         </div>
     </section>
-    <section class="section section-two">
+    <section id="mas-comprados" class="section section-two">
         <div class="container buy-container max-width-1400">
             <div class="row">
-                <div class="buy-title">
+                <div class="buy-title titles">
                     <h1 class="title">
                         Más Comprados
                     </h1>
@@ -133,17 +133,17 @@ Suspendisse a non tellus nibh. Et ullamcorper.
                                 </div>
                                 <div class="card-body">
                                     <div class="boddy-title">
-                                        <h2 class="title">Catálogo de bebidas</h2>
+                                        <h2 class="title">Chivito para dos</h2>
                                     </div>
                                     <div class="body-paragh">
                                         <p class="paragh">
-                                            Ampliamos el catálogo de bebidas para que encuentres el trago ideal.<br/>
-                                            En caso de que no lo encuentres, escribinos.
+                                            Chivito completo al plato para dos personas con guarnición.
+                                            Acompañamiento de ensalada a elección y fritas.
                                         </p>
                                     </div>
-                                    <div class="body-button">
-                                        <button class="button">Leer más</button>
-                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="button">Leer más</button>
                                 </div>
                             </div>
                         </div>
@@ -154,38 +154,36 @@ Suspendisse a non tellus nibh. Et ullamcorper.
                                 </div>
                                 <div class="card-body">
                                     <div class="boddy-title">
-                                        <h2 class="title">Catálogo de bebidas</h2>
+                                        <h2 class="title">Cerveza IPA artesanal</h2>
                                     </div>
                                     <div class="body-paragh">
                                         <p class="paragh">
-                                            Ampliamos el catálogo de bebidas para que encuentres el trago ideal.<br/>
-                                            En caso de que no lo encuentres, escribinos.
+                                            Nueva IPA artesanal para probar.
                                         </p>
                                     </div>
-                                    <div class="body-button">
-                                        <button class="button">Leer más</button>
-                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="button">Leer más</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col col-2">
+                        <div class="col col-3">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="ch ch-1"></div>
                                 </div>
                                 <div class="card-body">
                                     <div class="boddy-title">
-                                        <h2 class="title">Catálogo de bebidas</h2>
+                                        <h2 class="title">Ahora tenemos postres</h2>
                                     </div>
                                     <div class="body-paragh">
                                         <p class="paragh">
-                                            Ampliamos el catálogo de bebidas para que encuentres el trago ideal.<br/>
-                                            En caso de que no lo encuentres, escribinos.
+                                            Estamos ampliando nuestro menú. Ahora tenemos postres.
                                         </p>
                                     </div>
-                                    <div class="body-button">
-                                        <button class="button">Leer más</button>
-                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="button">Leer más</button>
                                 </div>
                             </div>
                         </div>
@@ -194,16 +192,86 @@ Suspendisse a non tellus nibh. Et ullamcorper.
             </div>
         </div>
     </section>
-    <section class="section section-three">
+    <section id="reservas" class="section section-three">
         <div class="container reserve-container max-width-1400">
             <div class="row">
-                <div class="reserve-title">
+                <div class="reserve-title titles">
                     <h1 class="title">
                         Reserva
                     </h1>
                 </div>
+                <div class="reserve-content content">
+                    <form class="form-grid">
+                        <div class="block block-1">
+                            <label for="txtMail" class="mail-label">Email <span class="required">*</span></label>
+                            <input type="text" name="txtMail" id="txtMail">
+                        </div>
+                        <div class="block block-2">
+                            <label for="txtPedido" class="mail-label">Pedido <span class="required">*</span></label>
+                            <input type="text" name="txtPedido" id="txtPedido">
+                        </div>
+                        <div class="block block-3">
+                            <div class="block-item block-item-1">
+                                <input type="radio" name="txtCredito" id="txtCredito">
+                                <label for="txtCredito" class="credito-label">Crédito</label>
+                            </div>
+                            <div class="block-item block-item-2">
+                                <input type="radio" name="txtDebito" id="txtDebito">
+                                <label for="txtDebito" class="debito-label">Débito</label>
+                            </div>
+                        </div>
+                        <div class="block block-4">
+                            <button class="button btnSubmit" type="submit">Enviar</button>
+                        </div>
+                        <div class="block block-5">
+                            <input type="checkbox" name="txtCoditions" id="txtCoditions">
+                            <label for="txtCoditions" class="conditions-label">
+                                acepto las <a href="#" class="conditions-link">condiciones</a>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="promotion-content content">
+                <div class="promotion-img">
+                    <div class="img ch"></div>
+                </div>
+                <div class="promotion-table">
+                    <div class="table-title">
+                        <h3 class="title">Promociones</h3>
+                    </div>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <th>Menú</th>
+                                <th>Cant. Personas</th>
+                                <th>Descuento (%)</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Menú individual</td>
+                                    <td>1 persona</td>
+                                    <td>15%</td>
+                                </tr>
+                                <tr>
+                                    <td>Menú para dos</td>
+                                    <td>2 personas</td>
+                                    <td>25%</td>
+                                </tr>
+                                <tr>
+                                    <td>Menú familiar</td>
+                                    <td>5 personsa</td>
+                                    <td>35%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
+    <section class="section-four">
+
     </section>
 </body>
 </html>
