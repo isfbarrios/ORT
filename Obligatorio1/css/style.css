@@ -152,7 +152,7 @@ header .container .navbar .navbar-nav {
     text-shadow: 0.2rem 0.2rem 0.1rem black;
     text-decoration: none;
 }
-.section-two {
+.section-two, .section-four {
     background-color: var(--color2);
     min-height: 500px;
 }
@@ -274,4 +274,22 @@ header .container .navbar .navbar-nav {
     width: 100%;
     justify-self: start;
     align-self: center;
+}
+.section-four {
+    min-height: 400px;
+}
+.section-four .container {
+    padding: 2rem 2rem 0 2rem;
+}
+.section-four .location {
+    max-width: 350px;
+    max-height:250px;
+}
+.section-four .content {
+    display: grid;
+    grid-template: 1fr / 500px 500px;
+    justify-content: center;
+    align-self: center;
+    justify-items: center;
+    grid-gap: 2rem;
 }
