@@ -21,9 +21,6 @@ namespace Dominio
         private List<Resultado> resultados = new List<Resultado>();
         private List<Resena> resenas = new List<Resena>();
 
-        private static Dictionary<string, List<Seleccion>> seleccionesPorGrupo = new Dictionary<string, List<Seleccion>>();
-        private static Dictionary<string, List<Partido>> partidosPorGrupo = new Dictionary<string, List<Partido>>();
-
         private int minimoParaVIP = 0;
 
         private Administradora() 
@@ -75,14 +72,6 @@ namespace Dominio
         {
             get { return this.minimoParaVIP; }
             set { this.minimoParaVIP = value; }
-        }
-        public Dictionary<string, List<Seleccion>> SeleccionesPorGrupo
-        {
-            get { return seleccionesPorGrupo; }
-        }
-        public Dictionary<string, List<Partido>> PartidoPorGrupo
-        {
-            get { return partidosPorGrupo; }
         }
         
         //Métodos de precarga de datos

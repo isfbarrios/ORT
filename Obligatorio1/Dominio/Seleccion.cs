@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Web.Mvc;
+using System.Web.WebPages;
 
 namespace Dominio
 {
-    public class Seleccion
+    public class Seleccion : IValidator
     {
         //Atributos
         private static int autoIncrementId;
@@ -130,6 +133,20 @@ namespace Dominio
         public bool ValidarSeleccionado()
         {
             return this.jugadores.Count >= 11;
+        }
+        ModelClientValidationRule IValidator.ClientValidationRule => throw new NotImplementedException();
+
+        ValidationResult IValidator.Validate(ValidationContext validationContext)
+        {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
         }
     }
 }

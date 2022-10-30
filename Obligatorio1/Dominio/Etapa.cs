@@ -6,7 +6,6 @@ namespace Dominio
 {
     public enum Etapa
     {
-        FASE_GRUPOS,
         OCTAVOS,
         CUARTOS,
         SEMIFINAL,

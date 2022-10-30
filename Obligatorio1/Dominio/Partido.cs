@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Partido
+    public abstract class Partido
     {
         //Atributos
         private static int autoIncrementId;
@@ -15,7 +15,6 @@ namespace Dominio
         private bool finalizado;
         private Resultado resultado;
         private List<Incidente> incidentes;
-        private Etapa etapa;
 
         //Constructores
         public Partido() 
@@ -23,7 +22,7 @@ namespace Dominio
             this.id = ++autoIncrementId;
         }
 
-        public Partido(Seleccion local, Seleccion visitante, DateTime fecha, Etapa etapa)
+        public Partido(Seleccion local, Seleccion visitante, DateTime fecha)
         {
             this.id = ++autoIncrementId;
             this.local = local;
@@ -31,7 +30,6 @@ namespace Dominio
             this.fecha = fecha;
             this.finalizado = false; //Por defecto, no finalizado
             this.resultado = Resultado.PENDIENTE;
-            this.etapa = etapa;
             this.incidentes = new List<Incidente>();
         }
 
@@ -59,7 +57,7 @@ namespace Dominio
         public Partido GetPartidos(Seleccion seleccion)
         {
             int golesPartido = 0;
-            Partido retPartido = new Partido();
+            Partido retPartido = null;
             foreach (Partido partido in Administradora.Instance.Partidos)
             {
                 //Si el partido actual tuvo a esta selección como local o visitante, entro.
@@ -126,7 +124,7 @@ namespace Dominio
         /// <summary>
         /// Retorna el objecto en formato string.
         /// </summary>
-        public override string ToString() => ($"Partido Nº {this.Id}. Fecha {this.Fecha} - {this.Local.Pais.Nombre} (Local) vs {this.Visitante.Pais.Nombre} (Visitante) - {this.Etapa.ToString()}");
+        public abstract override string ToString();
         //Getters & Setters
         public int Id
         {
@@ -160,11 +158,7 @@ namespace Dominio
         {
             get { return this.incidentes; }
         }
-        public Etapa Etapa
-        {
-            get { return this.etapa; }
-        }
-        
+        /*
         public static void PreLoadPartidos()
         {
             //Partidos de fase de grupos
@@ -186,5 +180,6 @@ namespace Dominio
             AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[7], Utils.RandomDate(), Etapa.OCTAVOS));
             AltaPartido(new Partido(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[3], Utils.RandomDate(), Etapa.OCTAVOS));
         }
+        */
     }
 }
