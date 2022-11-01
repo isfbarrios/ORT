@@ -34,16 +34,7 @@ namespace Dominio
         }
 
         //Funcionalidades
-        public static bool AltaPartido(Partido partido)
-        {
-            bool retVal = false;
-            if (Partido.EsPartidoValido(partido))
-            {
-                Administradora.Instance.Partidos.Add(partido);
-                retVal = true;
-            }
-            return retVal;
-        }
+
         /// <summary>
         /// Retorna TRUE si el partido cumple con la condicion de tener Selecciones validas para Local y Visitante.
         /// </summary>

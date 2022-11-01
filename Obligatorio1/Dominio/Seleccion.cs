@@ -7,7 +7,7 @@ using System.Web.WebPages;
 
 namespace Dominio
 {
-    public class Seleccion : IValidator
+    public class Seleccion
     {
         //Atributos
         private static int autoIncrementId;
@@ -133,20 +133,6 @@ namespace Dominio
         public bool ValidarSeleccionado()
         {
             return this.jugadores.Count >= 11;
-        }
-        ModelClientValidationRule IValidator.ClientValidationRule => throw new NotImplementedException();
-
-        ValidationResult IValidator.Validate(ValidationContext validationContext)
-        {
-            try
-            {
-
-            }
-            catch (Exception e)
-            {
-
-                throw;
-            }
         }
     }
 }

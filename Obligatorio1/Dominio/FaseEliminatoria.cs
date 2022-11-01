@@ -7,6 +7,27 @@ namespace Dominio
     public class FaseEliminatoria : Partido
     {
         private Etapa etapa;
+
+        //Constructores
+        public FaseEliminatoria() : base() { }
+
+        public FaseEliminatoria(Seleccion local, Seleccion visitante, DateTime fecha, Etapa etapa) : base(local, visitante, fecha) 
+        {
+            this.etapa = etapa;
+        }
+
+        //Funcionalidad
+        public static bool AltaPartido(FaseEliminatoria partido)
+        {
+            bool retVal = false;
+            if (Partido.EsPartidoValido(partido))
+            {
+                Administradora.Instance.Partidos.Add(partido);
+                retVal = true;
+            }
+            return retVal;
+        }
+
         /// <summary>
         /// Retorna el objecto en formato string.
         /// </summary>
