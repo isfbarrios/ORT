@@ -1,0 +1,38 @@
+﻿@using proyy
+@model List<Persona>
+
+<div class="container-fluid">
+    <div class="row justify-content-center align-content-center">
+        <div class="col-12 col-sm-8">
+            <h1>Administrador de personas</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center align-content-center py-3">
+        <div class="col-12 col-md-8">
+            <table class="table table-responsive table-striped">
+                <thead>
+                    <tr>
+                        <td>Id</td>
+                        <td>Nombre</td>
+                        <td>Edad</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Persona p in Model)
+                    {
+                        <tr>
+                            <td>@p.Id</td>
+                            <td>@p.Nombre</td>
+                            <td>@p.Edad</td>
+                            <td>
+                                <a href="~/Persona/EliminarPersona/@p.Id">Eliminar</a>
+                                <a href="#" data-id="@p.Id">Editar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>

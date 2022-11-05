@@ -28,7 +28,7 @@ namespace Dominio
         public static bool AltaPartido(FaseGrupos partido)
         {
             bool retVal = false;
-            if (Partido.EsPartidoValido(partido))
+            if (partido.Validar())
             {
                 Administradora.Instance.Partidos.Add(partido);
                 retVal = true;
@@ -36,10 +36,6 @@ namespace Dominio
             return retVal;
         }
 
-        public Grupo Grupo
-        {
-            get { return this.grupo; }
-            set { this.grupo = value; }
-        }
+        public Grupo Grupo { get { return this.grupo; } set { this.grupo = value; } }
     }
 }

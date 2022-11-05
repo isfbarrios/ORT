@@ -20,7 +20,7 @@ namespace Dominio
         public static bool AltaPartido(FaseEliminatoria partido)
         {
             bool retVal = false;
-            if (Partido.EsPartidoValido(partido))
+            if (partido.Validar())
             {
                 Administradora.Instance.Partidos.Add(partido);
                 retVal = true;
@@ -35,10 +35,6 @@ namespace Dominio
             $"Fecha {this.Fecha}.\n" +
             $"(Local) {this.Local.Pais.Nombre} vs (Visitante) {this.Visitante.Pais.Nombre}.");
 
-        public Etapa Etapa
-        {
-            get { return this.etapa; }
-            set { this.etapa = value; }
-        }
+        public Etapa Etapa { get { return this.etapa; } set { this.etapa = value; } }
     }
 }

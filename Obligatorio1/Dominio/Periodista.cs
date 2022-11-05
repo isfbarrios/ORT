@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Periodista:IComparable<Periodista>
+    public class Periodista:IComparable<Periodista>, IValidar
     {
         //Atributos
         private static int autoIncrementId;
@@ -34,7 +34,7 @@ namespace Dominio
         public static bool AltaPeriodista(Periodista periodista)
         {
             bool retVal = false;
-            if (periodista.ValidarNombre() && periodista.ValidarMail() && periodista.ValidarPassword())
+            if (periodista.Validar())
             {
                 Administradora.Instance.Periodistas.Add(periodista);
                 retVal = true;
@@ -44,30 +44,26 @@ namespace Dominio
         /// <summary>
         /// Genera un nuevo objeto Resena en el sistema.
         /// </summary>
-        public bool CrearResena(string titulo, string contenido)
+        /*public bool CrearResena(string titulo, string contenido)
         {
             bool retVal = false;
             DateTime fecha = DateTime.Now;
             if (titulo.Length > 0 && contenido.Length > 0)
             {
+                FaseEliminatoria fe = new FaseEliminatoria
                 Resena resena = new Resena(this, new Partido(), titulo, contenido);
                 listaResenas.Add(resena);
                 Administradora.Instance.Resenas.Add(resena);
             }
             return retVal;
-        }
-        /// <summary>
-        /// Valida que el password cumpla con el largo requerido.
-        /// </summary>
-        public bool ValidarPassword() => Utils.ValidLength(this.Password, 8);
-        /// <summary>
-        /// Valida que el mail contenga un @, pero no se encuentre en la primer o última posición y que no este usado.
-        /// </summary>
-        public bool ValidarMail() => (Utils.ValidMail(this.Mail) && !ValidarMail(this.Mail));
+        }*/
+        public bool Validar() => (Administradora.ValidLength(this.Password, 8) && Administradora.ValidMail(this.Mail) && !ValidarMailPeriodista(this.Mail)
+            && this.Nombre.Length > 0 && this.Nombre.IndexOf(" ") > -1);
+
         /// <summary>
         /// Valida únicamente que el mail no este repetido entre los usados por aquellos Periodistas ya registrados.
         /// </summary>
-        private bool ValidarMail(String mail)
+        private bool ValidarMailPeriodista(String mail)
         {
             bool retVal = false;
             foreach (Periodista periodista in Administradora.Instance.Periodistas) 
@@ -81,10 +77,6 @@ namespace Dominio
             return retVal;
         }
         /// <summary>
-        /// Valida que el nombre completo del periodista sea valido.
-        /// </summary>
-        public bool ValidarNombre() => (this.Nombre.Length > 0 && this.Nombre.IndexOf(" ") > -1);
-        /// <summary>
         /// Retorna el objecto en formato string.
         /// </summary>
         public override string ToString() => ($"Nombre {this.Nombre} - Mail {this.Mail}");
@@ -95,35 +87,12 @@ namespace Dominio
         {
             return this.Id.CompareTo(other.Id);
         }
+
         //Getters & Setters
-        public int Id
-        {
-            get { return this.id; }
-        }
-        public string Nombre
-        {
-            get { return this.nombre; }
-            set { this.nombre = value; }
-        }
-        public string Mail
-        {
-            get { return this.mail; }
-            set { this.mail = value; }
-        }
-        public string Password
-        {
-            get { return this.password; }
-            set { this.password = value; }
-        }
-        public List<Resena> ListaResenas
-        {
-            get { return this.listaResenas; }
-        }
-        public static void PreLoadPeriodistas()
-        {
-            AltaPeriodista(new Periodista("Fabricio Barrios", "fabriciobarrios@gmail.com", "nosoyreal1"));
-            AltaPeriodista(new Periodista("Federico Barrios", "federicobarrios@gmail.com", "nosoyreal2"));
-            AltaPeriodista(new Periodista("Fernando Barrios", "fernandobarrios@gmail.com", "nosoyreal3"));
-        }
+        public int Id { get { return this.id; } }
+        public string Nombre { get { return this.nombre; } set { this.nombre = value; } }
+        public string Mail { get { return this.mail; } set { this.mail = value; } }
+        public string Password { get { return this.password; } set { this.password = value; } }
+        public List<Resena> ListaResenas { get { return this.listaResenas; } }
     }
 }

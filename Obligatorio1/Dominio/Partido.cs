@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public abstract class Partido
+    public abstract class Partido : IValidar
     {
         //Atributos
         private static int autoIncrementId;
@@ -36,13 +36,6 @@ namespace Dominio
         //Funcionalidades
 
         /// <summary>
-        /// Retorna TRUE si el partido cumple con la condicion de tener Selecciones validas para Local y Visitante.
-        /// </summary>
-        public static bool EsPartidoValido(Partido partido)
-        {
-            return (partido.Local.EsSeleccionValida() && partido.Visitante.EsSeleccionValida());
-        }
-        /// <summary>
         /// Retorna el partido con más goles, disputado por una seleccion determinada.
         /// </summary>
         public Partido GetPartidos(Seleccion seleccion)
@@ -55,7 +48,6 @@ namespace Dominio
                 if (seleccion.JugadoPorEstaSeleccion(partido))
                 {
                     int aux = TotalGolesPartido(partido, seleccion);
-
                     if (aux >= golesPartido) golesPartido = aux;
                 }
             }
@@ -90,13 +82,8 @@ namespace Dominio
             foreach (Jugador jugador in jugadores)
             {
                 //Valido que el jugador iterado corresponda a la seleccion que quiero validar.
-                if (seleccion.JugadorDeSeleccion(jugador))
-                {
-                    //Si lo es, valido que tenga incidencias de gol.
-                    int auxVal = Incidente.TotalIncidenciasPartido(partido).Count;
-                    //Acumulo el resultado.
-                    retVal += auxVal;
-                }
+                //Si lo es, valido que tenga incidencias de gol y acumulo el resultado.
+                if (seleccion.JugadorDeSeleccion(jugador)) retVal += Incidente.TotalIncidenciasPartido(partido).Count;
             }
             return retVal;
         }
@@ -105,72 +92,24 @@ namespace Dominio
             bool retVal = false;
             DateTime dateFrom = Convert.ToDateTime("20/11/2022");
             DateTime dateTo = Convert.ToDateTime("18/12/2022");
-
-            if (this.Fecha >= dateFrom && this.Fecha <= dateTo)
-            {
-                retVal = true;
-            }
+            if (this.Fecha >= dateFrom && this.Fecha <= dateTo)  retVal = true;
             return retVal;
         }
         /// <summary>
         /// Retorna el objecto en formato string.
         /// </summary>
         public abstract override string ToString();
+        /// <summary>
+        /// Retorna TRUE si el partido cumple con la condicion de tener Selecciones validas para Local y Visitante.
+        /// </summary>
+        public bool Validar() => (this.Local.Validar() && this.Visitante.Validar());
         //Getters & Setters
-        public int Id
-        {
-            get { return this.id; }
-        }
-        public Seleccion Local
-        {
-            get { return this.local; }
-            set { this.local = value; }
-        }
-        public Seleccion Visitante
-        {
-            get { return this.visitante; }
-            set { this.visitante = value; }
-        }
-        public DateTime Fecha
-        {
-            get { return this.fecha; }
-        }
-        public bool Finalizado
-        {
-            get { return this.finalizado; }
-            set { this.finalizado = value; }
-        }
-        public Resultado Resultado
-        {
-            get { return this.resultado; }
-            set { this.resultado = value; }
-        }
-        public List<Incidente> Incidentes
-        {
-            get { return this.incidentes; }
-        }
-        /*
-        public static void PreLoadPartidos()
-        {
-            //Partidos de fase de grupos
-            //Grupo A - Ganadores Selecciones[0] y Selecciones[3]
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[1], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[2], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[3], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[1], Administradora.Instance.Selecciones[2], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[1], Administradora.Instance.Selecciones[3], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[2], Administradora.Instance.Selecciones[3], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            //Grupo B - Ganadores Selecciones[4] y Selecciones[7]
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[5], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[6], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[7], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[5], Administradora.Instance.Selecciones[6], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[5], Administradora.Instance.Selecciones[7], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[6], Administradora.Instance.Selecciones[7], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            //Partidos de eliminatorias
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[7], Utils.RandomDate(), Etapa.OCTAVOS));
-            AltaPartido(new Partido(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[3], Utils.RandomDate(), Etapa.OCTAVOS));
-        }
-        */
+        public int Id { get { return this.id; } }
+        public Seleccion Local { get { return this.local; } set { this.local = value; } }
+        public Seleccion Visitante { get { return this.visitante; } set { this.visitante = value; } }
+        public DateTime Fecha { get { return this.fecha; } set { this.fecha = value; } }
+        public bool Finalizado { get { return this.finalizado; } set { this.finalizado = value; } }
+        public Resultado Resultado { get { return this.resultado; } set { this.resultado = value; } }
+        public List<Incidente> Incidentes { get { return this.incidentes; } }
     }
 }

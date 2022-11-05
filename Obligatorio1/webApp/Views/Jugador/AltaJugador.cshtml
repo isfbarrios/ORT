@@ -1,0 +1,47 @@
+﻿@using Dominio
+@model JugadorModel
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-sm-10">
+            <h1>Alta jugador</h1>
+        </div>
+        <div class="col-12 col-sm-6">
+            <form method="post">
+                <div class="form-group">
+                    <label for="txtNombre">Nombre</label>
+                    <input type="text" class="form-control" id="txtNombre">
+                </div>
+                <div class="form-group">
+                    <label for="txtFechaNacimiento">Fecha de nacimiento</label>
+                    <input type="date" class="form-control" id="txtFechaNacimiento">
+                </div>
+                <div class="form-group">
+                    <label for="txtPais">Pais</label>
+                    <input type="text" class="form-control" id="txtPais">
+                </div>
+                <div class="form-group">
+                    <label for="txtNumeroCamiseta">Número de camiseta</label>
+                    <input type="number" min="1" max="99" class="form-control" id="txtNumeroCamiseta">
+                </div>
+                <div class="form-group">
+                    <label for="selPie" asp-for="Pie">Pie habil</label>
+                    <select class="form-control" id="selPie" asp-for="Pie" asp-items="Html.GetEnumSelectList<Pie>()">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="txtValorMercado">Valor de mercado</label>
+                    <input type="number" min="1" class="form-control" id="txtValorMercado">
+                </div>
+                <div class="form-group">
+                    <label for="selMoneda" asp-for="Moneda">Pie habil</label>
+                    <select class="form-control" id="selPie" asp-for="Moneda" asp-items="Html.GetEnumSelectList<Moneda>()">
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+

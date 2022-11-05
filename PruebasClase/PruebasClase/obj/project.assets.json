@@ -1797,6 +1797,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "proyy/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/proyy.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/proyy.dll": {}
+        }
       }
     }
   },
@@ -6061,11 +6071,17 @@
         "system.xml.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "proyy/1.0.0": {
+      "type": "project",
+      "path": "../proyy/proyy.csproj",
+      "msbuildProject": "../proyy/proyy.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.5"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.5",
+      "proyy >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -6094,7 +6110,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Fabricio Barrios\\source\\repos\\PruebasClase\\proyy\\proyy.csproj": {
+              "projectPath": "C:\\Users\\Fabricio Barrios\\source\\repos\\PruebasClase\\proyy\\proyy.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

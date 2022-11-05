@@ -111,3 +111,6 @@ C:\Users\Fabricio Barrios\source\repos\PruebasClase\PruebasClase\obj\Debug\netco
 C:\Users\Fabricio Barrios\source\repos\PruebasClase\PruebasClase\obj\Debug\netcoreapp3.1\PruebasClase.genruntimeconfig.cache
 C:\Users\Fabricio Barrios\source\repos\PruebasClase\PruebasClase\obj\Debug\netcoreapp3.1\Razor\Views\Bienvenida\Index.cshtml.g.cs
 C:\Users\Fabricio Barrios\source\repos\PruebasClase\PruebasClase\obj\Debug\netcoreapp3.1\Razor\Views\Parametros\Index.cshtml.g.cs
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\PruebasClase\obj\Debug\netcoreapp3.1\Razor\Views\Persona\Index.cshtml.g.cs
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\PruebasClase\bin\Debug\netcoreapp3.1\proyy.dll
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\PruebasClase\bin\Debug\netcoreapp3.1\proyy.pdb

@@ -20,7 +20,6 @@ namespace Dominio
         {
             this.id = ++autoIncrementId;
         }
-
         public Resena(Periodista periodista, Partido partido, string titulo, string contenido)
         {
             this.id = ++autoIncrementId;
@@ -48,29 +47,11 @@ namespace Dominio
         /// </summary>
         public override string ToString() => ($"Nombre {this.Periodista.Nombre} {this.Titulo} - Mail {this.Contenido}");
         //Getters & Setters
-        public int Id
-        {
-            get { return this.id; }
-        }
-        public Periodista Periodista
-        {
-            get { return this.periodista; }
-        }
-        public Partido Partido
-        {
-            get { return this.partido; }
-        }
-        public DateTime Fecha
-        {
-            get { return this.fecha; }
-        }
-        public string Titulo
-        {
-            get { return this.titulo; }
-        }
-        public string Contenido
-        {
-            get { return this.contenido; }
-        }
+        public int Id { get { return this.id; } }
+        public Periodista Periodista { get { return this.periodista; } set { this.periodista = value; } }
+        public Partido Partido { get { return this.partido; } set { this.partido = value; } }
+        public DateTime Fecha { get { return this.fecha; } set { this.fecha = value; } }
+        public string Titulo { get { return this.titulo; } set { this.titulo = value; } }
+        public string Contenido { get { return this.contenido; } set { this.contenido = value; } }
     }
 }

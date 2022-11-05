@@ -1,0 +1,13 @@
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\consApp\bin\Debug\netcoreapp3.1\consApp.exe
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\consApp\bin\Debug\netcoreapp3.1\consApp.deps.json
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\consApp\bin\Debug\netcoreapp3.1\consApp.runtimeconfig.json
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\consApp\bin\Debug\netcoreapp3.1\consApp.runtimeconfig.dev.json
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\consApp\bin\Debug\netcoreapp3.1\consApp.dll
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\consApp\bin\Debug\netcoreapp3.1\consApp.pdb
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\consApp\obj\Debug\netcoreapp3.1\consApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\consApp\obj\Debug\netcoreapp3.1\consApp.AssemblyInfoInputs.cache
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\consApp\obj\Debug\netcoreapp3.1\consApp.AssemblyInfo.cs
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\consApp\obj\Debug\netcoreapp3.1\consApp.csproj.CoreCompileInputs.cache
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\consApp\obj\Debug\netcoreapp3.1\consApp.dll
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\consApp\obj\Debug\netcoreapp3.1\consApp.pdb
+C:\Users\Fabricio Barrios\source\repos\PruebasClase\consApp\obj\Debug\netcoreapp3.1\consApp.genruntimeconfig.cache
