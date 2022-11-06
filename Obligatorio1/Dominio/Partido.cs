@@ -21,7 +21,6 @@ namespace Dominio
         {
             this.id = ++autoIncrementId;
         }
-
         public Partido(Seleccion local, Seleccion visitante, DateTime fecha)
         {
             this.id = ++autoIncrementId;
@@ -32,9 +31,7 @@ namespace Dominio
             this.resultado = Resultado.PENDIENTE;
             this.incidentes = new List<Incidente>();
         }
-
         //Funcionalidades
-
         /// <summary>
         /// Retorna el partido con más goles, disputado por una seleccion determinada.
         /// </summary>

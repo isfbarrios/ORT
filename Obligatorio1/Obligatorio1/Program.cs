@@ -55,12 +55,12 @@ namespace Obligatorio1
                 case 3:
                     Console.Clear();
                     //Alta Reseña
-                    CrearResena();
+                    //CrearResena();
                     break;
                 case 4:
                     Console.Clear();
                     //Modificar valor referencia categoría
-                    AsignarReferenciaCategoria();
+                    //AsignarReferenciaCategoria();
                     break;
                 case 5:
                     Console.Clear();
@@ -146,64 +146,64 @@ namespace Obligatorio1
             
             return retVal;
         }
-        private static bool AsignarReferenciaCategoria()
-        {
-            bool retVal = false;
-            string valorReferencia = "";
-            string[] descripciones = { "Valor Referencia" };
+        //private static bool AsignarReferenciaCategoria()
+        //{
+        //    bool retVal = false;
+        //    string valorReferencia = "";
+        //    string[] descripciones = { "Valor Referencia" };
 
-            Console.WriteLine($"Ingrese un nuevo {descripciones[0]}:");
+        //    Console.WriteLine($"Ingrese un nuevo {descripciones[0]}:");
 
-            bool datosValidos = false;
-            //Solicito el nuevo valor hasta que el resultado sea correcto (datosValidos = Tue).
-            do
-            {
-                datosValidos = SolicitarDatos(ref valorReferencia, descripciones[0]);
-            }
-            while (!datosValidos);
-            if (valorReferencia.Length != 0)
-            {
-                //Guardo el nuevo valor dado que es un dato estático, si se actualiza, retorno TRUE.
-                retVal = (Categoria.setMinimoParaVip(valorReferencia));
-            }
-            return retVal;
-        }
-        private static bool CrearResena()
-        {
-            bool retVal = false;
-            string titulo = "", contenido = "";
-            string[] descripciones = { "Título", "Contenido" };
+        //    bool datosValidos = false;
+        //    //Solicito el nuevo valor hasta que el resultado sea correcto (datosValidos = Tue).
+        //    do
+        //    {
+        //        datosValidos = SolicitarDatos(ref valorReferencia, descripciones[0]);
+        //    }
+        //    while (!datosValidos);
+        //    if (valorReferencia.Length != 0)
+        //    {
+        //        //Guardo el nuevo valor dado que es un dato estático, si se actualiza, retorno TRUE.
+        //        retVal = (Categoria.setMinimoParaVip(valorReferencia));
+        //    }
+        //    return retVal;
+        //}
+        //private static bool CrearResena()
+        //{
+        //    bool retVal = false;
+        //    string titulo = "", contenido = "";
+        //    string[] descripciones = { "Título", "Contenido" };
 
-            Console.WriteLine("\nPara crear una nueva reseña, complete los siguientes datos:\n");
+        //    Console.WriteLine("\nPara crear una nueva reseña, complete los siguientes datos:\n");
 
-            //Recorrida según cantidad de campos a completar (titulo, contenido).
-            for (int i = 0; i < descripciones.Length; i++)
-            {
-                bool datosValidos = false;
-                //Por cada uno solicito los datos hasta que el resultado sea correcto (datosValidos = Tue).
-                do
-                {
-                    switch (i)
-                    {
-                        case 0:
-                            datosValidos = SolicitarDatos(ref titulo, descripciones[i]);
-                            break;
-                        case 1:
-                            datosValidos = SolicitarDatos(ref contenido, descripciones[i]);
-                            break;
-                    }
-                }
-                while (!datosValidos);
-            }
-            if (titulo.Length != 0 && contenido.Length != 0)
-            {
-                //Debo obtener el id de periodista al menos, o ver como generar el objeto correspondiente para que quede asociado
-                Resena resena = new Resena(new Periodista(), new Partido(), titulo, contenido);
-                Console.WriteLine($"\nSe creó la Reseña: {resena.ToString()}.\n");
-                retVal = Resena.AltaResena(resena);
-            }
-            return retVal;
-        }
+        //    //Recorrida según cantidad de campos a completar (titulo, contenido).
+        //    for (int i = 0; i < descripciones.Length; i++)
+        //    {
+        //        bool datosValidos = false;
+        //        //Por cada uno solicito los datos hasta que el resultado sea correcto (datosValidos = Tue).
+        //        do
+        //        {
+        //            switch (i)
+        //            {
+        //                case 0:
+        //                    datosValidos = SolicitarDatos(ref titulo, descripciones[i]);
+        //                    break;
+        //                case 1:
+        //                    datosValidos = SolicitarDatos(ref contenido, descripciones[i]);
+        //                    break;
+        //            }
+        //        }
+        //        while (!datosValidos);
+        //    }
+        //    if (titulo.Length != 0 && contenido.Length != 0)
+        //    {
+        //        //Debo obtener el id de periodista al menos, o ver como generar el objeto correspondiente para que quede asociado
+        //        Resena resena = new Resena(new Periodista(), new Partido(), titulo, contenido);
+        //        Console.WriteLine($"\nSe creó la Reseña: {resena.ToString()}.\n");
+        //        retVal = Resena.AltaResena(resena);
+        //    }
+        //    return retVal;
+        //}
 
         private static string ListarJugadoresExpulsados()
         {

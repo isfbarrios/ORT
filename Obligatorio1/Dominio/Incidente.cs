@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Incidente
+    public class Incidente : IValidar
     {
         //Atributos
         private static int autoIncrementId;
@@ -19,6 +19,7 @@ namespace Dominio
         {
             this.id = ++autoIncrementId;
         }
+
         public Incidente(Partido partido, Jugador jugador, TipoIncidente tipoIncidente, int minuto = -1)
         {
             this.id = ++autoIncrementId;
@@ -27,60 +28,30 @@ namespace Dominio
             this.tipoIncidente = tipoIncidente;
             this.minuto = minuto;
         }
-        /// <summary>
-        /// Genera el alta de la incidencia en el sistema.
-        /// </summary>
+
         public static bool AltaIncidente(Incidente incidente)
         {
             bool retVal = false;
             
             if (incidente.Partido.Validar())
             {
-                retVal = incidente.ValidarIncidente();
                 //Guardo el incidente en la lista genérica y a su vez, en la lista específica de ese partido.
-                incidente.Partido.Incidentes.Add(incidente);
-                Administradora.Instance.Incidentes.Add(incidente);
+                if (incidente.Validar())
+                {
+                    retVal = true;
+                    incidente.Partido.Incidentes.Add(incidente);
+                    Administradora.Instance.Incidentes.Add(incidente);
+                }
             }
             return retVal;
         }
-        /// <summary>
-        /// Retorna TRUE si la incidencia del objeto es valida según las condiciones planteadas.<para/>
-        /// 1 - Amonestaciones: no acumular más de dos sobre un mismo jugador.<para/>
-        /// 2 - Expulsiones: no acumular más de una sobre un mismo jugador.
-        /// </summary>
-        private bool ValidarIncidente()
-        {
-            bool retVal = true;
-            int amonestacion = 0, expulsion = 0;
-            //Traigo los Incidentes ya filtrados por Partido y Jugador.
-            List<Incidente> jugadorPartidoIncidentes = GetIncidentes(this.Partido, this.Jugador);
 
-            foreach (Incidente incidente in jugadorPartidoIncidentes)
-            {
-                //Si ya hay suficientes incidentes salgo del bucle.
-                if (expulsion == 1 && amonestacion == 2) break;
-
-                if (Incidente.EsTarjetaAmarilla(incidente)) amonestacion++;
-                if (Incidente.EsTarjetaRoja(incidente)) expulsion++;
-            }
-
-            if (expulsion == 1) retVal = false;
-            else if (amonestacion == 2) retVal = false;
-
-            return retVal;
-        }
-        /// <summary>
-        /// Retorna TRUE si el incidente corresponde a una expulsión.
-        /// </summary>
         public static bool EsTarjetaRoja(Incidente incidente) => (incidente.TipoIncidente.Equals(TipoIncidente.TARJETA_ROJA));
-        /// <summary>
-        /// Retorna TRUE si el incidente corresponde a una amonestación.
-        /// </summary>
+
         public static bool EsTarjetaAmarilla(Incidente incidente) => (incidente.TipoIncidente.Equals(TipoIncidente.TARJETA_AMARILLA));
-        /// <summary>
-        /// Retorna TRUE si el incidente corresponde a un gol.
-        /// </summary>
+
         public static bool EsGol(Incidente incidente) => (incidente.TipoIncidente.Equals(TipoIncidente.GOL));
+        
         /// <summary>
         /// Retorna el total de incidencias, de un determinado tipo en un partido.
         /// </summary>
@@ -122,10 +93,34 @@ namespace Dominio
             }
             return partidoIncidentes;
         }
-        /// <summary>
-        /// Retorna el objecto en formato string.
-        /// </summary>
+        
         public override string ToString() => $"Jugador {this.Jugador.Nombre} {this.TipoIncidente.ToString()}" + (this.Minuto > -1 ? $" - Minuto {this.Minuto}'" : "");
+
+        /// <summary>
+        /// Retorna TRUE si la incidencia del objeto es valida según las condiciones planteadas.<para/>
+        /// 1 - Amonestaciones: no acumular más de dos sobre un mismo jugador.<para/>
+        /// 2 - Expulsiones: no acumular más de una sobre un mismo jugador.
+        /// </summary>
+        public bool Validar()
+        {
+            bool retVal = true;
+            int amonestacion = 0, expulsion = 0;
+            //Traigo los Incidentes ya filtrados por Partido y Jugador.
+            List<Incidente> jugadorPartidoIncidentes = GetIncidentes(this.Partido, this.Jugador);
+
+            foreach (Incidente incidente in jugadorPartidoIncidentes)
+            {
+                //Si ya hay suficientes incidentes salgo del bucle.
+                if (expulsion == 1 || amonestacion == 2) break;
+                if (Incidente.EsTarjetaAmarilla(incidente)) amonestacion++;
+                else if (Incidente.EsTarjetaRoja(incidente)) expulsion++;
+            }
+            if (expulsion == 1) retVal = false;
+            else if (amonestacion == 2) retVal = false;
+
+            return retVal;
+        }
+
         //Getters && Setters
         public int Id { get { return this.id; } }
         public TipoIncidente TipoIncidente { get { return this.tipoIncidente; } set { this.tipoIncidente = value; } }

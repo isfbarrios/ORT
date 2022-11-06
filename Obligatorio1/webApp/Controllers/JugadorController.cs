@@ -28,5 +28,12 @@ namespace webApp.Controllers
             if (j.Validar()) manager.Jugadores.Add(j);
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public IActionResult Expulsados()
+        {
+            List<Incidente> incidentes = manager.Incidentes;
+            List<Jugador> expulsados = Jugador.GetJugadoresExpulsados();
+            return View(Jugador.GetJugadoresExpulsados());
+        }
     }
 }

@@ -12,5 +12,6 @@ namespace webApp.Models
         public Pie Pie { get; set; }
         public Posicion Posicion { get; set; }
         public Moneda Moneda { get; set; }
+        //public List<Jugador> Jugadores => Jugador.GetJugadoresExpulsados();
     }
 }

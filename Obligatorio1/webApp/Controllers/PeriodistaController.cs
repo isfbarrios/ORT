@@ -4,84 +4,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dominio;
 
 namespace webApp.Controllers
 {
     public class PeriodistaController : Controller
     {
-        // GET: PeriodistaController
-        public ActionResult Index()
+        Administradora manager = Administradora.Instance;
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            Administradora.PreLoad();
+            return View(manager.Partidos);
+        }
+        [HttpGet]
+        public IActionResult AltaJugador()
         {
             return View();
         }
-
-        // GET: PeriodistaController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: PeriodistaController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: PeriodistaController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult AltaJugador(Jugador j)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PeriodistaController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: PeriodistaController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PeriodistaController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: PeriodistaController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            if (j.Validar()) manager.Jugadores.Add(j);
+            return RedirectToAction("Index");
         }
     }
 }

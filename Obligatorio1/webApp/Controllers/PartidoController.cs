@@ -4,84 +4,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dominio;
 
 namespace webApp.Controllers
 {
     public class PartidoController : Controller
     {
-        // GET: PartidoController
-        public ActionResult Index()
+        Administradora manager = Administradora.Instance;
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            Administradora.PreLoad();
+            return View(manager.Partidos);
+        }
+        [HttpGet]
+        public IActionResult AltaJugador()
         {
             return View();
         }
-
-        // GET: PartidoController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: PartidoController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: PartidoController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult AltaJugador(Partido p)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PartidoController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: PartidoController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PartidoController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: PartidoController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            if (p.Validar()) manager.Partidos.Add(p);
+            return RedirectToAction("Index");
         }
     }
 }

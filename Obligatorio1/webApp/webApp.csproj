@@ -12,4 +12,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Seleccion\" />
+    <Folder Include="Views\Periodista\" />
+  </ItemGroup>
+
 </Project>

@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Dominio
 {
     public class Categoria
     {
-        public static bool setMinimoParaVip(string value)
+        public static bool setMinimoParaVip(int value)
         {
             int oldValue = Administradora.Instance.MinimoParaVIP;
-            Administradora.Instance.MinimoParaVIP = int.Parse(value);
-
+            Administradora.Instance.MinimoParaVIP = value;
             //Retorno TRUE si el valor se actualizo, caso contrario, retorno FALSE
-            return (Administradora.Instance.MinimoParaVIP == oldValue);
+            return (Administradora.Instance.MinimoParaVIP != oldValue);
         }
 
         ///// <summary>
@@ -27,17 +27,14 @@ namespace Dominio
         //    }
         //    return true;
         //}
-        public static TipoCategoria AsignarCategoria(Jugador j)
-        {
-            return (j.ValorMercado.CompareTo(
-                Administradora.Instance.MinimoParaVIP) > 0 
-                ? TipoCategoria.VIP 
-                : TipoCategoria.ESTANDAR);
-        }
+        public static TipoCategoria AsignarCategoria(Jugador j) => 
+            (j.ValorMercado.CompareTo(Administradora.Instance.MinimoParaVIP) > 0 ? TipoCategoria.VIP : TipoCategoria.ESTANDAR);
     }
     public enum TipoCategoria
     {
+        [Display(Name = "Estandar")]
         ESTANDAR,
+        [Display(Name = "VIP")]
         VIP
     }
 }

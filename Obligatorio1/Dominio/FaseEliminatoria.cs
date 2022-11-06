@@ -17,12 +17,12 @@ namespace Dominio
         }
 
         //Funcionalidad
-        public static bool AltaPartido(FaseEliminatoria partido)
+        public static bool AltaPartido(FaseEliminatoria fe)
         {
             bool retVal = false;
-            if (partido.Validar())
+            if (fe.Validar())
             {
-                Administradora.Instance.Partidos.Add(partido);
+                Administradora.Instance.Partidos.Add(fe);
                 retVal = true;
             }
             return retVal;
@@ -35,6 +35,7 @@ namespace Dominio
             $"Fecha {this.Fecha}.\n" +
             $"(Local) {this.Local.Pais.Nombre} vs (Visitante) {this.Visitante.Pais.Nombre}.");
 
+        //Getters & Setters
         public Etapa Etapa { get { return this.etapa; } set { this.etapa = value; } }
     }
 }

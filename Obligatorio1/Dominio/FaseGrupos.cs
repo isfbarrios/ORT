@@ -15,7 +15,6 @@ namespace Dominio
         {
             this.grupo = grupo;
         }
-        
         //Funcionalidad
 
         /// <summary>
@@ -25,17 +24,18 @@ namespace Dominio
             $"Fecha {this.Fecha}.\n" +
             $"(Local) {this.Local.Pais.Nombre} vs (Visitante) {this.Visitante.Pais.Nombre}.");
 
-        public static bool AltaPartido(FaseGrupos partido)
+        public static bool AltaPartido(FaseGrupos fg)
         {
             bool retVal = false;
-            if (partido.Validar())
+            if (fg.Validar())
             {
-                Administradora.Instance.Partidos.Add(partido);
+                Administradora.Instance.Partidos.Add(fg);
                 retVal = true;
             }
             return retVal;
         }
 
+        //Getters & Setters
         public Grupo Grupo { get { return this.grupo; } set { this.grupo = value; } }
     }
 }

@@ -26,9 +26,8 @@ namespace Dominio
             this.pais = pais;
             this.jugadores = new List<Jugador>();
         }
-        /// <summary>
-        /// Genera el alta de la Seleccion en el sistema.
-        /// </summary>
+
+        //Funcionalidades
         public static bool AltaSeleccion(Seleccion seleccion)
         {
             bool retVal = false;
@@ -41,7 +40,7 @@ namespace Dominio
             return retVal;
         }
         /// <summary>
-        /// Retorna todos los jugadores de una selección, a partir del país del jugador.
+        /// Retorna todos los jugadores de una selección, a partir de un país determinado.
         /// </summary>
         public static List<Jugador> ListarJugadores(Pais pais)
         {
@@ -49,7 +48,7 @@ namespace Dominio
 
             foreach (Jugador j in Administradora.Instance.Jugadores)
             {
-                if (j.Pais.Equals(pais))  selJugadores.Add(j);
+                if (j.Pais.Equals(pais)) selJugadores.Add(j);
             }
             return selJugadores;
         }

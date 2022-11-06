@@ -8,10 +8,6 @@ namespace Dominio
     {
         private static Administradora instance;
 
-        //Variables para simular la sesión del sistema
-        public static string session_user = "";
-        public static string session_pass = "";
-
         private List<Pais> paises = new List<Pais>();
         private List<Seleccion> selecciones = new List<Seleccion>();
         private List<Jugador> jugadores = new List<Jugador>();
@@ -21,6 +17,15 @@ namespace Dominio
         private List<Resultado> resultados = new List<Resultado>();
         private List<Resena> resenas = new List<Resena>();
         private int minimoParaVIP = 0;
+
+        //Variables para simular la sesión del sistema
+        public static string session_user = "";
+        public static string session_pass = "";
+
+        //Variables de utilidad
+        private static DateTime iniDate = new DateTime(2022, 11, 20);
+        private static DateTime endDate = new DateTime(2022, 12, 18);
+        private static Random gen;
 
         private Administradora() { }
 
@@ -40,7 +45,15 @@ namespace Dominio
         /// Retorna TRUE si un mail es valido.
         /// </summary>
         public static bool ValidMail(String a) => (a.Length > 0 && a.IndexOf("@") > 0 && !a.StartsWith("@") && !a.EndsWith("@"));
-       
+        /// <summary>
+        /// Retorna una fecha aleatoria entre un rango de fechas predefinido.
+        /// </summary>
+        private static DateTime RandomDate()
+        {
+            gen = new Random();
+            return iniDate.AddDays(new Random().Next(29)).AddHours(gen.Next(0, 24)).AddMinutes(gen.Next(0, 60)).AddSeconds(gen.Next(0, 60));
+        }
+
         //Getters & Setters
         public List<Pais> Paises { get { return this.paises; } }
         public List<Seleccion> Selecciones { get { return this.selecciones; } }
@@ -62,7 +75,7 @@ namespace Dominio
                 PreLoadJugadores();
                 PrecargaSelecciones();
                 PreLoadPeriodistas();
-                //PreLoadPartidos();
+                PreLoadPartidos();
                 PreLoadIncidentes();
             }
             catch (Exception e)
@@ -986,29 +999,29 @@ namespace Dominio
             Periodista.AltaPeriodista(new Periodista("Federico Barrios", "federicobarrios@gmail.com", "nosoyreal2"));
             Periodista.AltaPeriodista(new Periodista("Fernando Barrios", "fernandobarrios@gmail.com", "nosoyreal3"));
         }
-        /*
+        
         public static void PreLoadPartidos()
         {
             //Partidos de fase de grupos
             //Grupo A - Ganadores Selecciones[0] y Selecciones[3]
-            Pais.AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[1], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            Pais.AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[2], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            Pais.AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[3], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            Pais.AltaPartido(new Partido(Administradora.Instance.Selecciones[1], Administradora.Instance.Selecciones[2], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            Pais.AltaPartido(new Partido(Administradora.Instance.Selecciones[1], Administradora.Instance.Selecciones[3], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            Pais.AltaPartido(new Partido(Administradora.Instance.Selecciones[2], Administradora.Instance.Selecciones[3], Utils.RandomDate(), Etapa.FASE_GRUPOS));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[1], RandomDate(), Grupo.A));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[2], RandomDate(), Grupo.A));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[3], RandomDate(), Grupo.A));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[1], Administradora.Instance.Selecciones[2], RandomDate(), Grupo.A));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[1], Administradora.Instance.Selecciones[3], RandomDate(), Grupo.A));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[2], Administradora.Instance.Selecciones[3], RandomDate(), Grupo.A));
             //Grupo B - Ganadores Selecciones[4] y Selecciones[7]
-            Pais.AltaPartido(new Partido(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[5], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            Pais.AltaPartido(new Partido(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[6], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            Pais.AltaPartido(new Partido(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[7], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            Pais.AltaPartido(new Partido(Administradora.Instance.Selecciones[5], Administradora.Instance.Selecciones[6], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            Pais.AltaPartido(new Partido(Administradora.Instance.Selecciones[5], Administradora.Instance.Selecciones[7], Utils.RandomDate(), Etapa.FASE_GRUPOS));
-            Pais.AltaPartido(new Partido(Administradora.Instance.Selecciones[6], Administradora.Instance.Selecciones[7], Utils.RandomDate(), Etapa.FASE_GRUPOS));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[5], RandomDate(), Grupo.B));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[6], RandomDate(), Grupo.B));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[7], RandomDate(), Grupo.B));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[5], Administradora.Instance.Selecciones[6], RandomDate(), Grupo.B));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[5], Administradora.Instance.Selecciones[7], RandomDate(), Grupo.B));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[6], Administradora.Instance.Selecciones[7], RandomDate(), Grupo.B));
             //Partidos de eliminatorias
-            Pais.AltaPartido(new Partido(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[7], Utils.RandomDate(), Etapa.OCTAVOS));
-            Pais.AltaPartido(new Partido(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[3], Utils.RandomDate(), Etapa.OCTAVOS));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[7], RandomDate(), Grupo.C));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[3], RandomDate(), Grupo.C));
         }
-        */
+        
         public static void PreLoadIncidentes()
         {
             //Catar (Local) vs Alemania (Visitante)
@@ -1036,7 +1049,7 @@ namespace Dominio
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[4], Administradora.Instance.Jugadores[124], TipoIncidente.GOL, 12));
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[4], Administradora.Instance.Jugadores[124], TipoIncidente.GOL, 16));
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[4], Administradora.Instance.Jugadores[124], TipoIncidente.GOL, 33));
-            Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[4], Administradora.Instance.Jugadores[124], TipoIncidente.GOL, 61));
+            Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[4], Administradora.Instance.Jugadores[124], TipoIncidente.TARJETA_ROJA, 61));
             //Dinamarca (Local) vs Brasil (Visitante)
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[5], Administradora.Instance.Jugadores[88], TipoIncidente.TARJETA_AMARILLA, 2));
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[5], Administradora.Instance.Jugadores[126], TipoIncidente.GOL, 44));
@@ -1070,11 +1083,9 @@ namespace Dominio
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[48], Administradora.Instance.Jugadores[190], TipoIncidente.GOL, 86));
             //Francia (Local) vs Brasil (Visitante)
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[49], Administradora.Instance.Jugadores[124], TipoIncidente.GOL, 17));
-            Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[49], Administradora.Instance.Jugadores[124], TipoIncidente.TARJETA_AMARILLA, 34));
+            Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[49], Administradora.Instance.Jugadores[124], TipoIncidente.TARJETA_ROJA, 34));
         }
-        /// <summary>
-        /// Realiza la precarga de datos de Seleccion en el sistema.
-        /// </summary>
+        
         public static void PrecargaSelecciones()
         {
             //Contamos con países y jugadores, la seleccion debe armar para cada pais una seleccion.

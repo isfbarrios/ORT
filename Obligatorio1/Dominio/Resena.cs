@@ -29,9 +29,8 @@ namespace Dominio
             this.titulo = titulo;
             this.contenido = contenido;
         }
-        /// <summary>
-        /// Genera el alta del Periodista en el sistema.
-        /// </summary>
+        
+        //Funcionalidades
         public static bool AltaResena(Resena resena)
         {
             bool retVal = false;
@@ -42,10 +41,8 @@ namespace Dominio
             }
             return retVal;
         }
-        /// <summary>
-        /// Retorna el objecto en formato string.
-        /// </summary>
         public override string ToString() => ($"Nombre {this.Periodista.Nombre} {this.Titulo} - Mail {this.Contenido}");
+        
         //Getters & Setters
         public int Id { get { return this.id; } }
         public Periodista Periodista { get { return this.periodista; } set { this.periodista = value; } }
