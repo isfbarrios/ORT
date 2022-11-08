@@ -11,10 +11,12 @@ namespace Dominio
         //Constructores
         public FaseGrupos() : base() { }
 
-        public FaseGrupos(Seleccion local, Seleccion visitante, DateTime fecha, Grupo grupo) : base(local, visitante, fecha)
+        public FaseGrupos(Seleccion local, Seleccion visitante, 
+            DateTime fecha, Grupo grupo) : base(local, visitante, fecha)
         {
             this.grupo = grupo;
         }
+
         //Funcionalidad
 
         /// <summary>

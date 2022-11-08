@@ -121,3 +121,4 @@ C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Jugador\AltaJugador.cshtml.g.cs
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Partido\Index.cshtml.g.cs
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Jugador\Expulsados.cshtml.g.cs
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Incidente\Index.cshtml.g.cs

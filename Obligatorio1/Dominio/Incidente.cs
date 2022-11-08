@@ -83,7 +83,7 @@ namespace Dominio
         /// <summary>
         /// Retorna el listado de incidencias ocurridas en un partido determinado.
         /// </summary>
-        public List<Incidente> GetIncidentes(Partido partido)
+        public static List<Incidente> GetIncidentes(Partido partido)
         {
             List<Incidente> partidoIncidentes = new List<Incidente>();
 

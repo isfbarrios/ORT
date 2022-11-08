@@ -51,6 +51,18 @@ namespace Dominio
             return retPartido;
         }
         /// <summary>
+        /// Retorna el objeto correspondiente al id especificado.
+        /// </summary>
+        public static Partido GetPartido(int id)
+        {
+            Partido retVal = null;
+            foreach (Partido p in Administradora.Instance.Partidos)
+            {
+                if (p.Id == id) retVal = p;
+            }
+            return retVal;
+        }
+        /// <summary>
         /// Retorna el listado de partidos disputados por un jugador determinado.
         /// </summary>
         public List<Partido> GetPartidos(Jugador jugador)

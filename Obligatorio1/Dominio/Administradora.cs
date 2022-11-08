@@ -1095,7 +1095,8 @@ namespace Dominio
                 Seleccion nuevaSeleccion = new Seleccion(pais);
                 List<Jugador> jugadores = Seleccion.ListarJugadores(pais);
                 //Recorro los jugadores de dicha selección.
-                foreach (Jugador j in jugadores) nuevaSeleccion.Jugadores.Add(j);
+                nuevaSeleccion.Jugadores.AddRange(jugadores);
+                //foreach (Jugador j in jugadores) nuevaSeleccion.Jugadores.Add(j);
                 Seleccion.AltaSeleccion(nuevaSeleccion);
             }
         }

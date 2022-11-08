@@ -81,7 +81,7 @@ namespace Dominio
         /// <summary>
         /// Retorna TRUE o FALSE si la seleccion es valida o no, respectivamente.
         /// </summary>
-        public bool Validar() => (!this.Pais.Validar() && this.Jugadores.Count >= 11);
+        public bool Validar() => (this.Pais.Validar() && this.Jugadores.Count >= 11);
 
         //Getters && Setters
         public int Id { get { return this.id; } }

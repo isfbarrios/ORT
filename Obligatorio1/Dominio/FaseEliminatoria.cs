@@ -11,7 +11,8 @@ namespace Dominio
         //Constructores
         public FaseEliminatoria() : base() { }
 
-        public FaseEliminatoria(Seleccion local, Seleccion visitante, DateTime fecha, Etapa etapa) : base(local, visitante, fecha) 
+        public FaseEliminatoria(Seleccion local, Seleccion visitante, 
+            DateTime fecha, Etapa etapa) : base(local, visitante, fecha) 
         {
             this.etapa = etapa;
         }
