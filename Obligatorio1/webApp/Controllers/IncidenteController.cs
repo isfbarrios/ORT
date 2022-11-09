@@ -10,15 +10,25 @@ namespace webApp.Controllers
     public class IncidenteController : Controller
     {
         Administradora manager = Administradora.Instance;
+
+        [HttpGet]
         public IActionResult Index()
         {
             return View(manager.Incidentes);
         }
-        public IActionResult IncidentesPartido(int id)
+        [HttpGet]
+        public IActionResult IncidentePartido(int id)
         {
             Partido p = Partido.GetPartido(id);
 
             return View(Incidente.GetIncidentes(p));
+        }
+        [HttpGet]
+        public IActionResult IncidenteJugador(int id)
+        {
+            Jugador j = Jugador.GetJugador(id);
+
+            return View(Incidente.GetIncidentes(j));
         }
     }
 }

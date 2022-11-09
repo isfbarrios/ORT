@@ -69,7 +69,7 @@ namespace Dominio
         /// <summary>
         /// Retorna el listado de incidencias sobre un jugador ocurridas en un partido determinado.
         /// </summary>
-        public List<Incidente> GetIncidentes(Partido partido, Jugador jugador)
+        public static List<Incidente> GetIncidentes(Partido partido, Jugador jugador)
         {
             List<Incidente> jugadorPartidoIncidentes = new List<Incidente>();
             List<Incidente> partidoIncidentes = GetIncidentes(partido);
@@ -85,13 +85,22 @@ namespace Dominio
         /// </summary>
         public static List<Incidente> GetIncidentes(Partido partido)
         {
-            List<Incidente> partidoIncidentes = new List<Incidente>();
+            List<Incidente> retVal = new List<Incidente>();
 
             foreach (Incidente incidente in Administradora.Instance.Incidentes)
             {
-                if (incidente.Partido.Equals(partido)) partidoIncidentes.Add(incidente);
+                if (incidente.Partido.Equals(partido)) retVal.Add(incidente);
             }
-            return partidoIncidentes;
+            return retVal;
+        }
+        public static List<Incidente> GetIncidentes(Jugador jugador)
+        {
+            List<Incidente> retVal = new List<Incidente>();
+            foreach (Incidente incidente in Administradora.Instance.Incidentes)
+            {
+                if (incidente.Jugador.Equals(jugador)) retVal.Add(incidente);
+            }
+            return retVal;
         }
         
         public override string ToString() => $"Jugador {this.Jugador.Nombre} {this.TipoIncidente.ToString()}" + (this.Minuto > -1 ? $" - Minuto {this.Minuto}'" : "");
@@ -106,7 +115,7 @@ namespace Dominio
             bool retVal = true;
             int amonestacion = 0, expulsion = 0;
             //Traigo los Incidentes ya filtrados por Partido y Jugador.
-            List<Incidente> jugadorPartidoIncidentes = GetIncidentes(this.Partido, this.Jugador);
+            List<Incidente> jugadorPartidoIncidentes = Incidente.GetIncidentes(this.Partido, this.Jugador);
 
             foreach (Incidente incidente in jugadorPartidoIncidentes)
             {

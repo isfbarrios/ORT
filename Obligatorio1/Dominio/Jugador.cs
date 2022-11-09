@@ -65,7 +65,7 @@ namespace Dominio
         /// <summary>
         /// Retorna un jugador según el Id especificado.
         /// </summary>
-        public static Jugador GetJugador(string id = "0")
+        public static Jugador GetJugador(int id = 0)
         {
             Jugador jugador = new Jugador();
 

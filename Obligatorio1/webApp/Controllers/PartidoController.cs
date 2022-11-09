@@ -29,5 +29,19 @@ namespace webApp.Controllers
             if (p.Validar()) manager.Partidos.Add(p);
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public IActionResult IncidentePartido(int id)
+        {
+            Partido p = Partido.GetPartido(id);
+
+            return View(Incidente.GetIncidentes(p));
+        }
+        [HttpGet]
+        public IActionResult IncidenteJugador(int id)
+        {
+            Jugador j = Jugador.GetJugador(id);
+
+            return View(Incidente.GetIncidentes(j));
+        }
     }
 }
