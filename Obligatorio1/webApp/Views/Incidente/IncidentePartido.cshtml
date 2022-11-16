@@ -1,46 +1,47 @@
 ﻿@using Dominio
-@model List<Partido>
+@model List<Incidente>
+
+@{ 
+    string tituloPartido = Model[0].Partido.Local.Pais.Nombre + " vs " + Model[0].Partido.Visitante.Pais.Nombre;
+}
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-sm-10">
-            <h1>Partidos</h1>
+        <div class="col-12">
+            <h1>@tituloPartido</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-sm-10">
+        <div class="col-12">
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Local</th>
-                        <th>Visitante</th>
-                        <th>Fecha</th>
-                        <th>Resultado</th>
-                        <th>Incidentes</th>
+                        <th>Jugador</th>
+                        <th>Incidente</th>
+                        <th>Minuto</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Partido p in Model)
+                    @foreach (Incidente i in Model)
                     {
                         <tr>
-                            <td>@p.Id</td>
-                            <td>@p.Local</td>
-                            <td>@p.Visitante</td>
-                            <td>@p.Fecha.ToShortDateString()</td>
-                            <td>@p.Resultado</td>
+                            <td>@i.Id</td>
+                            <td>@i.Jugador.Nombre.ToString()</td>
+                            <td>@i.TipoIncidente.ToString()</td>
+                            <td>@i.Minuto</td>
                             <td>
-                                <a class="btn btn-link p-1" href="~/Incidente/IncidentePartido/@p.Id">
-                                    <span class="text">Ver incidentes </span>
+                                <a class="btn btn-link p-1" href="~/Partido/Index/@i.Partido.Id">
+                                    <span class="text">Ver Partido </span>
                                     <i class="fas fa-plus-circle"></i>
                                 </a>
                             </td>
                             <td style="display: grid;grid-template: 1fr / 1fr 1fr;grid-gap: 5px;">
-                                <a class="btn btn-warning p-1" href="~/Partido/EditarPartido/@p.Id" style="width:34px;height:34px;">
+                                <a class="btn btn-warning p-1" href="~/Incidentes/EditarIncidentes/@i.Id" style="width:34px;height:34px;">
                                     <i class="fas fa-edit" style="font-size:15px;"></i>
                                 </a>
-                                <a class="btn btn-danger p-1" href="~/Partido/EliminarPartido/@p.Id" style="width:34px;height:34px;">
+                                <a class="btn btn-danger p-1" href="~/Incidentes/EliminarIncidente/@i.Id" style="width:34px;height:34px;">
                                     <i class="fas fa-trash" style="font-size:15px;"></i>
                                 </a>
                             </td>

@@ -29,6 +29,7 @@ namespace webApp.Controllers
             if (p.Validar()) manager.Partidos.Add(p);
             return RedirectToAction("Index");
         }
+        /*
         [HttpGet]
         public IActionResult IncidentePartido(int id)
         {
@@ -43,5 +44,6 @@ namespace webApp.Controllers
 
             return View(Incidente.GetIncidentes(j));
         }
+        */
     }
 }
