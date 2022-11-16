@@ -18,9 +18,8 @@ namespace Dominio
         private List<Resena> resenas = new List<Resena>();
         private int minimoParaVIP = 0;
 
-        //Variables para simular la sesión del sistema
-        public static string session_user = "";
-        public static string session_pass = "";
+        //Variables para controlar que este la precarga hecha
+        private bool loaded = false;
 
         //Variables de utilidad
         private static DateTime iniDate = new DateTime(2022, 11, 20);
@@ -64,12 +63,14 @@ namespace Dominio
         public List<Periodista> Periodistas { get { return this.periodistas; } }
         public List<Incidente> Incidentes { get { return this.incidentes; } }
         public int MinimoParaVIP { get { return this.minimoParaVIP; } set { this.minimoParaVIP = value; } }
+        public bool Loaded { get { return this.loaded; } set { this.loaded = value; } }
 
         //Métodos de precarga de datos
         public static void PreLoad()
         {
             try
             {
+                Instance.Loaded = true;
                 //Alta de jugadores
                 PreLoadPaises();
                 PreLoadJugadores();
@@ -995,9 +996,9 @@ namespace Dominio
         }
         public static void PreLoadPeriodistas()
         {
-            Periodista.AltaPeriodista(new Periodista("Fabricio Barrios", "fabriciobarrios@gmail.com", "nosoyreal1"));
-            Periodista.AltaPeriodista(new Periodista("Federico Barrios", "federicobarrios@gmail.com", "nosoyreal2"));
-            Periodista.AltaPeriodista(new Periodista("Fernando Barrios", "fernandobarrios@gmail.com", "nosoyreal3"));
+            Periodista.AltaPeriodista(new Periodista("Fabricio", "Barrios", "fabriciobarrios@gmail.com", "nosoyreal1"));
+            Periodista.AltaPeriodista(new Periodista("Federico", "Barrios", "federicobarrios@gmail.com", "nosoyreal2"));
+            Periodista.AltaPeriodista(new Periodista("Fernando", "Barrios", "fernandobarrios@gmail.com", "nosoyreal3"));
         }
         
         public static void PreLoadPartidos()

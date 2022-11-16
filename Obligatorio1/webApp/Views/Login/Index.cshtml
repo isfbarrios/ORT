@@ -1,0 +1,34 @@
+﻿@using Dominio
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1>Login</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @if (ViewBag.mensaje != null)
+            {
+                <div class="alert alert-warning">
+                    <div>
+                        @ViewBag.Mensaje
+                    </div>
+                </div>
+            }
+            <form class="form" method="post">
+                <div class="form-group">
+                    <label for="txtUser">Usuario</label>
+                    <input id="txtUser" class="form-control" name="user" type="text" placeholder="Jhon Doe" />
+                </div>
+                <div class="form-group">
+                    <label for="txtUser">Usuario</label>
+                    <input id="txtPass" class="form-control" name="pass" type="password" placeholder="Contraseña" />
+                </div>
+                <button type="submit" class="btn btn-primary">Ingresar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+

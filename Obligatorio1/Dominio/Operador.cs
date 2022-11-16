@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Operador
+    public class Operador
     {
         //nombre, apellido, email, contraseña y fecha en que comenzó a trabajar
         private static int autoIncrementId;
@@ -29,7 +29,20 @@ namespace Dominio
             this.password = password;
             this.fechaIngreso = fechaIngreso;
         }
+        //Funcionalidades
 
+        /// <summary>
+        /// Retorna el Periodista según el nombre. Si no existe, retorna Null.
+        /// </summary>
+        public static Periodista GetPeriodista(String nombre)
+        {
+            Periodista retVal = null;
+            foreach (Periodista p in Administradora.Instance.Periodistas)
+            {
+                if (p.Nombre == nombre) retVal = p;
+            }
+            return retVal;
+        }
         //Getters & Setters
         public int Id { get { return this.id; } }
         public string Nombre { get { return this.nombre; } set { this.nombre = value; } }

@@ -31,6 +31,7 @@ namespace Dominio
         }
         
         //Funcionalidades
+
         public static bool AltaResena(Resena resena)
         {
             bool retVal = false;
@@ -41,9 +42,19 @@ namespace Dominio
             }
             return retVal;
         }
+        public static List<Resena> GetResenas(Periodista periodista)
+        {
+            List<Resena> retVal = new List<Resena>();
+            foreach (Resena r in Administradora.Instance.Resenas)
+            {
+                if (r.Periodista.Equals(periodista)) retVal.Add(r);
+            }
+            return retVal;
+        }
         public override string ToString() => ($"Nombre {this.Periodista.Nombre} {this.Titulo} - Mail {this.Contenido}");
         
         //Getters & Setters
+        
         public int Id { get { return this.id; } }
         public Periodista Periodista { get { return this.periodista; } set { this.periodista = value; } }
         public Partido Partido { get { return this.partido; } set { this.partido = value; } }

@@ -11,6 +11,7 @@ namespace Dominio
         private static int autoIncrementId;
         private int id;
         private string nombre;
+        private string apellido;
         private string mail;
         private string password;
         private List<Resena> listaResenas;
@@ -20,10 +21,11 @@ namespace Dominio
         {
             this.id = ++autoIncrementId;
         }
-        public Periodista(string nombre, string mail, string password)
+        public Periodista(string nombre, string apellido, string mail, string password)
         {
             this.id = ++autoIncrementId;
             this.nombre = nombre;
+            this.apellido = apellido;
             this.mail = mail;
             this.password = password;
             this.listaResenas = new List<Resena>();
@@ -58,8 +60,9 @@ namespace Dominio
             return retVal;
         }*/
         public bool Validar() => (Administradora.ValidLength(this.Password, 8) && Administradora.ValidMail(this.Mail) && !ValidarMailPeriodista(this.Mail)
-            && this.Nombre.Length > 0 && this.Nombre.IndexOf(" ") > -1);
-
+            && this.Nombre.Length > 0 && this.Nombre.IndexOf(" ") == -1);
+        private bool ValidarNombreCompleto() => this.Nombre.Length > 0 
+            && this.Nombre.IndexOf(" ") == -1 && this.Apellido.Length > 0 && this.Apellido.IndexOf(" ") == -1;
         /// <summary>
         /// Valida únicamente que el mail no este repetido entre los usados por aquellos Periodistas ya registrados.
         /// </summary>
@@ -77,9 +80,21 @@ namespace Dominio
             return retVal;
         }
         /// <summary>
+        /// Retorna el Periodista según el nombre. Si no existe, retorna Null.
+        /// </summary>
+        public static Periodista GetPeriodista(String nombre)
+        {
+            Periodista retVal = null;
+            foreach (Periodista p in Administradora.Instance.Periodistas)
+            {
+                if (p.Nombre == nombre) retVal = p;
+            }
+            return retVal;
+        }
+        /// <summary>
         /// Retorna el objecto en formato string.
         /// </summary>
-        public override string ToString() => ($"Nombre {this.Nombre} - Mail {this.Mail}");
+        public override string ToString() => ($"Nombre {this.Nombre} {this.Apellido} - Mail {this.Mail}");
         /// <summary>
         /// Define el tipo de ordenamiento que tendrá esta clase. Se ordena por Id.
         /// </summary>
@@ -91,6 +106,7 @@ namespace Dominio
         //Getters & Setters
         public int Id { get { return this.id; } }
         public string Nombre { get { return this.nombre; } set { this.nombre = value; } }
+        public string Apellido { get { return this.apellido; } set { this.apellido = value; } }
         public string Mail { get { return this.mail; } set { this.mail = value; } }
         public string Password { get { return this.password; } set { this.password = value; } }
         public List<Resena> ListaResenas { get { return this.listaResenas; } }

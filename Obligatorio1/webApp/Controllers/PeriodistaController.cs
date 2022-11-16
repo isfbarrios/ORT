@@ -15,7 +15,6 @@ namespace webApp.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            Administradora.PreLoad();
             return View(manager.Partidos);
         }
         [HttpGet]

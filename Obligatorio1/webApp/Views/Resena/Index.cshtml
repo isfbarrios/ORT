@@ -1,45 +1,46 @@
 ﻿@using Dominio
-@model List<Incidente>
+@model List<Resena>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 col-sm-10">
-            <h1>Incidentes</h1>
+            <h1>Tus reseñas</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 col-sm-10">
             <table class="table">
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Partido</th>
-                        <th>Jugador</th>
-                        <th>Incidente</th>
-                        <th>Minuto</th>
+                        <th>Local</th>
+                        <th>Visitante</th>
+                        <th>Fecha</th>
+                        <th>Resultado</th>
+                        <th>Incidentes</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Incidente i in Model)
+                    @foreach (Resena p in Model)
                     {
                         <tr>
-                            <td>@i.Id</td>
-                            <td>@i.Partido.ToString()</td>
-                            <td>@i.Jugador.ToString()</td>
-                            <td>@i.TipoIncidente.ToString()</td>
-                            <td>@i.Minuto</td>
+                            <td>@p.Id</td>
+                            <td>@p.Local</td>
+                            <td>@p.Visitante</td>
+                            <td>@p.Fecha.ToShortDateString()</td>
+                            <td>@p.Resultado</td>
                             <td>
-                                <a class="btn btn-link p-1" href="~/Partido/Index/@i.Partido.Id">
-                                    <span class="text">Ver Partido </span>
+                                <a class="btn btn-link p-1" href="~/Incidente/IncidentePartido/@p.Id">
+                                    <span class="text">Ver incidentes </span>
                                     <i class="fas fa-plus-circle"></i>
                                 </a>
                             </td>
                             <td style="display: grid;grid-template: 1fr / 1fr 1fr;grid-gap: 5px;">
-                                <a class="btn btn-warning p-1" href="~/Incidentes/EditarIncidentes/@i.Id" style="width:34px;height:34px;">
+                                <a class="btn btn-warning p-1" href="~/Partido/EditarPartido/@p.Id" style="width:34px;height:34px;">
                                     <i class="fas fa-edit" style="font-size:15px;"></i>
                                 </a>
-                                <a class="btn btn-danger p-1" href="~/Incidentes/EliminarIncidente/@i.Id" style="width:34px;height:34px;">
+                                <a class="btn btn-danger p-1" href="~/Partido/EliminarPartido/@p.Id" style="width:34px;height:34px;">
                                     <i class="fas fa-trash" style="font-size:15px;"></i>
                                 </a>
                             </td>
