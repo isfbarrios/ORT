@@ -9,9 +9,23 @@ namespace webApp.Controllers
 {
     public class ResenaController : Controller
     {
-        public IActionResult Index()
+        Administradora manager = Administradora.Instance;
+
+        [HttpGet]
+        public IActionResult Index(string mensaje)
         {
-            return View();
+            ViewBag.Mensaje = mensaje;
+            return View(manager.Resenas);
+        }
+
+        [HttpPost]
+        public IActionResult MostrarResena(int id)
+        {
+            Resena resena = Resena.GetResena(id);
+
+            if (resena == null) return RedirectToAction("index", new { mensaje = "No se encontró la reseña." });
+
+            return View(manager.Resenas);
         }
     }
 }

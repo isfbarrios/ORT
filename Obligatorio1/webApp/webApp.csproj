@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Seleccion\" />
-    <Folder Include="Views\Periodista\" />
   </ItemGroup>
 
 </Project>

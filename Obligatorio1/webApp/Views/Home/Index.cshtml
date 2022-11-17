@@ -1,8 +1,16 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
+﻿@using Dominio
+@using Microsoft.AspNetCore.Http;
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @if (Context.Session.GetString("Nombre") != null)
+    {
+        <h1 class="display-4">¡Bienvenido @Context.Session.GetString("Nombre")!</h1>
+        <p>Accede a toda la información del mundial desde el menú de navegación.</p>
+    }
+    else
+    {
+        <h4 class="my-5">
+            Para acceder al sistema debes <a href="~/Login/Index">ingresar con tú usuario</a>.
+        </h4>
+    }
+
 </div>

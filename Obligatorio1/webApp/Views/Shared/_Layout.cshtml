@@ -25,19 +25,19 @@
                         @if (Context.Session.GetString("Nombre") != null)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Periodista" asp-action="Index">Periodista</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Jugador" asp-action="Index">Jugadores</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Periodista" asp-action="Index">Periodista</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Partido" asp-action="Index">Partidos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Partido" asp-action="Index">Partido</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Seleccion" asp-action="Index">Selecciones</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Seleccion" asp-action="Index">Seleccion</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Resena" asp-action="Index">Reseñas</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="LogOut">Log Out</a>
@@ -47,6 +47,9 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Log In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Registrarse">Registrarse</a>
                             </li>
                         }
                     </ul>

@@ -28,17 +28,15 @@ namespace webApp.Controllers
             {
                 HttpContext.Session.SetString("Nombre", user);
                 HttpContext.Session.SetString("Rol", "Periodista");
-                sessionLoaded = true;
             }
             if (Operador.GetPeriodista(user) != null)
             {
                 HttpContext.Session.SetString("Nombre", user);
                 HttpContext.Session.SetString("Rol", "Operador");
-
             }
-            sessionLoaded = HttpContext.Session.GetString("Nombre") != null;
+            sessionLoaded = (HttpContext.Session.GetString("Nombre") != null);
 
-            if (sessionLoaded) Redirect("~/Home");
+            if (sessionLoaded) return Redirect("~/Home");
 
             return RedirectToAction("index", new { mensaje = "Usuario o contraseña incorrecta." });
         }
@@ -47,6 +45,22 @@ namespace webApp.Controllers
         {
             HttpContext.Session.Clear();
             return View();
+        }
+        [HttpGet]
+        public ActionResult Registrarse()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Registrarse(string nombre, string apellido, string mail, string pass)
+        {
+            Periodista periodista = new Periodista(nombre, apellido, mail, pass);
+
+            return RedirectToAction("index",
+                Periodista.AltaPeriodista(periodista) ?
+                new { mensaje = "Perfil periodista creado correctamente." }
+                : new { mensaje = "Alguno de los datos no son correctos, vuelva a intentar." }
+                );
         }
     }
 }

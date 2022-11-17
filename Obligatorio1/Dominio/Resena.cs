@@ -51,6 +51,15 @@ namespace Dominio
             }
             return retVal;
         }
+        public static Resena GetResena(int id)
+        {
+            Resena retVal = null;
+            foreach (Resena r in Administradora.Instance.Resenas)
+            {
+                if (r.Id == id) retVal = r;
+            }
+            return retVal;
+        }
         public override string ToString() => ($"Nombre {this.Periodista.Nombre} {this.Titulo} - Mail {this.Contenido}");
         
         //Getters & Setters

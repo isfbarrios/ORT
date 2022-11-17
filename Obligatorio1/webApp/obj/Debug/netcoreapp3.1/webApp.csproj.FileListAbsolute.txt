@@ -125,3 +125,6 @@ C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Incidente\IncidenteJugador.cshtml.g.cs
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Incidente\IncidentePartido.cshtml.g.cs
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Resena\Index.cshtml.g.cs
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Periodista\Index.cshtml.g.cs
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Login\Registrarse.cshtml.g.cs

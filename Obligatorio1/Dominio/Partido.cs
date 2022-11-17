@@ -109,6 +109,36 @@ namespace Dominio
         /// </summary>
         public abstract override string ToString();
         /// <summary>
+        /// Dispara el evento de finalizaci'on de un partido.
+        /// </summary>
+        public abstract bool FinalizarPartido();
+        /// <summary>
+        /// Retorna el listado de incidencias tipo Gol ocurridas en un partido determinado.
+        /// </summary>
+        public List<Incidente> GetIncidentesDeGol()
+        {
+            List<Incidente> retVal = new List<Incidente>();
+            //Traigo todos los incidentes de este partido.
+            foreach (Incidente i in this.Incidentes)
+            {
+                if (Incidente.EsGol(i)) retVal.Add(i);
+            }
+            return retVal;
+        }
+        /// <summary>
+        /// Recorre las incidencias de Gol de un partido.
+        /// Retorna un valor númerico dependiendo si el ganador fue el equipo local (-1), empate (0) o si el ganador fue el equipo visitante (1).
+        /// </summary>
+        public abstract int CalcularResultado();
+        /// <summary>
+        /// Retorna el resultado del partido.
+        /// </summary>
+        public abstract string ExpresarResultado();
+        /// <summary>
+        /// Retorna el objecto en formato string.
+        /// </summary>
+        public string TituloToString() => this.Local.Pais.Nombre + " vs " + this.Visitante.Pais.Nombre;
+        /// <summary>
         /// Retorna TRUE si el partido cumple con la condicion de tener Selecciones validas para Local y Visitante.
         /// </summary>
         public bool Validar() => (this.Local.Validar() && this.Visitante.Validar());

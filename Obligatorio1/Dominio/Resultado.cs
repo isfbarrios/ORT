@@ -6,7 +6,10 @@ namespace Dominio
 {
     public enum Resultado
     {
-        PENDIENTE
+        PENDIENTE,
+        LOCAL,
+        VISITANTE,
+        EMPATE
 
     }
 }

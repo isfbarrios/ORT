@@ -19,7 +19,6 @@ namespace Dominio
         {
             this.id = ++autoIncrementId;
         }
-
         public Incidente(Partido partido, Jugador jugador, TipoIncidente tipoIncidente, int minuto = -1)
         {
             this.id = ++autoIncrementId;
@@ -28,6 +27,8 @@ namespace Dominio
             this.tipoIncidente = tipoIncidente;
             this.minuto = minuto;
         }
+
+        //Funcionalidades
 
         public static bool AltaIncidente(Incidente incidente)
         {
@@ -47,11 +48,8 @@ namespace Dominio
         }
 
         public static bool EsTarjetaRoja(Incidente incidente) => (incidente.TipoIncidente.Equals(TipoIncidente.TARJETA_ROJA));
-
         public static bool EsTarjetaAmarilla(Incidente incidente) => (incidente.TipoIncidente.Equals(TipoIncidente.TARJETA_AMARILLA));
-
         public static bool EsGol(Incidente incidente) => (incidente.TipoIncidente.Equals(TipoIncidente.GOL));
-        
         /// <summary>
         /// Retorna el total de incidencias, de un determinado tipo en un partido.
         /// </summary>
@@ -72,7 +70,7 @@ namespace Dominio
         public static List<Incidente> GetIncidentes(Partido partido, Jugador jugador)
         {
             List<Incidente> jugadorPartidoIncidentes = new List<Incidente>();
-            List<Incidente> partidoIncidentes = GetIncidentes(partido);
+            List<Incidente> partidoIncidentes = partido.Incidentes;
 
             foreach (Incidente incidente in partidoIncidentes)
             {
@@ -81,18 +79,8 @@ namespace Dominio
             return jugadorPartidoIncidentes;
         }
         /// <summary>
-        /// Retorna el listado de incidencias ocurridas en un partido determinado.
+        /// Retorna el listado de incidencias ocurridas para un jugador determinado.
         /// </summary>
-        public static List<Incidente> GetIncidentes(Partido partido)
-        {
-            List<Incidente> retVal = new List<Incidente>();
-
-            foreach (Incidente incidente in Administradora.Instance.Incidentes)
-            {
-                if (incidente.Partido.Equals(partido)) retVal.Add(incidente);
-            }
-            return retVal;
-        }
         public static List<Incidente> GetIncidentes(Jugador jugador)
         {
             List<Incidente> retVal = new List<Incidente>();

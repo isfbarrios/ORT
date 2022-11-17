@@ -21,7 +21,7 @@ namespace webApp.Controllers
         {
             Partido p = Partido.GetPartido(id);
 
-            return View(Incidente.GetIncidentes(p));
+            return View(p.Incidentes);
         }
         [HttpGet]
         public IActionResult IncidenteJugador(int id)
