@@ -24,33 +24,35 @@ namespace webApp.Controllers
         public ActionResult Index(string user, string pass)
         {
             bool sessionLoaded = false;
-            if (Periodista.GetPeriodista(user) != null)
+            Usuario usuario = Administradora.GetUsuario(user);
+
+            if (usuario != null && usuario.Password == pass.Trim())
             {
+                HttpContext.Session.SetString("Id", usuario.Id.ToString());
                 HttpContext.Session.SetString("Nombre", user);
-                HttpContext.Session.SetString("Rol", "Periodista");
+                HttpContext.Session.SetString("Rol", usuario.GetUserType());
             }
-            if (Operador.GetPeriodista(user) != null)
-            {
-                HttpContext.Session.SetString("Nombre", user);
-                HttpContext.Session.SetString("Rol", "Operador");
-            }
+            
             sessionLoaded = (HttpContext.Session.GetString("Nombre") != null);
 
             if (sessionLoaded) return Redirect("~/Home");
 
             return RedirectToAction("index", new { mensaje = "Usuario o contraseña incorrecta." });
         }
-        [HttpPost]
+
+        [HttpGet]
         public ActionResult LogOut()
         {
             HttpContext.Session.Clear();
-            return View();
+            return Redirect("~/Home");
         }
+
         [HttpGet]
         public ActionResult Registrarse()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Registrarse(string nombre, string apellido, string mail, string pass)
         {
@@ -59,8 +61,7 @@ namespace webApp.Controllers
             return RedirectToAction("index",
                 Periodista.AltaPeriodista(periodista) ?
                 new { mensaje = "Perfil periodista creado correctamente." }
-                : new { mensaje = "Alguno de los datos no son correctos, vuelva a intentar." }
-                );
+                : new { mensaje = "Alguno de los datos no son correctos, vuelva a intentar." });
         }
     }
 }

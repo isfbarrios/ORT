@@ -39,9 +39,7 @@ namespace Dominio
             }
             return retVal;
         }
-        /// <summary>
-        /// Retorna todos los jugadores de una selección, a partir de un país determinado.
-        /// </summary>
+
         public static List<Jugador> ListarJugadores(Pais pais)
         {
             List<Jugador> selJugadores = new List<Jugador>();
@@ -52,21 +50,13 @@ namespace Dominio
             }
             return selJugadores;
         }
-        /// <summary>
-        /// Retorna TRUE si la selección jugó este partido (independientemente si era local o visitante).
-        /// </summary>
+
         public bool JugadoPorEstaSeleccion(Partido partido) => (partido.Local.Equals(this) || partido.Visitante.Equals(this));
-        /// <summary>
-        /// Retorna TRUE si el jugador recibido por parámetro es parte de esta selección.
-        /// </summary>
+
         public bool JugadorDeSeleccion(Jugador jugador) => (this.Pais.Equals(jugador.Pais));
-        /// <summary>
-        /// Retorna el objecto en formato string.
-        /// </summary>
+
         public override string ToString() => ($"Nombre {this.Pais.Nombre} [{this.Pais.Codigo}]");
-        /// <summary>
-        /// Retorna la selección a la que el jugador pertenece.
-        /// </summary>
+
         public static Seleccion GetSeleccion(Jugador jugador)
         {
             Seleccion retVal = null;
@@ -78,9 +68,7 @@ namespace Dominio
 
             return retVal;
         }
-        /// <summary>
-        /// Retorna TRUE o FALSE si la seleccion es valida o no, respectivamente.
-        /// </summary>
+
         public bool Validar() => (this.Pais.Validar() && this.Jugadores.Count >= 11);
 
         //Getters && Setters

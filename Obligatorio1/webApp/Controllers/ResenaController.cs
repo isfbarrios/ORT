@@ -27,5 +27,25 @@ namespace webApp.Controllers
 
             return View(manager.Resenas);
         }
+
+        [HttpGet]
+        public IActionResult CrearResena(string mensaje)
+        {
+            ViewBag.Mensaje = mensaje;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CrearResena(string periodistaId, string titulo, string contenido, string partidoId)
+        {
+            bool retVal = false;
+            Periodista periodista = (Periodista)Usuario.GetUserById(int.Parse(periodistaId));
+            Partido partido = Partido.GetPartido(int.Parse(partidoId));
+
+            if (partido != null && periodista != null) retVal = Resena.CrearResena(periodista, titulo, contenido, partido);
+            
+            return RedirectToAction( (retVal ? "index" : "CrearResena"), 
+                new { mensaje = (retVal ? "Reseña creada correctamente." : "No se pudo crear la reseña. Intente nuevamente.") });
+        }
     }
 }

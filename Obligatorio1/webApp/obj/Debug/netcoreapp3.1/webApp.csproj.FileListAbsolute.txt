@@ -118,7 +118,6 @@ C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\bin\Debug\netcoreapp3
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Jugador\Index.cshtml.g.cs
-C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Jugador\AltaJugador.cshtml.g.cs
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Partido\Index.cshtml.g.cs
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Jugador\Expulsados.cshtml.g.cs
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Incidente\Index.cshtml.g.cs
@@ -128,3 +127,6 @@ C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Resena\Index.cshtml.g.cs
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Periodista\Index.cshtml.g.cs
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Login\Registrarse.cshtml.g.cs
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Seleccion\Index.cshtml.g.cs
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Partido\PartidosCerrados.cshtml.g.cs
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Resena\CrearResena.cshtml.g.cs

@@ -1,0 +1,44 @@
+﻿@using Dominio
+@using Microsoft.AspNetCore.Http;
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1>Crear Reseña</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @if (ViewBag.mensaje != null)
+            {
+                <div class="alert alert-warning">
+                    <div>
+                        @ViewBag.Mensaje
+                    </div>
+                </div>
+            }
+            <form class="form" method="post">
+                <div class="form-group">
+                    <label for="txtTitulo">Título</label>
+                    <input id="txtTitulo" class="form-control" name="titulo" type="text" placeholder="Partido emocionante" required />
+                </div>
+                <div class="form-group">
+                    <label for="txtContenido">Contenido</label>
+                    <textarea id="txtContenido" class="form-control" name="contenido" rows="10" cols="50" placeholder="Descripción del partido" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="txtPartido">Partido</label>
+                    <select id="txtPartido" name="partidoId" class="form-control" required>
+                        <option value="-1">Seleccione un partido</option>
+                        @foreach (Partido p in Administradora.Instance.Partidos)
+                        {
+                            <option value="@p.Id">@p.TituloToString()</option>
+                        }
+                    </select>
+                </div>
+                <input type="hidden" name="periodistaId" value="@Context.Session.GetString("Id")" />
+                <button type="submit" class="btn btn-primary">Crear</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -18,15 +18,17 @@ namespace webApp.Controllers
             return View(manager.Partidos);
         }
         [HttpGet]
-        public IActionResult AltaJugador()
+        public IActionResult PartidosCerrados()
         {
-            return View();
+            return View(Partido.GetPartidosFinalizados());
         }
         [HttpPost]
-        public IActionResult AltaJugador(Partido p)
+        public IActionResult Index(string filter)
         {
-            if (p.Validar()) manager.Partidos.Add(p);
-            return RedirectToAction("Index");
+            string retVal = "Index";
+            if (filter == "0") retVal = "PartidosCerrados";
+
+            return RedirectToAction(retVal);
         }
     }
 }

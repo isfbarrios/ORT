@@ -24,18 +24,12 @@ namespace Dominio
             this.codigo = codigo;
         }
         //Funcionalidades
-
-        /// <summary>
-        /// Genera el alta del Pais en el sistema.
-        /// </summary>
         public static void AltaPais(Pais pais)
         {
             //Si código tiene tres caracteres y al menos uno, lo guardo.
             if (pais.Validar()) Administradora.Instance.Paises.Add(pais);
         }
-        /// <summary>
-        /// Retorna el Pais correspondiente mediante su nombre.
-        /// </summary>
+
         public static Pais GetPais(string nombre)
         {
             foreach (Pais pais in Administradora.Instance.Paises)
@@ -44,13 +38,9 @@ namespace Dominio
             }
             return null;
         }
-        /// <summary>
-        /// Retorna el objecto en formato string.
-        /// </summary>
+
         public override string ToString() => ($"País {this.Nombre} [{this.Codigo}");
-        /// <summary>
-        /// Valida que el objeto tenga nombre y código valido.
-        /// </summary>
+
         public bool Validar() => (this.Nombre.Length > 0 && this.Codigo.Length == 3);
 
         //Getters y Setters

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Resena
+    public class Resena : IValidar
     {
         //Atributos
         private static int autoIncrementId;
@@ -29,19 +29,22 @@ namespace Dominio
             this.titulo = titulo;
             this.contenido = contenido;
         }
-        
+
         //Funcionalidades
 
-        public static bool AltaResena(Resena resena)
+        public static bool CrearResena(Periodista periodista, string titulo, string contenido, Partido partido)
         {
             bool retVal = false;
-            if (resena.Id != 0)
+            Resena resena = new Resena(periodista, partido, titulo, contenido);
+
+            if (resena.Validar())
             {
+                periodista.ListaResenas.Add(resena);
                 Administradora.Instance.Resenas.Add(resena);
-                retVal = true;
             }
             return retVal;
         }
+
         public static List<Resena> GetResenas(Periodista periodista)
         {
             List<Resena> retVal = new List<Resena>();
@@ -61,9 +64,11 @@ namespace Dominio
             return retVal;
         }
         public override string ToString() => ($"Nombre {this.Periodista.Nombre} {this.Titulo} - Mail {this.Contenido}");
-        
+
+        public bool Validar() => partido != null && partido.Finalizado && titulo.Length > 0 && contenido.Length > 0;
+
         //Getters & Setters
-        
+
         public int Id { get { return this.id; } }
         public Periodista Periodista { get { return this.periodista; } set { this.periodista = value; } }
         public Partido Partido { get { return this.partido; } set { this.partido = value; } }

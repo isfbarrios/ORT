@@ -32,27 +32,23 @@ namespace Dominio
             this.incidentes = new List<Incidente>();
         }
         //Funcionalidades
-        /// <summary>
-        /// Retorna el partido con más goles, disputado por una seleccion determinada.
-        /// </summary>
-        public Partido GetPartidos(Seleccion seleccion)
-        {
-            int golesPartido = 0;
-            Partido retPartido = null;
-            foreach (Partido partido in Administradora.Instance.Partidos)
-            {
-                //Si el partido actual tuvo a esta selección como local o visitante, entro.
-                if (seleccion.JugadoPorEstaSeleccion(partido))
-                {
-                    int aux = TotalGolesPartido(partido, seleccion);
-                    if (aux >= golesPartido) golesPartido = aux;
-                }
-            }
-            return retPartido;
-        }
-        /// <summary>
-        /// Retorna el objeto correspondiente al id especificado.
-        /// </summary>
+
+        //public Partido GetPartidos(Seleccion seleccion)
+        //{
+        //    int golesPartido = 0;
+        //    Partido retPartido = null;
+        //    foreach (Partido partido in Administradora.Instance.Partidos)
+        //    {
+        //        //Si el partido actual tuvo a esta selección como local o visitante, entro.
+        //        if (seleccion.JugadoPorEstaSeleccion(partido))
+        //        {
+        //            int aux = TotalGolesPartido(partido, seleccion);
+        //            if (aux >= golesPartido) golesPartido = aux;
+        //        }
+        //    }
+        //    return retPartido;
+        //}
+
         public static Partido GetPartido(int id)
         {
             Partido retVal = null;
@@ -62,12 +58,10 @@ namespace Dominio
             }
             return retVal;
         }
-        /// <summary>
-        /// Retorna el listado de partidos disputados por un jugador determinado.
-        /// </summary>
+
         public List<Partido> GetPartidos(Jugador jugador)
         {
-            List<Partido> jugadorPartidos = new List<Partido>();
+            List<Partido> retVal = new List<Partido>();
 
             foreach (Partido partido in Administradora.Instance.Partidos)
             {
@@ -75,14 +69,23 @@ namespace Dominio
 
                 foreach (Jugador jPartido in jugadores)
                 {
-                    if (jPartido.Equals(jugador)) jugadorPartidos.Add(partido);
+                    if (jPartido.Equals(jugador)) retVal.Add(partido);
                 }
             }
-            return jugadorPartidos;
+            return retVal;
         }
-        /// <summary>
-        /// Retorna el total de goles de una seleccion, para un partido determinado.
-        /// </summary>
+
+        public static List<Partido> GetPartidosFinalizados()
+        {
+            List<Partido> retVal = new List<Partido>();
+
+            foreach (Partido partido in Administradora.Instance.Partidos)
+            {
+                if (partido.Finalizado) retVal.Add(partido);
+            }
+            return retVal;
+        }
+
         public int TotalGolesPartido(Partido partido, Seleccion seleccion)
         {
             int retVal = 0;
@@ -92,7 +95,8 @@ namespace Dominio
             {
                 //Valido que el jugador iterado corresponda a la seleccion que quiero validar.
                 //Si lo es, valido que tenga incidencias de gol y acumulo el resultado.
-                if (seleccion.JugadorDeSeleccion(jugador)) retVal += Incidente.TotalIncidenciasPartido(partido).Count;
+                if (seleccion.JugadorDeSeleccion(jugador)) 
+                    retVal += Incidente.TotalIncidenciasPartido(partido).Count;
             }
             return retVal;
         }
@@ -104,17 +108,11 @@ namespace Dominio
             if (this.Fecha >= dateFrom && this.Fecha <= dateTo)  retVal = true;
             return retVal;
         }
-        /// <summary>
-        /// Retorna el objecto en formato string.
-        /// </summary>
+
         public abstract override string ToString();
-        /// <summary>
-        /// Dispara el evento de finalizaci'on de un partido.
-        /// </summary>
+
         public abstract bool FinalizarPartido();
-        /// <summary>
-        /// Retorna el listado de incidencias tipo Gol ocurridas en un partido determinado.
-        /// </summary>
+
         public List<Incidente> GetIncidentesDeGol()
         {
             List<Incidente> retVal = new List<Incidente>();
@@ -125,23 +123,15 @@ namespace Dominio
             }
             return retVal;
         }
-        /// <summary>
-        /// Recorre las incidencias de Gol de un partido.
-        /// Retorna un valor númerico dependiendo si el ganador fue el equipo local (-1), empate (0) o si el ganador fue el equipo visitante (1).
-        /// </summary>
+        
         public abstract int CalcularResultado();
-        /// <summary>
-        /// Retorna el resultado del partido.
-        /// </summary>
+        
         public abstract string ExpresarResultado();
-        /// <summary>
-        /// Retorna el objecto en formato string.
-        /// </summary>
+       
         public string TituloToString() => this.Local.Pais.Nombre + " vs " + this.Visitante.Pais.Nombre;
-        /// <summary>
-        /// Retorna TRUE si el partido cumple con la condicion de tener Selecciones validas para Local y Visitante.
-        /// </summary>
+
         public bool Validar() => (this.Local.Validar() && this.Visitante.Validar());
+        
         //Getters & Setters
         public int Id { get { return this.id; } }
         public Seleccion Local { get { return this.local; } set { this.local = value; } }

@@ -40,16 +40,11 @@ namespace Dominio
             this.posicion = posicion;
         }
 
-        /// <summary>
-        /// Genera el alta del Jugador en el sistema.
-        /// </summary>
         public static void AltaJugador(Jugador jugador)
         {
                 if (jugador.Validar()) Administradora.Instance.Jugadores.Add(jugador);
         }
-        /// <summary>
-        /// Retorna el listado de jugadores con al menos una expulsión.
-        /// </summary>
+
         public static List<Jugador> GetJugadoresExpulsados()
         {
             List<Jugador> jugadorIncidentes = new List<Jugador>();
@@ -62,9 +57,7 @@ namespace Dominio
             jugadorIncidentes.Sort();
             return jugadorIncidentes;
         }
-        /// <summary>
-        /// Retorna un jugador según el Id especificado.
-        /// </summary>
+
         public static Jugador GetJugador(int id = 0)
         {
             Jugador jugador = new Jugador();
@@ -79,18 +72,12 @@ namespace Dominio
             }
             return jugador;
         }
-        /// <summary>
-        /// Retorna el objecto en formato string.
-        /// </summary>
+
         public override string ToString() => ($"Nombre {this.Nombre} [{this.Pais.Codigo}]. Camiseta {this.NumeroCamiseta} - Posición {this.Posicion}");
-        /// <summary>
-        /// Retorna TRUE si el objeto es valido.
-        /// </summary>
-        public bool Validar() => (this.Nombre.Length > 0 && this.Nombre.IndexOf(" ") > -1 && this.NumeroCamiseta.Length > 0 && this.NumeroCamiseta.Length > 0
+
+        public bool Validar() => (this.Nombre.Length > 0  && this.NumeroCamiseta.Length > 0 && this.NumeroCamiseta.Length > 0
                 && DateTime.Now.ToString("yyyy-MM-dd").Length == this.FechaNacimiento.ToString("dd-MM-yyyy").Length && this.AlturaCM > 0);
-        /// <summary>
-        /// Retorna el listado de jugadores que disputaron un determinado partido.
-        /// </summary>
+
         public static List<Jugador> TotalJugadoresPartido(Partido partido)
         {
             List<Jugador> jugadores = new List<Jugador>();
@@ -100,14 +87,9 @@ namespace Dominio
 
             return jugadores;
         }
-        /// <summary>
-        /// Retorna la categoria correspondiente al valor de mercado del jugador.
-        /// </summary>
+
         public TipoCategoria GetCategoria() => Categoria.AsignarCategoria(this);
-        /// <summary>
-        /// Define el tipo de ordenamiento que tendrá esta clase.<para/>
-        /// Primero se ordena por valor de mercado (descebdebte), en caso de coincidir, alfabeticamente (ascendente).
-        /// </summary>
+
         public int CompareTo([AllowNull] Jugador other)
         {
             int i = other.ValorMercado.CompareTo(this.ValorMercado);
@@ -115,9 +97,7 @@ namespace Dominio
             if (i == 0) i = this.Nombre.CompareTo(other.Nombre);
             return i;
         }
-        /// <summary>
-        /// Retorna el listado de partidos en los que participó un jugador determinado.
-        /// </summary>
+
         public static List<Partido> GetPartidos(Jugador jugador)
         {
             List<Partido> partidosJugados = new List<Partido>();

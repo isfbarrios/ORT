@@ -30,8 +30,6 @@ namespace webApp.Controllers
         [HttpGet]
         public IActionResult Expulsados()
         {
-            List<Incidente> incidentes = manager.Incidentes;
-            List<Jugador> expulsados = Jugador.GetJugadoresExpulsados();
             return View(Jugador.GetJugadoresExpulsados());
         }
     }

@@ -1,10 +1,10 @@
 ﻿@using Dominio
-@model List<Resena>
+@model Periodista
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 col-sm-10">
-            <h1>Periodistas</h1>
+            <h1>Perfil de usuario</h1>
         </div>
     </div>
     <div class="row">
@@ -21,37 +21,13 @@
     </div>
     <div class="row">
         <div class="col-12 col-sm-10">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Fecha</th>
-                        <th>Partido</th>
-                        <th>Título</th>
-                        <th>Ver contenido</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (Resena r in Model)
-                    {
-                        <tr>
-                            <td>@r.Id</td>
-                            <td>@r.Fecha.ToShortDateString()</td>
-                            <td>
-
-                                <a class="btn btn-link" href="~/Partido/Partido/@r.Partido.Id">
-                                    <span>@r.Partido.TituloToString()</span>
-                                </a>
-                            </td>
-                            <td>
-                                <a class="btn btn-info p-1" href="~/Resena/Resena/@r.Id">
-                                    <i class="fas fa-info"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+            <span class="name">@Model.Nombre @Model.Apellido</span>
+        </div>
+        <div class="col-12 col-sm-10">
+            <span class="mail">@Model.Mail</span>
+        </div>
+        <div class="col-12 col-sm-10">
+            <span class="name">@Model.Nombre @Model.Apellido</span>
         </div>
     </div>
 </div>

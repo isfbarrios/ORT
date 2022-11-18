@@ -1,54 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Dominio
 {
-    public class Operador
+    public class Operador : Usuario
     {
-        //nombre, apellido, email, contraseña y fecha en que comenzó a trabajar
-        private static int autoIncrementId;
-        private int id;
-        private string nombre;
-        private string apellido;
-        private string mail;
-        private string password;
+        //Atributos
         private DateTime fechaIngreso;
 
         //Constructores
-        public Operador()
+        public Operador() : base() { }
+
+        public Operador(string nombre, string apellido, string mail, 
+            string password, DateTime fechaIngreso) : base(nombre, apellido, mail, password)
         {
-            this.id = ++autoIncrementId;
-        }
-        public Operador(string nombre, string apellido, string mail, string password, DateTime fechaIngreso)
-        {
-            this.id = ++autoIncrementId;
-            this.nombre = nombre;
-            this.apellido = apellido;
-            this.mail = mail;
-            this.password = password;
             this.fechaIngreso = fechaIngreso;
         }
         //Funcionalidades
-
-        /// <summary>
-        /// Retorna el Periodista según el nombre. Si no existe, retorna Null.
-        /// </summary>
         public static Periodista GetPeriodista(String nombre)
         {
             Periodista retVal = null;
-            foreach (Periodista p in Administradora.Instance.Periodistas)
+            foreach (Periodista p in Administradora.Instance.Usuarios)
             {
                 if (p.Nombre == nombre) retVal = p;
             }
             return retVal;
         }
+
+        public static Usuario GetOperador(string nombre)
+        {
+            Operador retVal = null;
+            foreach (Operador p in Administradora.Instance.Usuarios)
+            {
+                if (p.Nombre == nombre) retVal = p;
+            }
+            return retVal;
+        }
+
+        public override string GetUserType() => "Operador";
+
+        public override string ToString() => ($"Nombre {this.Nombre} {this.Apellido} - Mail {this.Mail}");
+
         //Getters & Setters
-        public int Id { get { return this.id; } }
-        public string Nombre { get { return this.nombre; } set { this.nombre = value; } }
-        public string Apellido { get { return this.apellido; } set { this.apellido = value; } }
-        public string Mail { get { return this.mail; } set { this.mail = value; } }
-        public string Password { get { return this.password; } set { this.password = value; } }
         public DateTime FechaIngreso { get { return this.fechaIngreso; } set { this.fechaIngreso = value; } }
     }
 }
