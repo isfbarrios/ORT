@@ -32,6 +32,7 @@
                         <th>Fecha</th>
                         <th>Resultado</th>
                         <th>Incidentes</th>
+                        <th>Finalizar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,8 +46,22 @@
                             <td>@p.Resultado</td>
                             <td>
                                 <a class="btn btn-link p-1" href="~/Incidente/IncidentePartido/@p.Id">
-                                    <span class="text">Ver incidentes</span>
+                                    <span class="text">Ver</span>
                                 </a>
+                            </td>
+                            <td>
+                                @if (!p.Finalizado)
+                                {
+                                    <form class="form-inline" method="post" action="~/Partido/Finalizar/">
+                                        <input class="form-group" type="hidden" name="id" value="@p.Id" />
+                                        <button class="btn btn-link p-1" type="submit">Finalizar</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <span class="text">Finalizado</span>
+                                }
+
                             </td>
                         </tr>
                     }

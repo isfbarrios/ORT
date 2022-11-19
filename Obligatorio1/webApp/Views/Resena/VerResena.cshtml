@@ -1,0 +1,29 @@
+﻿@using Dominio
+@model Resena
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-sm-10">
+            <h1>@Model.Titulo [@Model.Partido.TituloToString()]</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-10">
+            @if (ViewBag.mensaje != null)
+            {
+                <div class="alert alert-warning">
+                    <div>
+                        @ViewBag.Mensaje
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-10 my-3">
+            <p class="name">@Model.Contenido</p>
+        </div>
+    </div>
+</div>
+
+

@@ -39,6 +39,7 @@ namespace Dominio
 
             if (resena.Validar())
             {
+                retVal = true;
                 periodista.ListaResenas.Add(resena);
                 Administradora.Instance.Resenas.Add(resena);
             }

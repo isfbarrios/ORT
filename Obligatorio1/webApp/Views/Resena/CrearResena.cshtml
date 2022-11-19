@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                     <label for="txtContenido">Contenido</label>
-                    <textarea id="txtContenido" class="form-control" name="contenido" rows="10" cols="50" placeholder="Descripción del partido" required></textarea>
+                    <textarea id="txtContenido" class="form-control" name="contenido" rows="5" cols="30" placeholder="Descripción del partido" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="txtPartido">Partido</label>
@@ -32,7 +32,10 @@
                         <option value="-1">Seleccione un partido</option>
                         @foreach (Partido p in Administradora.Instance.Partidos)
                         {
-                            <option value="@p.Id">@p.TituloToString()</option>
+                            @if (p.Finalizado)
+                            {
+                                <option value="@p.Id">@p.TituloToString()</option>
+                            }
                         }
                     </select>
                 </div>

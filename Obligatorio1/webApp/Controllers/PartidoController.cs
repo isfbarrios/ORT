@@ -30,5 +30,15 @@ namespace webApp.Controllers
 
             return RedirectToAction(retVal);
         }
+        [HttpPost]
+        public IActionResult Finalizar(string id)
+        {
+            string retVal = "No se pudo finalizar el partido. Intente nuevamente";
+            Partido p = Partido.GetPartido(int.Parse(id));
+
+            if (p.FinalizarPartido()) retVal = "Se finalizo el partido correctamente.";
+            
+            return RedirectToAction("index", new { mensaje = retVal });
+        }
     }
 }

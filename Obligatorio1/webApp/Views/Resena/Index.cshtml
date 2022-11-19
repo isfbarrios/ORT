@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-sm-10">
+        <div class="col-12 col-sm-10 my-3 mx-1">
             <a href="~/Resena/CrearResena" class="btn btn-info">Crear reseña</a>
         </div>
     </div>
@@ -31,9 +31,9 @@
                     <tr>
                         <th>#</th>
                         <th>Fecha</th>
-                        <th>Partido</th>
                         <th>Título</th>
-                        <th>Ver contenido</th>
+                        <th>Partido</th>
+                        <th>Contenido</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,15 +42,16 @@
                         <tr>
                             <td>@r.Id</td>
                             <td>@r.Fecha.ToShortDateString()</td>
+                            <td>@r.Titulo</td>
                             <td>
 
-                                <a class="btn btn-link" href="~/Partido/Partido/@r.Partido.Id">
+                                <a href="~/Partido/Partido/@r.Partido.Id">
                                     <span>@r.Partido.TituloToString()</span>
                                 </a>
                             </td>
                             <td>
-                                <a class="btn btn-info p-1" href="~/Resena/Resena/@r.Id">
-                                    <i class="fas fa-info"></i>
+                                <a href="~/Resena/VerResena/@r.Id">
+                                    <span>Ver</span>
                                 </a>
                             </td>
                         </tr>

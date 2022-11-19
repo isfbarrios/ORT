@@ -42,10 +42,19 @@ namespace webApp.Controllers
             Periodista periodista = (Periodista)Usuario.GetUserById(int.Parse(periodistaId));
             Partido partido = Partido.GetPartido(int.Parse(partidoId));
 
-            if (partido != null && periodista != null) retVal = Resena.CrearResena(periodista, titulo, contenido, partido);
+            if (periodista != null) retVal = Resena.CrearResena(periodista, titulo, contenido, partido);
             
             return RedirectToAction( (retVal ? "index" : "CrearResena"), 
-                new { mensaje = (retVal ? "Reseña creada correctamente." : "No se pudo crear la reseña. Intente nuevamente.") });
+                new { mensaje = (retVal ? "Reseña creada correctamente." 
+                : "No se pudo crear la reseña. Intente nuevamente.") });
+        }
+
+        [HttpGet]
+        public IActionResult VerResena(string id, string mensaje)
+        {
+            Resena r = Resena.GetResena(int.Parse(id));
+            ViewBag.Mensaje = mensaje;
+            return View(r);
         }
     }
 }
