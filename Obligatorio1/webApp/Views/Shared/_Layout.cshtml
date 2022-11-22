@@ -1,12 +1,17 @@
 ﻿@using Microsoft.AspNetCore.Http;
+
+@{
+    bool isOperador = (Context.Session.GetString("Rol") == "Operador");
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - webApp</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" 
-          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
@@ -24,9 +29,12 @@
                     <ul class="navbar-nav flex-grow-1 justify-content-end">
                         @if (Context.Session.GetString("Nombre") != null)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Periodista" asp-action="Index">Periodista</a>
-                            </li>
+                            @if (isOperador)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Periodista" asp-action="Index">Periodista</a>
+                                </li>
+                            }
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Jugador" asp-action="Index">Jugadores</a>
                             </li>

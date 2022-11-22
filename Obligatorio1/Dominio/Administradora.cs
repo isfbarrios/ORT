@@ -1005,34 +1005,39 @@ namespace Dominio
             Pais.AltaPais(new Pais("Gales", "WLS"));
             Pais.AltaPais(new Pais("Australia", "AUS"));
             Pais.AltaPais(new Pais("Costa Rica", "CRI"));
+
+            Administradora.Instance.Paises.Sort();
         }
         public static void PreLoadPeriodistas()
         {
             Periodista.AltaPeriodista(new Periodista("Fabricio", "Barrios", "fabriciobarrios@gmail.com", "nosoyreal1"));
             Periodista.AltaPeriodista(new Periodista("Federico", "Barrios", "federicobarrios@gmail.com", "nosoyreal2"));
             Periodista.AltaPeriodista(new Periodista("Fernando", "Barrios", "fernandobarrios@gmail.com", "nosoyreal3"));
+
+            Operador.AltaOperador(new Operador("Francisco", "Barrios", "franciscobarrios@gmail.com", "nosoyreal4", RandomDate()));
+            Operador.AltaOperador(new Operador("Franco", "Barrios", "francobarrios@gmail.com", "nosoyreal5", RandomDate()));
         }
-        
+
         public static void PreLoadPartidos()
         {
             //Partidos de fase de grupos
             //Grupo A - Ganadores Selecciones[0] y Selecciones[3]
-            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[1], RandomDate(), Grupo.A));
-            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[2], RandomDate(), Grupo.A));
-            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[3], RandomDate(), Grupo.A));
-            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[1], Administradora.Instance.Selecciones[2], RandomDate(), Grupo.A));
-            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[1], Administradora.Instance.Selecciones[3], RandomDate(), Grupo.A));
-            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[2], Administradora.Instance.Selecciones[3], RandomDate(), Grupo.A));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[8], Administradora.Instance.Selecciones[0], RandomDate(), Grupo.A));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[8], Administradora.Instance.Selecciones[12], RandomDate(), Grupo.A));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[8], Administradora.Instance.Selecciones[5], RandomDate(), Grupo.A));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[12], RandomDate(), Grupo.A));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[5], RandomDate(), Grupo.A));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[12], Administradora.Instance.Selecciones[5], RandomDate(), Grupo.A));
             //Grupo B - Ganadores Selecciones[4] y Selecciones[7]
-            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[5], RandomDate(), Grupo.B));
-            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[6], RandomDate(), Grupo.B));
-            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[7], RandomDate(), Grupo.B));
-            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[5], Administradora.Instance.Selecciones[6], RandomDate(), Grupo.B));
-            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[5], Administradora.Instance.Selecciones[7], RandomDate(), Grupo.B));
-            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[6], Administradora.Instance.Selecciones[7], RandomDate(), Grupo.B));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[16], Administradora.Instance.Selecciones[4], RandomDate(), Grupo.B));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[16], Administradora.Instance.Selecciones[11], RandomDate(), Grupo.B));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[16], Administradora.Instance.Selecciones[14], RandomDate(), Grupo.B));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[11], RandomDate(), Grupo.B));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[14], RandomDate(), Grupo.B));
+            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[11], Administradora.Instance.Selecciones[14], RandomDate(), Grupo.B));
             //Partidos de eliminatorias
-            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[0], Administradora.Instance.Selecciones[7], RandomDate(), Grupo.C));
-            FaseGrupos.AltaPartido(new FaseGrupos(Administradora.Instance.Selecciones[4], Administradora.Instance.Selecciones[3], RandomDate(), Grupo.C));
+            FaseEliminatoria.AltaPartido(new FaseEliminatoria(Administradora.Instance.Selecciones[8], Administradora.Instance.Selecciones[14], RandomDate(), Etapa.OCTAVOS));
+            FaseEliminatoria.AltaPartido(new FaseEliminatoria(Administradora.Instance.Selecciones[16], Administradora.Instance.Selecciones[5], RandomDate(), Etapa.OCTAVOS));
         }
         
         public static void PreLoadIncidentes()
@@ -1121,6 +1126,11 @@ namespace Dominio
                 //foreach (Jugador j in jugadores) nuevaSeleccion.Jugadores.Add(j);
                 Seleccion.AltaSeleccion(nuevaSeleccion);
             }
+        }
+
+        public static void PreLoadResenas()
+        {
+            //Resena.CrearResena(Administradora.Instance.Usuarios[0], "");
         }
     }
 }

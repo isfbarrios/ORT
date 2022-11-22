@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Dominio
 {
-    public class Pais : IValidar
+    public class Pais : IComparable<Pais>, IValidar
     {
         //Atributos
         private static int autoIncrementId;
@@ -39,9 +40,14 @@ namespace Dominio
             return null;
         }
 
-        public override string ToString() => ($"País {this.Nombre} [{this.Codigo}");
+        public override string ToString() => ($"{this.Nombre} [{this.Codigo}");
 
         public bool Validar() => (this.Nombre.Length > 0 && this.Codigo.Length == 3);
+
+        public int CompareTo([AllowNull] Pais other)
+        {
+            return this.Nombre.CompareTo(other.Nombre);
+        }
 
         //Getters y Setters
         public int Id { get; }

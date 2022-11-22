@@ -1,5 +1,10 @@
 ﻿@using Dominio
+@using Microsoft.AspNetCore.Http
 @model List<Partido>
+
+@{ 
+    bool isOperador = (Context.Session.GetString("Rol") == "Operador");
+}
 
 <div class="container-fluid">
     <div class="row">
@@ -11,6 +16,14 @@
         <div class="col-12 col-sm-10">
             <div class="form-content">
                 <form class="form-inline" method="post">
+                    <div class="form-group m-2">
+                        <label for="txtFiltro">Fecha desde</label>
+                        <input type="date" name="dateFrom" class="form-group" />
+                    </div>
+                    <div class="form-group m-2">
+                        <label for="txtFiltro">Fecha hasta</label>
+                        <input type="date" name="dateTo" class="form-group" />
+                    </div>
                     <div class="form-group m-2">
                         <label for="txtFiltro">Tipo de filtro</label>
                         <select id="txtFiltro" name="filter" class="form-control">
@@ -32,28 +45,34 @@
                         <th>Fecha</th>
                         <th>Resultado</th>
                         <th>Incidentes</th>
-                        <th>Finalizar</th>
+                        @if (isOperador)
+                        {
+                            <th>Finalizar</th>
+                        }
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (Partido p in Model)
                     {
-                        <tr>
-                            <td>@p.Id</td>
-                            <td>@p.Local</td>
-                            <td>@p.Visitante</td>
-                            <td>@p.Fecha.ToShortDateString()</td>
-                            <td>@p.Resultado</td>
-                            <td>
-                                <a class="btn btn-link p-1" href="~/Incidente/IncidentePartido/@p.Id">
-                                    <span class="text">Ver</span>
-                                </a>
-                            </td>
+                    <tr>
+                        <td>@p.Id</td>
+                        <td>@p.Local</td>
+                        <td>@p.Visitante</td>
+                        <td>@p.Fecha.ToShortDateString()</td>
+                        <td>@p.Resultado</td>
+                        <td>
+                            <a class="btn btn-link p-1" href="~/Incidente/IncidentePartido/@p.Id">
+                                <span class="text">Ver</span>
+                            </a>
+                        </td>
+                        @if (isOperador)
+                        {
                             <td>
                                 @if (!p.Finalizado)
                                 {
                                     <form class="form-inline" method="post" action="~/Partido/Finalizar/">
                                         <input class="form-group" type="hidden" name="id" value="@p.Id" />
+                                        <input class="form-group" type="hidden" name="viewReturn" value="VerPartido" />
                                         <button class="btn btn-link p-1" type="submit">Finalizar</button>
                                     </form>
                                 }
@@ -63,7 +82,8 @@
                                 }
 
                             </td>
-                        </tr>
+                        }
+                    </tr>
                     }
                 </tbody>
             </table>

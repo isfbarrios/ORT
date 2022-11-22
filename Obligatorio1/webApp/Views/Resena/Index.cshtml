@@ -37,24 +37,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Resena r in Model)
+                    @if (Model.Count == 0)
                     {
-                        <tr>
-                            <td>@r.Id</td>
-                            <td>@r.Fecha.ToShortDateString()</td>
-                            <td>@r.Titulo</td>
-                            <td>
-
-                                <a href="~/Partido/Partido/@r.Partido.Id">
-                                    <span>@r.Partido.TituloToString()</span>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="~/Resena/VerResena/@r.Id">
-                                    <span>Ver</span>
-                                </a>
-                            </td>
-                        </tr>
+                        <tr><td class="text-center" colspan="5"><span>Aún no hay reseñas para mostrar.</span></td></tr>
+                    }
+                    else
+                    {
+                        @foreach (Resena r in Model)
+                        {
+                            <tr>
+                                <td>@r.Id</td>
+                                <td>@r.Fecha.ToShortDateString()</td>
+                                <td>@r.Titulo</td>
+                                <td>
+                                    <a href="~/Partido/VerPartido/@r.Partido.Id">
+                                        <span>@r.Partido.TituloToString()</span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="~/Resena/VerResena/@r.Id">
+                                        <span>Ver</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>

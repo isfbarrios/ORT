@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Dominio
 {
-    public class Incidente : IValidar
+    public class Incidente : IComparable<Incidente>, IValidar
     {
         //Atributos
         private static int autoIncrementId;
@@ -50,20 +51,23 @@ namespace Dominio
         public static bool EsTarjetaRoja(Incidente incidente) => (incidente.TipoIncidente.Equals(TipoIncidente.TARJETA_ROJA));
         public static bool EsTarjetaAmarilla(Incidente incidente) => (incidente.TipoIncidente.Equals(TipoIncidente.TARJETA_AMARILLA));
         public static bool EsGol(Incidente incidente) => (incidente.TipoIncidente.Equals(TipoIncidente.GOL));
+        
         /// <summary>
-        /// Retorna el total de incidencias, de un determinado tipo en un partido.
+        /// Retorna el total de incidencias de un determinado tipo, en un partido.
         /// </summary>
         public static List<Incidente> TotalIncidenciasPartido(Partido partido, TipoIncidente tipoIncidente = TipoIncidente.GOL)
         {
             List<Incidente> retVal = new List<Incidente>();
             //Recorro el listado de incidencias del partido
-            foreach (Incidente incidente in Administradora.Instance.Incidentes)
+            foreach (Incidente incidente in TotalIncidenciasPartido(partido))
             {
                 //Valido que el incidente coincida con el recibido por parámetro.
-                if (incidente.TipoIncidente.Equals(tipoIncidente)) retVal.Add(incidente); //Si lo es, agrego la incidencia
+                if (incidente.TipoIncidente.Equals(tipoIncidente)) retVal.Add(incidente);
             }
             return retVal;
         }
+
+
         /// <summary>
         /// Retorna el listado de incidencias sobre un jugador ocurridas en un partido determinado.
         /// </summary>
@@ -91,7 +95,8 @@ namespace Dominio
             return retVal;
         }
         
-        public override string ToString() => $"Jugador {this.Jugador.Nombre} {this.TipoIncidente.ToString()}" + (this.Minuto > -1 ? $" - Minuto {this.Minuto}'" : "");
+        public override string ToString() => $"Jugador {this.Jugador.Nombre} " +
+            $"{this.TipoIncidente.ToString()}" + (this.Minuto > -1 ? $" - Minuto {this.Minuto}'" : "");
 
         /// <summary>
         /// Retorna TRUE si la incidencia del objeto es valida según las condiciones planteadas.<para/>
@@ -117,6 +122,8 @@ namespace Dominio
 
             return retVal;
         }
+
+        public int CompareTo([AllowNull] Incidente other) => this.Minuto.CompareTo(other.Minuto);
 
         //Getters && Setters
         public int Id { get { return this.id; } }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,10 @@ namespace webApp.Controllers
         [HttpGet]
         public IActionResult Index(string mensaje)
         {
+            Periodista periodista = (Periodista)Periodista.GetUserById(int.Parse(HttpContext.Session.GetString("Id")));
             ViewBag.Mensaje = mensaje;
-            return View(manager.Resenas);
+            
+            return View(Resena.GetResenas(periodista));
         }
 
         [HttpPost]

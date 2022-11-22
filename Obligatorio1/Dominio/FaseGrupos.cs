@@ -19,15 +19,10 @@ namespace Dominio
 
         //Funcionalidad
 
-        /// <summary>
-        /// Retorna el objecto en formato string.
-        /// </summary>
         public override string ToString() => ($"Partido Nº {this.Id}. Grupo {this.Grupo}.\n" +
             $"Fecha {this.Fecha}.\n" +
             $"(Local) {this.Local.Pais.Nombre} vs (Visitante) {this.Visitante.Pais.Nombre}.");
-        /// <summary>
-        /// Dispara el evento de finalizaci'on de un partido. Retorna True si la acción resulta exitosa.
-        /// </summary>
+
         public override bool FinalizarPartido() 
         {
             bool retVal = false;
@@ -60,9 +55,7 @@ namespace Dominio
             }
             return (local > visitante ? -1 : (local == visitante ? 0 : 1));
         }
-        /// <summary>
-        /// Retorna el resultado del partido.
-        /// </summary>
+
         public override string ExpresarResultado()
         {
             string retVal = this.Resultado == Resultado.EMPATE ? "Empate" : "Ganador: ";
@@ -80,6 +73,9 @@ namespace Dominio
             }
             return retVal;
         }
+        public override string GetPartidoType() => "Grupos";
+
+        public override string GetFase() => this.Grupo.ToString();
 
         //Getters & Setters
         public Grupo Grupo { get { return this.grupo; } set { this.grupo = value; } }

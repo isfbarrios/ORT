@@ -1,44 +1,63 @@
 ﻿@using Dominio
+@using Microsoft.AspNetCore.Http
 @model Partido
 
+@{
+    string viewReturn = "VerPartido";
+    bool isOperador = (Context.Session.GetString("Rol") == "Operador");
+
+    List<Incidente> incidentesLoc = new List<Incidente>();
+    List<Incidente> incidentesVis = new List<Incidente>();
+
+    foreach (Incidente i in Model.Incidentes)
+    {
+        //Valido si el jugador del incidente corrresponde al equipo Local o visitante.
+        if (Model.Local.JugadorDeSeleccion(i.Jugador)) incidentesLoc.Add(i);
+        else incidentesVis.Add(i);
+    }
+
+    incidentesLoc.Sort();
+    incidentesVis.Sort();
+}
+
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12 col-sm-10">
+    <div class="row my-2">
+        <div class="col-12 col-sm-12">
             <h1>@Model.TituloToString()</h1>
         </div>
     </div>
-    <div class="row">
-        @if (!Model.Finalizado)
+    <div class="row my-2">
+        @if (isOperador && !Model.Finalizado)
         {
-            <div class="col-12 col-sm-10">
+            <div class="col-12 col-sm-12">
                 <div class="form-content">
                     <form class="form-inline" method="post" action="~/Partido/Finalizar/">
+                        <input class="form-group" type="hidden" name="viewReturn" value="@viewReturn" />
                         <input class="form-group" type="hidden" name="id" value="@Model.Id" />
                         <button class="btn btn-link p-1" type="submit">Finalizar</button>
                     </form>
                 </div>
             </div>
         }
-        <div class="col-12 col-sm-10">
-            <a class="btn btn-link p-1" href="~/Incidente/CrearIncidente/@Model.Id">
-                <span class="text">Crear Incidente</span>
-            </a>
-        </div>
-        <div class="col-12 col-sm-10">
+        <div class="col-12 col-sm-12">
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Fase</th>
                         <th>Local</th>
                         <th>Visitante</th>
                         <th>Fecha</th>
                         <th>Resultado</th>
                         <th>Incidentes</th>
+                        <th>¿Tuvo Alargue?</th>
+                        <th>Def por penales</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>@Model.Id</td>
+                        <td>@Model.GetPartidoType()</td>
                         <td>@Model.Local</td>
                         <td>@Model.Visitante</td>
                         <td>@Model.Fecha.ToShortDateString()</td>
@@ -48,9 +67,86 @@
                                 <span class="text">Ver</span>
                             </a>
                         </td>
+                        <td>@(Model.TuvoAlargue() ? "Si" : "No")</td>
+                        <td>@(Model.TuvoPenales() ? "Si" : "No")</td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="col-12 col-sm-12">
+            <h3>@Model.ExpresarResultado()</h3>
+            <h6>
+                @if (Model.GetPartidoType() == "Eliminatoria")
+                {
+                    <span class="cont-1 d-block">Fase: @Model.GetFase()</span>
+                }
+                else
+                {
+                    <span class="cont-1 d-block">Grupo: @Model.GetFase()</span>
+                }
+            </h6>
+        </div>
+        <div class="col-12 col-sm-6 my-4">
+            <h5>@Model.Local</h5>
+            <div class="content">
+                <span class="cont-1 d-block">Goles: @Model.TotalGolesPartido(Model.Local).Count.</span>
+                <span class="cont-1 d-block">Tarjetas amarillas: @Model.TotalAmarillasPartido(Model.Local).Count.</span>
+                <span class="cont-1 d-block">Tarjetas rojas: @Model.TotalRojasPartido(Model.Local).Count.</span>
+            </div>
+            <div class="my-2">
+                <h6>Detalle:</h6>
+                @foreach (Incidente i in incidentesLoc)
+                {
+                    if (Incidente.EsTarjetaAmarilla(i))
+                    {
+                        <span class="cont-1 d-block @i.Id @i.TipoIncidente.ToString()">@i.Minuto TA. @i.Jugador.Nombre</span>
+                    }
+                    else if (Incidente.EsTarjetaRoja(i))
+                    {
+                        <span class="cont-1 d-block @i.Id @i.TipoIncidente.ToString()">@i.Minuto TR. @i.Jugador.Nombre</span>
+                    }
+                    else if (Incidente.EsGol(i))
+                    {
+                        if (i.Minuto != -1)
+                        {
+                            <span class="cont-1 d-block @i.Id @i.TipoIncidente.ToString()">@i.Minuto GOL. @i.Jugador.Nombre</span>
+                        }
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 my-4">
+            <h5>@Model.Visitante</h5>
+            <div class="content">
+                <span class="cont-1 d-block">Goles: @Model.TotalGolesPartido(Model.Visitante).Count.</span>
+                <span class="cont-1 d-block">Tarjetas amarillas: @Model.TotalAmarillasPartido(Model.Visitante).Count.</span>
+                <span class="cont-1 d-block">Tarjetas rojas: @Model.TotalRojasPartido(Model.Visitante).Count.</span>
+            </div>
+            <div class="my-2">
+                <h6>Detalle:</h6>
+                @foreach (Incidente i in incidentesVis)
+                {
+                    if (Incidente.EsTarjetaAmarilla(i))
+                    {
+                        <span class="cont-1 d-block @i.Id @i.TipoIncidente.ToString()">@i.Minuto TA. @i.Jugador.Nombre</span>
+                    }
+                    else if (Incidente.EsTarjetaRoja(i))
+                    {
+                        <span class="cont-1 d-block @i.Id @i.TipoIncidente.ToString()">@i.Minuto TR. @i.Jugador.Nombre</span>
+                    }
+                    else if (Incidente.EsGol(i))
+                    {
+                        if (i.Minuto == -1)
+                        {
+                            <span class="cont-1 d-block @i.Id @i.TipoIncidente.ToString()">@i.Minuto PP. @i.Jugador.Nombre</span>
+                        }
+                        else
+                        {
+                            <span class="cont-1 d-block @i.Id @i.TipoIncidente.ToString()">@i.Minuto GOL. @i.Jugador.Nombre</span>
+                        }
+                    }
+                }
+            </div>
         </div>
     </div>
 </div>

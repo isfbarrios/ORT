@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.WebPages;
 
 namespace Dominio
 {
-    public class Seleccion : IValidar
+    public class Seleccion : IComparable<Seleccion>, IValidar
     {
         //Atributos
         private static int autoIncrementId;
@@ -55,7 +56,7 @@ namespace Dominio
 
         public bool JugadorDeSeleccion(Jugador jugador) => (this.Pais.Equals(jugador.Pais));
 
-        public override string ToString() => ($"Nombre {this.Pais.Nombre} [{this.Pais.Codigo}]");
+        public override string ToString() => ($"{this.Pais.Nombre} [{this.Pais.Codigo}]");
 
         public static Seleccion GetSeleccion(Jugador jugador)
         {
@@ -70,6 +71,15 @@ namespace Dominio
         }
 
         public bool Validar() => (this.Pais.Validar() && this.Jugadores.Count >= 11);
+
+        public int CompareTo([AllowNull] Seleccion other)
+        {
+            int retVal = this.Pais.Nombre.CompareTo(other.Pais.Nombre);
+
+            if (retVal == 0) retVal = this.Id.CompareTo(other.Id);
+
+            return retVal;
+        }
 
         //Getters && Setters
         public int Id { get { return this.id; } }

@@ -54,9 +54,9 @@ namespace Dominio
         public bool ValidarMailUsuario(String mail)
         {
             bool retVal = false;
-            foreach (Periodista periodista in Administradora.Instance.Usuarios)
+            foreach (Usuario u in Administradora.Instance.Usuarios)
             {
-                if (mail.Equals(periodista.Mail))
+                if (mail.Equals(u.Mail))
                 {
                     retVal = true;
                     break;

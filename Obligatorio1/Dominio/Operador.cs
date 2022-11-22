@@ -39,6 +39,17 @@ namespace Dominio
             return retVal;
         }
 
+        public static bool AltaOperador(Usuario operador)
+        {
+            bool retVal = false;
+            if (operador.Validar())
+            {
+                Administradora.Instance.Usuarios.Add(operador);
+                retVal = true;
+            }
+            return retVal;
+        }
+
         public override string GetUserType() => "Operador";
 
         public override string ToString() => ($"Nombre {this.Nombre} {this.Apellido} - Mail {this.Mail}");

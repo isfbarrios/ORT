@@ -82,6 +82,10 @@ namespace Dominio
             $"Fecha {this.Fecha}.\n" +
             $"(Local) {this.Local.Pais.Nombre} vs (Visitante) {this.Visitante.Pais.Nombre}.");
 
+        public override string GetPartidoType() => "Eliminatoria";
+
+        public override string GetFase() => this.Etapa.ToString();
+
         //Getters & Setters
         public Etapa Etapa { get { return this.etapa; } set { this.etapa = value; } }
         public bool Penales { get { return this.penales; } set { this.penales = value; } }

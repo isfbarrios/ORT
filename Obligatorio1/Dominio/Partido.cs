@@ -33,22 +33,6 @@ namespace Dominio
         }
         //Funcionalidades
 
-        //public Partido GetPartidos(Seleccion seleccion)
-        //{
-        //    int golesPartido = 0;
-        //    Partido retPartido = null;
-        //    foreach (Partido partido in Administradora.Instance.Partidos)
-        //    {
-        //        //Si el partido actual tuvo a esta selección como local o visitante, entro.
-        //        if (seleccion.JugadoPorEstaSeleccion(partido))
-        //        {
-        //            int aux = TotalGolesPartido(partido, seleccion);
-        //            if (aux >= golesPartido) golesPartido = aux;
-        //        }
-        //    }
-        //    return retPartido;
-        //}
-
         public static Partido GetPartido(int id)
         {
             Partido retVal = null;
@@ -86,26 +70,76 @@ namespace Dominio
             return retVal;
         }
 
-        public int TotalGolesPartido(Partido partido, Seleccion seleccion)
+        public List<Incidente> TotalGolesPartido(Seleccion seleccion)
         {
-            int retVal = 0;
-            List<Jugador> jugadores = Jugador.TotalJugadoresPartido(partido);
-            //Recorro el listado de jugadores del partido.
-            foreach (Jugador jugador in jugadores)
+            List<Incidente> retVal = new List<Incidente>();
+
+            foreach (Incidente i in TotalIncidentesPartido(seleccion))
             {
-                //Valido que el jugador iterado corresponda a la seleccion que quiero validar.
-                //Si lo es, valido que tenga incidencias de gol y acumulo el resultado.
-                if (seleccion.JugadorDeSeleccion(jugador)) 
-                    retVal += Incidente.TotalIncidenciasPartido(partido).Count;
+                if (Incidente.EsGol(i)) retVal.Add(i);
+            }
+
+            return retVal;
+        }
+        public List<Incidente> TotalAmarillasPartido(Seleccion seleccion)
+        {
+            List<Incidente> retVal = new List<Incidente>();
+
+            foreach (Incidente i in TotalIncidentesPartido(seleccion))
+            {
+                if (Incidente.EsTarjetaAmarilla(i)) retVal.Add(i);
+            }
+
+            return retVal;
+        }
+        public List<Incidente> TotalRojasPartido(Seleccion seleccion)
+        {
+            List<Incidente> retVal = new List<Incidente>();
+
+            foreach (Incidente i in TotalIncidentesPartido(seleccion))
+            {
+                if (Incidente.EsTarjetaRoja(i)) retVal.Add(i);
+            }
+
+            return retVal;
+        }
+        public List<Incidente> TotalIncidentesPartido(Seleccion seleccion)
+        {
+            List<Incidente> retVal = new List<Incidente>();
+
+            foreach (Incidente i in Administradora.Instance.Incidentes)
+            {
+                if (i.Partido.Equals(this) && seleccion.JugadorDeSeleccion(i.Jugador)) retVal.Add(i);
+            }
+
+            return retVal;
+        }
+
+        public bool TuvoAlargue()
+        {
+            bool retVal = false;
+            foreach (Incidente i in this.Incidentes) {
+                if (i.Minuto > 90) retVal = true;
             }
             return retVal;
         }
+        public bool TuvoPenales()
+        {
+            bool retVal = false;
+            foreach (Incidente i in this.Incidentes)
+            {
+                if (i.Minuto == -1) retVal = true;
+            }
+            return retVal;
+        }
+
         private bool ValidarFechaDePartido()
         {
             bool retVal = false;
             DateTime dateFrom = Convert.ToDateTime("20/11/2022");
             DateTime dateTo = Convert.ToDateTime("18/12/2022");
             if (this.Fecha >= dateFrom && this.Fecha <= dateTo)  retVal = true;
+            
             return retVal;
         }
 
@@ -113,6 +147,7 @@ namespace Dominio
 
         public abstract bool FinalizarPartido();
 
+        public abstract string GetPartidoType();
         public List<Incidente> GetIncidentesDeGol()
         {
             List<Incidente> retVal = new List<Incidente>();
@@ -127,6 +162,8 @@ namespace Dominio
         public abstract int CalcularResultado();
         
         public abstract string ExpresarResultado();
+
+        public abstract string GetFase();
        
         public string TituloToString() => this.Local.Pais.Nombre + " vs " + this.Visitante.Pais.Nombre;
 
