@@ -62,7 +62,7 @@ namespace Dominio
         private static DateTime RandomDate()
         {
             gen = new Random();
-            return iniDate.AddDays(new Random().Next(29)).AddHours(gen.Next(0, 24)).AddMinutes(gen.Next(0, 60)).AddSeconds(gen.Next(0, 60));
+            return iniDate.AddDays(new Random().Next(29));
         }
 
         //Getters & Setters
@@ -93,7 +93,7 @@ namespace Dominio
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Error: {e.Message}");
+                throw e;
             }
         }
         public static void PreLoadJugadores()
@@ -1111,6 +1111,9 @@ namespace Dominio
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[13], Administradora.Instance.Jugadores[120], TipoIncidente.GOL, 53));
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[13], Administradora.Instance.Jugadores[120], TipoIncidente.TARJETA_AMARILLA, 44));
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[13], Administradora.Instance.Jugadores[120], TipoIncidente.TARJETA_AMARILLA, 81));
+
+            Administradora.Instance.Partidos[8].FinalizarPartido();
+            Administradora.Instance.Partidos[10].FinalizarPartido();
         }
         
         public static void PrecargaSelecciones()
@@ -1130,7 +1133,14 @@ namespace Dominio
 
         public static void PreLoadResenas()
         {
-            //Resena.CrearResena(Administradora.Instance.Usuarios[0], "");
+            Resena.CrearResena((Periodista)Administradora.Instance.Usuarios[0], 
+                "Francia y su baja de rendimiento", 
+                "Francia bajó su rendimiento y está teniendo dificiltades en la comunicación dentro de la cancha.", 
+                Administradora.Instance.Partidos[8]);
+            Resena.CrearResena((Periodista)Administradora.Instance.Usuarios[0],
+                "Poseción de ´balón",
+                "España nos deja un porcentaje de posesión de no creer.",
+                Administradora.Instance.Partidos[10]);
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Dominio
 {
-    public class Resena : IValidar
+    public class Resena : IComparable<Resena>, IValidar
     {
         //Atributos
         private static int autoIncrementId;
@@ -24,7 +25,7 @@ namespace Dominio
         {
             this.id = ++autoIncrementId;
             this.periodista = periodista;
-            this.fecha = DateTime.Now;
+            this.fecha = partido.Fecha.AddDays(1);
             this.partido = partido;
             this.titulo = titulo;
             this.contenido = contenido;
@@ -46,15 +47,6 @@ namespace Dominio
             return retVal;
         }
 
-        public static List<Resena> GetResenas(Periodista periodista)
-        {
-            List<Resena> retVal = new List<Resena>();
-            foreach (Resena r in Administradora.Instance.Resenas)
-            {
-                if (r.Periodista.Equals(periodista)) retVal.Add(r);
-            }
-            return retVal;
-        }
         public static Resena GetResena(int id)
         {
             Resena retVal = null;
@@ -67,6 +59,8 @@ namespace Dominio
         public override string ToString() => ($"Nombre {this.Periodista.Nombre} {this.Titulo} - Mail {this.Contenido}");
 
         public bool Validar() => partido != null && partido.Finalizado && titulo.Length > 0 && contenido.Length > 0;
+
+        public int CompareTo([AllowNull] Resena other) => (this.Fecha.CompareTo(other.Fecha) * -1);
 
         //Getters & Setters
 

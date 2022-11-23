@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Periodista : Usuario
+    public class Periodista : Usuario, IComparable<Periodista>
     {
         //Atributos
         private List<Resena> listaResenas;
@@ -31,6 +31,15 @@ namespace Dominio
         public override string GetUserType() => "Periodista";
 
         public override string ToString() => ($"Nombre {this.Nombre} {this.Apellido} - Mail {this.Mail}");
+
+        public int CompareTo([AllowNull] Periodista other)
+        {
+            int retVal = this.Apellido.CompareTo(other.Apellido);
+
+            if (retVal == 0) retVal = this.Nombre.CompareTo(other.Nombre);
+
+            return retVal;
+        }
 
         //Getters & Setters
         public List<Resena> ListaResenas { get { return this.listaResenas; } }

@@ -15,25 +15,45 @@ namespace webApp.Controllers
         [HttpGet]
         public IActionResult Index(string mensaje)
         {
-            Periodista periodista = (Periodista)Periodista.GetUserById(int.Parse(HttpContext.Session.GetString("Id")));
+            if (HttpContext.Session.GetString("Rol") == null) return Redirect("/Login/");
+
             ViewBag.Mensaje = mensaje;
             
-            return View(Resena.GetResenas(periodista));
+            return View(manager.Resenas);
+        }
+
+        [HttpGet]
+        public IActionResult MostrarResenas(List<Resena> resenas, string mensaje)
+        {
+            if (HttpContext.Session.GetString("Rol") == null) return Redirect("/Login/");
+
+            ViewBag.Mensaje = mensaje;
+            resenas.Sort();
+
+            return View(resenas);
         }
 
         [HttpPost]
-        public IActionResult MostrarResena(int id)
+        public IActionResult MostrarResenas(string id)
         {
-            Resena resena = Resena.GetResena(id);
+            if (HttpContext.Session.GetString("Rol") == null) return Redirect("/Login/");
 
-            if (resena == null) return RedirectToAction("index", new { mensaje = "No se encontró la reseña." });
+            Periodista p = (Periodista)Periodista.GetUserById(int.Parse(id));
 
-            return View(manager.Resenas);
+            if (p.ListaResenas.Count == 0) return RedirectToAction("index", new { mensaje = "No se encontraron reseñas para este periodista." });
+            else
+            {
+                p.ListaResenas.Sort();
+
+                return RedirectToAction("MostrarResenas", new { p.ListaResenas });
+            }
         }
 
         [HttpGet]
         public IActionResult CrearResena(string mensaje)
         {
+            if (HttpContext.Session.GetString("Rol") == null) return Redirect("/Login/");
+
             ViewBag.Mensaje = mensaje;
             return View();
         }
@@ -41,6 +61,8 @@ namespace webApp.Controllers
         [HttpPost]
         public IActionResult CrearResena(string periodistaId, string titulo, string contenido, string partidoId)
         {
+            if (HttpContext.Session.GetString("Rol") == null) return Redirect("/Login/");
+
             bool retVal = false;
             Periodista periodista = (Periodista)Usuario.GetUserById(int.Parse(periodistaId));
             Partido partido = Partido.GetPartido(int.Parse(partidoId));
@@ -55,6 +77,8 @@ namespace webApp.Controllers
         [HttpGet]
         public IActionResult VerResena(string id, string mensaje)
         {
+            if (HttpContext.Session.GetString("Rol") == null) return Redirect("/Login/");
+
             Resena r = Resena.GetResena(int.Parse(id));
             ViewBag.Mensaje = mensaje;
             return View(r);

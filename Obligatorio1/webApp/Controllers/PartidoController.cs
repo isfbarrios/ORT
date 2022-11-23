@@ -15,24 +15,29 @@ namespace webApp.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("Rol") == null) return Redirect("/Login/");
+
             return View(manager.Partidos);
         }
         [HttpGet]
-        public IActionResult PartidosCerrados()
+        public IActionResult PartidosCerrados(string dateFrom = "2022-11-20", string dateTo = "2022-12-18")
         {
-            return View(Partido.GetPartidosFinalizados());
+            if (HttpContext.Session.GetString("Rol") == null) return Redirect("/Login/");
+
+            return View(Partido.GetPartidosFinalizados(dateFrom, dateTo));
         }
         [HttpPost]
-        public IActionResult Index(string dateFrom, string dateTo, string filter)
+        public IActionResult FiltrarPartidosCerrados(string dateFrom = "2022-11-20", string dateTo = "2022-12-18")
         {
-            string retVal = "Index";
-            if (filter == "0") retVal = "PartidosCerrados";
+            if (HttpContext.Session.GetString("Rol") == null) return Redirect("/Login/");
 
-            return RedirectToAction(retVal);
+            return RedirectToAction("PartidosCerrados", new { dateFrom, dateTo });
         }
         [HttpPost]
         public IActionResult Finalizar(string id, string viewReturn = "Index")
         {
+            if (HttpContext.Session.GetString("Rol") == null) return Redirect("/Login/");
+
             string retVal = "No se pudo finalizar el partido. Intente nuevamente";
             Partido p = Partido.GetPartido(int.Parse(id));
             bool finalizado = p.FinalizarPartido();
@@ -44,6 +49,8 @@ namespace webApp.Controllers
         [HttpGet]
         public IActionResult VerPartido(string id, string mensaje)
         {
+            if (HttpContext.Session.GetString("Rol") == null) return Redirect("/Login/");
+
             Partido partido = Partido.GetPartido(int.Parse(id));
             ViewBag.Mensaje = mensaje;
 

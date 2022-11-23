@@ -8,34 +8,28 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-sm-10">
+        <div class="col-12 col-sm-12">
             <h1>Partidos</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-sm-10">
+        <div class="col-12 col-sm-12">
             <div class="form-content">
-                <form class="form-inline" method="post">
+                <h5>Filtrar partidos finalizados por rango de fechas:</h5>
+                <form class="form-inline" method="post" action="~/Partido/FiltrarPartidosCerrados/">
                     <div class="form-group m-2">
                         <label for="txtFiltro">Fecha desde</label>
-                        <input type="date" name="dateFrom" class="form-group" />
+                        <input type="date" name="dateFrom" class="form-control" />
                     </div>
                     <div class="form-group m-2">
                         <label for="txtFiltro">Fecha hasta</label>
-                        <input type="date" name="dateTo" class="form-group" />
-                    </div>
-                    <div class="form-group m-2">
-                        <label for="txtFiltro">Tipo de filtro</label>
-                        <select id="txtFiltro" name="filter" class="form-control">
-                            <option value="-1">Seleccione una opción</option>
-                            <option value="0">Partidos finalizados</option>
-                        </select>
+                        <input type="date" name="dateTo" class="form-control" />
                     </div>
                     <button class="btn btn-success m-2" type="submit">Filtrar</button>
                 </form>
             </div>
         </div>
-        <div class="col-12 col-sm-10">
+        <div class="col-12 col-sm-12">
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -61,7 +55,7 @@
                         <td>@p.Fecha.ToShortDateString()</td>
                         <td>@p.Resultado</td>
                         <td>
-                            <a class="btn btn-link p-1" href="~/Incidente/IncidentePartido/@p.Id">
+                            <a class="p-1" href="~/Incidente/IncidentePartido/@p.Id">
                                 <span class="text">Ver</span>
                             </a>
                         </td>

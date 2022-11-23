@@ -1,33 +1,48 @@
 ﻿@using Dominio
-@model Periodista
+@model List<Periodista>
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-sm-10">
-            <h1>Perfil de usuario</h1>
+        <div class="col-12">
+            <h1>Periodistas</h1>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-sm-10">
-            @if (ViewBag.mensaje != null)
-            {
-                <div class="alert alert-warning">
-                    <div>
-                        @ViewBag.Mensaje
+        <div class="col-12 col-sm-12">
+            <div class="container-fluid my-3">
+                <div class="row">
+                    <div class="col-12 col-sm-12">
+                        <h4>Opciones de filtrado</h4>
                     </div>
                 </div>
-            }
+            </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-sm-10">
-            <span class="name">@Model.Nombre @Model.Apellido</span>
-        </div>
-        <div class="col-12 col-sm-10">
-            <span class="mail">@Model.Mail</span>
-        </div>
-        <div class="col-12 col-sm-10">
-            <span class="name">@Model.Nombre @Model.Apellido</span>
+        <div class="col-12 col-sm-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Mail</th>
+                        <th>Reseñas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Periodista p in Model)
+                    {
+                        <tr>
+                            <td>@p.Id</td>
+                            <td>@p.Nombre</td>
+                            <td>@p.Apellido</td>
+                            <td>@p.Mail</td>
+                            <td>
+                                <a href="~/Resena/MostrarResenas/@p.Id">Ver</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

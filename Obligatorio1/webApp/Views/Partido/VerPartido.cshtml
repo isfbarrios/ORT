@@ -23,6 +23,11 @@
 <div class="container-fluid">
     <div class="row my-2">
         <div class="col-12 col-sm-12">
+            <a class="btn btn-link p-1" href="~/Partido/">
+                <i class="fas fa-chevron-left"></i><span class="text"> Volver</span>
+            </a>
+        </div>
+        <div class="col-12 col-sm-12">
             <h1>@Model.TituloToString()</h1>
         </div>
     </div>
@@ -63,7 +68,7 @@
                         <td>@Model.Fecha.ToShortDateString()</td>
                         <td>@Model.Resultado</td>
                         <td>
-                            <a class="btn btn-link p-1" href="~/Incidente/IncidentePartido/@Model.Id">
+                            <a class="p-1" href="~/Incidente/IncidentePartido/@Model.Id">
                                 <span class="text">Ver</span>
                             </a>
                         </td>

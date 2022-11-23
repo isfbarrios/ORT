@@ -59,13 +59,17 @@ namespace Dominio
             return retVal;
         }
 
-        public static List<Partido> GetPartidosFinalizados()
+        public static List<Partido> GetPartidosFinalizados(string dateFrom, string dateTo)
         {
             List<Partido> retVal = new List<Partido>();
 
-            foreach (Partido partido in Administradora.Instance.Partidos)
+            foreach (Partido p in Administradora.Instance.Partidos)
             {
-                if (partido.Finalizado) retVal.Add(partido);
+                int fr = DateTime.Compare(p.Fecha, DateTime.Parse(dateFrom));
+                int to = DateTime.Compare(p.Fecha, DateTime.Parse(dateTo));
+
+                if (p.Finalizado && DateTime.Compare(p.Fecha, DateTime.Parse(dateFrom)) >= 0 
+                    && DateTime.Compare(p.Fecha, DateTime.Parse(dateTo)) <= 0) retVal.Add(p);
             }
             return retVal;
         }

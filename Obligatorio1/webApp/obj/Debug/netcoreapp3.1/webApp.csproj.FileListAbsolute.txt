@@ -132,3 +132,4 @@ C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Resena\CrearResena.cshtml.g.cs
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Resena\VerResena.cshtml.g.cs
 C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Partido\VerPartido.cshtml.g.cs
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\webApp\obj\Debug\netcoreapp3.1\Razor\Views\Resena\MostrarResenas.cshtml.g.cs

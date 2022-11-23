@@ -14,6 +14,8 @@ namespace webApp.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (HttpContext.Session.GetString("Rol") == null) return Redirect("/Login/");
+
             return View(manager.Selecciones);
         }
     }
