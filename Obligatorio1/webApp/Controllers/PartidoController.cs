@@ -56,5 +56,32 @@ namespace webApp.Controllers
 
             return View(partido);
         }
+        [HttpGet]
+        public IActionResult PartidosExpulsiones(string mensaje, List<Partido> partidos)
+        {
+            if (HttpContext.Session.GetString("Rol") == null) return Redirect("/Login/");
+
+            ViewBag.Mensaje = mensaje;
+
+            return View(new List<Partido>());
+        }
+
+        [HttpPost]
+        public IActionResult PartidosExpulsionesPorMail(string mail)
+        {
+            if (HttpContext.Session.GetString("Rol") == null) return Redirect("/Login/");
+
+            Usuario user = Usuario.GetUserByMail(mail);
+
+            if (user != null && user.GetUserType() == "Periodista")
+            {
+                List<Partido> partidos = Periodista.GetPartidosResenados((Periodista)user);
+
+                return RedirectToAction("PartidosExpulsiones", 
+                    new { mensaje = "Se aplicó el filtro correctamente.", partidos = partidos });
+            }
+
+            return RedirectToAction("PartidosExpulsiones", new { mensaje = "No se encontraron resultados para mostrar." });
+        }
     }
 }

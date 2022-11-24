@@ -90,6 +90,7 @@ namespace Dominio
                 PreLoadPeriodistas();
                 PreLoadPartidos();
                 PreLoadIncidentes();
+                PreLoadResenas();
             }
             catch (Exception e)
             {
@@ -1063,7 +1064,7 @@ namespace Dominio
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[2], Administradora.Instance.Jugadores[124], TipoIncidente.GOL, 76));
             //Alemania (Local) vs Dinamarca (Visitante)
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[3], Administradora.Instance.Jugadores[66], TipoIncidente.TARJETA_AMARILLA, 55));
-            Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[3], Administradora.Instance.Jugadores[66], TipoIncidente.TARJETA_AMARILLA, 55));
+            Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[3], Administradora.Instance.Jugadores[66], TipoIncidente.TARJETA_ROJA, 55));
             //Alemania (Local) vs Brasil (Visitante)
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[4], Administradora.Instance.Jugadores[120], TipoIncidente.GOL, 12));
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[4], Administradora.Instance.Jugadores[124], TipoIncidente.GOL, 16));
@@ -1110,7 +1111,7 @@ namespace Dominio
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[13], Administradora.Instance.Jugadores[150], TipoIncidente.GOL, 37));
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[13], Administradora.Instance.Jugadores[120], TipoIncidente.GOL, 53));
             Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[13], Administradora.Instance.Jugadores[120], TipoIncidente.TARJETA_AMARILLA, 44));
-            Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[13], Administradora.Instance.Jugadores[120], TipoIncidente.TARJETA_AMARILLA, 81));
+            Incidente.AltaIncidente(new Incidente(Administradora.Instance.Partidos[13], Administradora.Instance.Jugadores[120], TipoIncidente.TARJETA_ROJA, 81));
 
             Administradora.Instance.Partidos[8].FinalizarPartido();
             Administradora.Instance.Partidos[10].FinalizarPartido();
@@ -1138,7 +1139,7 @@ namespace Dominio
                 "Francia bajó su rendimiento y está teniendo dificiltades en la comunicación dentro de la cancha.", 
                 Administradora.Instance.Partidos[8]);
             Resena.CrearResena((Periodista)Administradora.Instance.Usuarios[0],
-                "Poseción de ´balón",
+                "Posesión de balón",
                 "España nos deja un porcentaje de posesión de no creer.",
                 Administradora.Instance.Partidos[10]);
         }

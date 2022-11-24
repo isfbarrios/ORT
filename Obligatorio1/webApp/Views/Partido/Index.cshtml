@@ -19,14 +19,19 @@
                 <form class="form-inline" method="post" action="~/Partido/FiltrarPartidosCerrados/">
                     <div class="form-group m-2">
                         <label for="txtFiltro">Fecha desde</label>
-                        <input type="date" name="dateFrom" class="form-control" />
+                        <input id="txtFiltro" type="date" name="dateFrom" class="form-control" />
                     </div>
                     <div class="form-group m-2">
-                        <label for="txtFiltro">Fecha hasta</label>
-                        <input type="date" name="dateTo" class="form-control" />
+                        <label for="txtFiltro2">Fecha hasta</label>
+                        <input id="txtFiltro2" type="date" name="dateTo" class="form-control" />
                     </div>
                     <button class="btn btn-success m-2" type="submit">Filtrar</button>
                 </form>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12">
+            <div class="form-content">
+                <a href="~/Partido/PartidosExpulsiones/" class="btn btn-warning m-2">Filtrar por periodista</a>
             </div>
         </div>
         <div class="col-12 col-sm-12">
@@ -48,41 +53,41 @@
                 <tbody>
                     @foreach (Partido p in Model)
                     {
-                    <tr>
-                        <td>@p.Id</td>
-                        <td>@p.Local</td>
-                        <td>@p.Visitante</td>
-                        <td>@p.Fecha.ToShortDateString()</td>
-                        <td>@p.Resultado</td>
-                        <td>
-                            <a class="p-1" href="~/Incidente/IncidentePartido/@p.Id">
-                                <span class="text">Ver</span>
-                            </a>
-                        </td>
-                        @if (isOperador)
-                        {
+                        <tr>
+                            <td>@p.Id</td>
+                            <td>@p.Local</td>
+                            <td>@p.Visitante</td>
+                            <td>@p.Fecha.ToShortDateString()</td>
+                            <td>@p.Resultado</td>
                             <td>
-                                @if (!p.Finalizado)
-                                {
-                                    <form class="form-inline" method="post" action="~/Partido/Finalizar/">
-                                        <input class="form-group" type="hidden" name="id" value="@p.Id" />
-                                        <input class="form-group" type="hidden" name="viewReturn" value="VerPartido" />
-                                        <button class="btn btn-link p-1" type="submit">Finalizar</button>
-                                    </form>
-                                }
-                                else
-                                {
-                                    <span class="text">Finalizado</span>
-                                }
-
+                                <a class="p-1" href="~/Incidente/IncidentePartido/@p.Id">
+                                    <span class="text">Ver</span>
+                                </a>
                             </td>
-                        }
-                    </tr>
+                            @if (isOperador)
+                            {
+                                <td>
+                                    @if (!p.Finalizado)
+                                    {
+                                        <form class="form-inline" method="post" action="~/Partido/Finalizar/">
+                                            <input class="form-group" type="hidden" name="id" value="@p.Id" />
+                                            <input class="form-group" type="hidden" name="viewReturn" value="VerPartido" />
+                                            <button class="btn btn-link p-1" type="submit">Finalizar</button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <span class="text">Finalizado</span>
+                                    }
+
+                                </td>
+                            }
+                        </tr>
                     }
                 </tbody>
             </table>
         </div>
     </div>
-</div>
+    </div>
 
 

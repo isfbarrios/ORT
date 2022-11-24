@@ -1,11 +1,28 @@
 ﻿@using Dominio
 @model Resena
 
+@{ 
+    bool isFaseGrupos = Model.Partido.GetPartidoType() == "Grupos";
+    string grupo = "";
+    string etapa = "";
+
+    if (isFaseGrupos)
+    {
+        grupo = ((FaseGrupos)Model.Partido).Grupo.ToString();
+    }
+    else
+    {
+        etapa = ((FaseEliminatoria)Model.Partido).Etapa.ToString();
+    }
+}
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 col-sm-10">
             <h1>@Model.Titulo</h1>
-            <h4 class="px-1">[@Model.Partido.TituloToString()]</h4>
+            <h4 class="px-1">@Model.Partido.TituloToString()</h4>
+            <h6>
+                @(isFaseGrupos ? $"Fase de grupos. Grupo {grupo}" : $"Fase eliminatoria. Etapa {etapa}")
+            </h6>
         </div>
     </div>
     <div class="row">

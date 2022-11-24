@@ -64,6 +64,18 @@ namespace Dominio
             }
             return retVal;
         }
+
+        public static Usuario GetUserByMail(string mail)
+        {
+            if (Administradora.ValidMail(mail))
+            {
+                foreach (Usuario retVal in Administradora.Instance.Usuarios)
+                {
+                    if (retVal.Mail.Equals(mail)) return retVal;
+                }
+            }
+            return null;
+        }
         public int CompareTo([AllowNull] Usuario other)
         {
             return this.Id.CompareTo(other.Id);

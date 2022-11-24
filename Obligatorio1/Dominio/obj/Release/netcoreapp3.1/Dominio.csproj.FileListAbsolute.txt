@@ -1,0 +1,10 @@
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\Dominio\bin\Release\netcoreapp3.1\Dominio.deps.json
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\Dominio\bin\Release\netcoreapp3.1\Dominio.dll
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\Dominio\bin\Release\netcoreapp3.1\Dominio.pdb
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\Dominio\obj\Release\netcoreapp3.1\Dominio.csproj.AssemblyReference.cache
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\Dominio\obj\Release\netcoreapp3.1\Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\Dominio\obj\Release\netcoreapp3.1\Dominio.AssemblyInfoInputs.cache
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\Dominio\obj\Release\netcoreapp3.1\Dominio.AssemblyInfo.cs
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\Dominio\obj\Release\netcoreapp3.1\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\Dominio\obj\Release\netcoreapp3.1\Dominio.dll
+C:\Users\Fabricio Barrios\source\repos\Obligatorio1\Dominio\obj\Release\netcoreapp3.1\Dominio.pdb

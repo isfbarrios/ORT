@@ -28,6 +28,24 @@ namespace Dominio
             }
             return retVal;
         }
+        
+        public static List<Partido> GetPartidosResenados(Periodista p)
+        {
+            List<Partido> retVal = new List<Partido>();
+
+            if (p.ListaResenas.Count > 0)
+            {
+                foreach (Resena r in p.ListaResenas)
+                {
+                    foreach (Incidente i in r.Partido.Incidentes)
+                    {
+                        if (!retVal.Contains(i.Partido)) retVal.Add(i.Partido);
+                    }
+                }
+            }
+            return retVal;
+        }
+
         public override string GetUserType() => "Periodista";
 
         public override string ToString() => ($"Nombre {this.Nombre} {this.Apellido} - Mail {this.Mail}");

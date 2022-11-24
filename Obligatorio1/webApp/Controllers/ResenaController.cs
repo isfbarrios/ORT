@@ -45,7 +45,7 @@ namespace webApp.Controllers
             {
                 p.ListaResenas.Sort();
 
-                return RedirectToAction("MostrarResenas", new { p.ListaResenas });
+                return RedirectToAction("MostrarResenas", new { resenas = p.ListaResenas });
             }
         }
 

@@ -113,9 +113,22 @@ namespace Dominio
             foreach (Incidente incidente in jugadorPartidoIncidentes)
             {
                 //Si ya hay suficientes incidentes salgo del bucle.
-                if (expulsion == 1 || amonestacion == 2) break;
-                if (Incidente.EsTarjetaAmarilla(incidente)) amonestacion++;
-                else if (Incidente.EsTarjetaRoja(incidente)) expulsion++;
+                if (expulsion == 1) break;
+                else
+                if (amonestacion == 1)
+                {
+                    if (Incidente.EsTarjetaAmarilla(incidente))
+                    {
+                        amonestacion++;
+                        expulsion++;
+                    }
+                    else if (Incidente.EsTarjetaRoja(incidente)) expulsion++;
+                }
+                else
+                {
+                    if (Incidente.EsTarjetaAmarilla(incidente)) amonestacion++;
+                    else if (Incidente.EsTarjetaRoja(incidente)) expulsion++;
+                }
             }
             if (expulsion == 1) retVal = false;
             else if (amonestacion == 2) retVal = false;
