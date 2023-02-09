@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="JS/pais.js" defer></script>
+    <script src="JS/persona.js" defer></script>
+    <script src="JS/codigo.js" defer></script> 
+    <title>Document</title>
+</head>
+<body>
+    <div id="menu">
+        <input type="button" id="btnInicio" value="Inicio" >
+        <input type="button" id="btnIngreso" value="Ingreso">
+        <input type="button" id="btnRegistro" value="Registro">
+        <input type="button" id="btnCerrarSesion" value="Cerrar Sesión">
+    </div>
+    <div id="inicio">
+        <h1>Bienvenido al taller</h1>
+        <div id="divInicioUsuarioDesconocido">
+            <p>Gracias por formar parte del taller de desarrollo para dispositivos móviles. Por favor, navegue por la aplicación para iniciar sesión o registrarse</p>            
+        </div>
+        <div id="divInicioUsuarioLogueado">
+            <table>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>País</th>
+                <th>Usuario</th>
+                <tbody id="tablaInicioBody"></tbody>
+            </table>
+        </div>
+    </div>
+    <div id="login">
+        <label>Nombre de usuario</label>
+        <input type="text" placeholder="Ingrese nombre de usuario">
+        <br>
+        <label>Password</label>
+        <input type="password" placeHolder="Ingrese contraseña">
+        <br>
+        <input type="button" value="Iniciar sesión">
+        <p></p>
+    </div>
+    <div id="registro">
+        <label>Nombre</label>
+        <input type="text">
+        <br>
+        <label>Apellido</label>
+        <input type="text">
+        <br>
+        <label>Nombre de usuario</label>
+        <input type="text">
+        <br>
+        <label>Password</label>
+        <input type="password">
+        <br>
+        <label>Confirmar password</label>
+        <input type="password">
+        <br>
+        <label>País</label>
+        <select id="slPaises">
+            <option value="">Seleccione..</option>
+        </select>
+        <br>
+        <input type="button" value="Registrarse">
+        <p></p>
+
+    </div>
+   
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+
+    <script src="js/codigo.js" defer></script>
+</head>
+
+<body>
+    <ion-app>
+        <!-- Definiciones de ruteo para los enlaces del menú -->
+        <ion-router id="menu-ruteo">
+            <ion-route url="/" component="page-home"></ion-route>
+            <ion-route url="/login" component="page-login"></ion-route>
+            <ion-route url="/registro" component="page-registro"></ion-route>
+            <ion-route url="/productos" component="page-productos"></ion-route>
+        </ion-router>
+        <!-- Barra de navegación usada por Ionic -->
+        <ion-nav></ion-nav>
+        <!-- Menú de navegación -->
+        <ion-menu side="start" menu-id="first" content-id="main" id="menu">
+            <ion-header>
+                <ion-toolbar color="primary">
+                    <ion-title>Menú principal</ion-title>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content>
+                <ion-list>
+                    <ion-item clas="menu-item" href="/" onclick="cerrarMenu()">Home</ion-item>
+                    <ion-item clas="menu-item" href="/login" onclick="cerrarMenu()">Login</ion-item>
+                    <ion-item clas="menu-item" href="/registro" onclick="cerrarMenu()">Registro</ion-item>
+                    <ion-item clas="menu-item" href="/productos" onclick="cerrarMenu()">Productos</ion-item>
+                </ion-list>
+            </ion-content>
+        </ion-menu>
+        <div id="main"></div>
+        <!-- Sección Home -->
+        <ion-page class="ion-page" id="page-home">
+            <ion-header>
+                <ion-toolbar>
+                    <ion-buttons slot="end">
+                        <ion-menu-button></ion-menu-button>
+                    </ion-buttons>
+                    <ion-title>Home</ion-title>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content>
+                <div id="inicio">
+                    <h1>Inicio</h1>
+                    <div id="productos">
+                    </div>
+                </div>
+            </ion-content>
+        </ion-page>
+        <!-- Sección Login -->
+        <ion-page class="ion-page" id="page-login">
+            <ion-header>
+                <ion-toolbar>
+                    <ion-buttons slot="end">
+                        <ion-menu-button></ion-menu-button>
+                    </ion-buttons>
+                    <ion-title>Login</ion-title>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content>
+                <div id="login">
+                    <label>Nombre de usuario</label>
+                    <input type="text" id="nombreUsuario">
+                    <br>
+                    <label>Password</label>
+                    <input type="password" id="password">
+                    <br>
+                    <input type="button" value="Iniciar sesión" id="btnLogin">
+                    <p id="mensajeLogin"></p>
+                </div>
+            </ion-content>
+        </ion-page>
+        <!-- Sección Registro -->
+        <ion-page class="ion-page" id="page-registro">
+            <ion-header>
+                <ion-toolbar>
+                    <ion-buttons slot="end">
+                        <ion-menu-button></ion-menu-button>
+                    </ion-buttons>
+                    <ion-title>Registro</ion-title>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content>
+                <div id="registro">
+                    <label>Nombre</label>
+                    <input type="text" id="nombre">
+                    <br>
+                    <label>Apellido</label>
+                    <input type="text" id="apellido">
+                    <br>
+                    <label>Email</label>
+                    <input type="text" id="email">
+                    <br>
+                    <label>Dirección</label>
+                    <input type="text" id="direccion">
+                    <br>
+                    <label>Password</label>
+                    <input type="password" id="passwordRegistro">
+                    <br>
+                    <label>Ingrese nuevamente la contraseña</label>
+                    <input type="password" id="verifyPassword">
+                    <br>
+                    <input type="button" value="Registro" id="btnRegistroUsuario">
+                    <p id="mensajeRegistro"></p>
+                </div>
+            </ion-content>
+        </ion-page>
+                <!-- Sección Productos -->
+                <ion-page class="ion-page" id="page-productos">
+                    <ion-header>
+                        <ion-toolbar>
+                            <ion-buttons slot="end">
+                                <ion-menu-button></ion-menu-button>
+                            </ion-buttons>
+                            <ion-title>Listado productos</ion-title>
+                        </ion-toolbar>
+                    </ion-header>
+                    <ion-content>
+                        <div id="productos">
+                            <ion-list id="product-list">
+                                
+                            </ion-list>
+                        </div>
+                    </ion-content>
+                </ion-page>
+    </ion-app>
+</body>
+
+</html>

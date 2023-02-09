@@ -51,7 +51,7 @@ namespace Dominio
             return retVal;
         }
 
-        public bool ValidarMailUsuario(String mail)
+        private bool ValidarMailUsuario(String mail)
         {
             bool retVal = false;
             foreach (Usuario u in Administradora.Instance.Usuarios)

@@ -8,7 +8,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAmjGZWXPfmkCQEL9kB848rAAAAAACAAAAAAAQZgAAAAEAACAAAAAAxdyVSR9mVEw5ReAbJ+AIi4t4WUZfnW4eDiN06hNwuwAAAAAOgAAAAAIAACAAAABh4jIsafDhWNqpeTti2AqI5fSkv9EVPOmyT4YeVOpVjyAAAADzN6r0EM2qfsjIhJH45tHFuhaUcfWOb7sTlViV0oSf6EAAAAA96aabtRwgWn8a3TzKXvpbRLYpEL6xgU4X0r95Z/z4lgNaaBS/lLHQXQXYfJfbXzNDGSI4h9xVauLcUhm8uBhQ</EncryptedPassword>
     <_PublishTargetUrl>ftp://292342fbarrios.somee.com/www.292342fbarrios.somee.com</_PublishTargetUrl>
-    <History>True|2022-11-24T01:13:48.7461679Z;</History>
+    <History>False|2022-11-24T21:30:43.6354114Z;True|2022-11-24T18:10:54.5259989-03:00;False|2022-11-24T18:07:06.9219771-03:00;True|2022-11-24T17:11:50.5734327-03:00;True|2022-11-23T22:13:48.7461679-03:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.Development.json">
@@ -42,10 +42,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>09/12/2019 14:08:36</publishTime>
     </File>
     <File Include="Dominio.dll">
-      <publishTime>11/23/2022 22:06:59</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Dominio.pdb">
-      <publishTime>11/23/2022 22:06:59</publishTime>
+      <publishTime>11/24/2022 17:08:39</publishTime>
     </File>
     <File Include="dotnet-aspnet-codegenerator-design.dll">
       <publishTime>02/09/2021 18:12:02</publishTime>
@@ -237,28 +237,28 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>09/12/2019 14:08:36</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>11/23/2022 22:07:10</publishTime>
+      <publishTime>11/24/2022 18:27:44</publishTime>
     </File>
     <File Include="webApp.deps.json">
-      <publishTime>11/23/2022 22:07:04</publishTime>
+      <publishTime>11/24/2022 18:27:44</publishTime>
     </File>
     <File Include="webApp.dll">
-      <publishTime>11/23/2022 22:07:01</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="webApp.exe">
-      <publishTime>11/23/2022 22:07:01</publishTime>
+      <publishTime>11/24/2022 18:27:42</publishTime>
     </File>
     <File Include="webApp.pdb">
-      <publishTime>11/23/2022 22:07:01</publishTime>
+      <publishTime>11/24/2022 18:27:42</publishTime>
     </File>
     <File Include="webApp.runtimeconfig.json">
       <publishTime>11/23/2022 22:07:05</publishTime>
     </File>
     <File Include="webApp.Views.dll">
-      <publishTime>11/23/2022 22:07:04</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="webApp.Views.pdb">
-      <publishTime>11/23/2022 22:07:04</publishTime>
+      <publishTime>11/24/2022 18:27:43</publishTime>
     </File>
     <File Include="wwwroot/css/site.css">
       <publishTime>10/27/2022 19:46:02</publishTime>

@@ -19,16 +19,6 @@ namespace Dominio
             this.fechaIngreso = fechaIngreso;
         }
         //Funcionalidades
-        public static Periodista GetPeriodista(String nombre)
-        {
-            Periodista retVal = null;
-            foreach (Periodista p in Administradora.Instance.Usuarios)
-            {
-                if (p.Nombre == nombre) retVal = p;
-            }
-            return retVal;
-        }
-
         public static Usuario GetOperador(string nombre)
         {
             Operador retVal = null;
@@ -38,7 +28,6 @@ namespace Dominio
             }
             return retVal;
         }
-
         public static bool AltaOperador(Usuario operador)
         {
             bool retVal = false;

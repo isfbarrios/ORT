@@ -10,6 +10,5 @@ namespace Dominio
         LOCAL,
         VISITANTE,
         EMPATE
-
     }
 }
