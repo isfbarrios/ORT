@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/codigo.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="menu">
+        <input type="button" value="Inicio" id="btnInicio">
+        <input type="button" value="Ingreso" id="btnIngreso">
+        <input type="button" value="Registro" id="btnRegistro">
+        <input type="button" value="Cerrar Sesión" id="btnCerrarSesion">
+
+    </div>
+        <div id="inicio">
+        <h1>Listado de productos</h1>
+        <div id="productos">              
+        </div>
+    </div> 
+    <div id="login">
+        <h2>Ingreso Usuario</h2>
+        <label>Nombre de usuario</label>
+        <input type="text" id="nombreUsuario">
+        <br>
+        <label>Contraseña</label>
+        <input type="password" id="password">
+        <br>
+        <input type="button" value="Iniciar sesión" id="btnLogin">
+        <p id="mensajeLogin"></p>
+    </div>
+    <div id="registro">
+        <h2>Registro de usuario</h2>
+        <label>Usuario</label>
+        <input type="text" id="nombre">
+        <br>
+        <label>contraseña</label>
+        <input type="password" id="password">
+        <br>        
+        <label>Departamento</label>
+        <input type="text" id="idDepartamento">
+        <br>
+        <label>Ciudad</label>
+        <input type="text" id="idCiudad">
+        <br>
+        <input type="button" value="Registro" id="btnRegistroUsuario">
+        <p id="mensajeRegistro"></p>
+    </div> 
+</body>
+</html>

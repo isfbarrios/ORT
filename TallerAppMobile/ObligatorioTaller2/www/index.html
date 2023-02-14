@@ -54,9 +54,16 @@
             </ion-header>
             <ion-content>
                 <div id="inicio">
-                    <h1>Inicio</h1>
-                    <div id="productos">
-                    </div>
+                    <ion-grid id="home">
+                        <ion-row>
+                            <ion-col>
+                                <h1>Inicio</h1>
+                            </ion-col>
+                            <ion-col>
+                                <h1>Inicio</h1>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
                 </div>
             </ion-content>
         </ion-page>
@@ -71,16 +78,22 @@
                 </ion-toolbar>
             </ion-header>
             <ion-content>
-                <div id="login">
-                    <label>Nombre de usuario</label>
-                    <input type="text" id="nombreUsuario">
-                    <br>
-                    <label>Password</label>
-                    <input type="password" id="password">
-                    <br>
-                    <input type="button" value="Iniciar sesión" id="btnLogin">
-                    <p id="mensajeLogin"></p>
-                </div>
+                <ion-grid id="login">
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label>Nombre de usuario</ion-label>
+                                <ion-input id="loginUsuario" type="text" clear-input="true"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Contraseña</ion-label>
+                                <ion-input id="loginPassword" type="password" clear-input="true"></ion-input>
+                            </ion-item>
+                            <ion-button id="btnLogin" color="primary">Iniciar sesión</ion-button>
+                            <p id="mensajeLogin"></p>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
             </ion-content>
         </ion-page>
         <!-- Sección Registro -->
@@ -94,28 +107,38 @@
                 </ion-toolbar>
             </ion-header>
             <ion-content>
-                <div id="registro">
-                    <label>Nombre</label>
-                    <input type="text" id="nombre">
-                    <br>
-                    <label>Apellido</label>
-                    <input type="text" id="apellido">
-                    <br>
-                    <label>Email</label>
-                    <input type="text" id="email">
-                    <br>
-                    <label>Dirección</label>
-                    <input type="text" id="direccion">
-                    <br>
-                    <label>Password</label>
-                    <input type="password" id="passwordRegistro">
-                    <br>
-                    <label>Ingrese nuevamente la contraseña</label>
-                    <input type="password" id="verifyPassword">
-                    <br>
-                    <input type="button" value="Registro" id="btnRegistroUsuario">
-                    <p id="mensajeRegistro"></p>
-                </div>
+                <ion-grid id="registro">
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label>Nombre de usuario</ion-label>
+                                <ion-input id="registroUsuario" type="text" clear-input="true"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Departamento</ion-label>
+                                <ion-select id="idDepartamento" placeholder="Seleccionar..." value="idDepartamento" interface="popover">
+                                    
+                                </ion-select>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Ciudad</ion-label>
+                                <ion-select id="idCiudad" value="idCiudad" placeholder="Seleccionar..." interface="action-sheet">
+                                    
+                                </ion-select>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Contraseña</ion-label>
+                                <ion-input id="registroPassword" type="password" clear-input="true"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Repetir Contraseña</ion-label>
+                                <ion-input id="repeatePassword" type="password" clear-input="true"></ion-input>
+                            </ion-item>
+                            <ion-button id="btnRegistroUsuario" color="primary">Registrarse</ion-button>
+                            <p id="mensajeRegistro"></p>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
             </ion-content>
         </ion-page>
                 <!-- Sección Productos -->
