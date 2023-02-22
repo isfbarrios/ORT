@@ -1,0 +1,6 @@
+{
+  "appId": "com.example.app",
+  "appName": "obligatoriotaller2",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

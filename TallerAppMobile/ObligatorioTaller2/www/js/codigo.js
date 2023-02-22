@@ -28,14 +28,20 @@ function inicializar() {
     menu_ruteo.addEventListener('ionRouteWillChange', navegar);
     
     document.querySelector("#btnLogin").addEventListener("click", Login);
-    //document.querySelector("#btnCerrarSesion").addEventListener("click", cerrarSesion);
     document.querySelector("#btnRegistroUsuario").addEventListener("click", Registro);
     document.querySelector('#btnFiltrarCajeros').addEventListener("click", localizarCajeros);
     document.querySelector('#idDepartamento').addEventListener('ionChange', filtrarCiudades);
     document.querySelector('#btnAgregarGasto').addEventListener('click', agregarGasto);
     document.querySelector('#btnTipoTransferencia').addEventListener('click', tipoTransferencia);
+    document.querySelectorAll('.btnHome').forEach((btnHome) => btnHome.addEventListener("click", home));
+    document.querySelector('#filtroMovimiento').addEventListener('ionChange', filtrarMovimiento);
 
     navigator.geolocation.getCurrentPosition(devolverPosicion, devolverError);
+
+    //Le asigno un color rojo a los textos de alerta.
+    document.querySelectorAll('p[id*="mensaje"]').forEach((p) => {
+        p.style.color = 'red';
+    });
 
     //Disparo consultas asincronas solo si no tengo los datos almacenados.
     precargaDepartamentos();
@@ -44,11 +50,42 @@ function inicializar() {
     verificarSiEstaLogueado();
 }
 
+function calcularGastosTotales() {
+
+    let gastosJSON = JSON.parse(localStorage.getItem('movimientosGastos'));
+    let ingresosJSON = JSON.parse(localStorage.getItem('movimientosIngresos'));
+    let saldoRestante = 0;
+    let totalGastos = 0;
+    let totalIngresos = 0;
+
+    gastosJSON.forEach((gasto) => {
+        totalGastos += gasto.total;
+    });
+
+    ingresosJSON.forEach((ingreso) => {
+        totalIngresos += ingreso.total;
+    });
+
+    saldoRestante = totalIngresos - totalGastos;
+
+    document.querySelector('#totalGastos').innerHTML = `<b>Total gastos: </b> $${totalGastos}`;
+    document.querySelector('#totalIngresos').innerHTML = `<b>Total ingresos: </b> $${totalIngresos}`;
+    document.querySelector('#totalRestante').innerHTML = `<b>Saldo restante: </b> $${saldoRestante}`;
+}
+
+function filtrarMovimiento() {
+    let filtro = parseInt(this.value);
+    if (filtro === 0) mostrarMovimientos(JSON.parse(localStorage.getItem('movimientos')));
+    else if (filtro === 1) mostrarMovimientos(JSON.parse(localStorage.getItem('movimientosGastos')));
+    else mostrarMovimientos(JSON.parse(localStorage.getItem('movimientosIngresos')));
+}
+
 function verificarSiEstaLogueado() {
     if(localStorage.getItem("token") !== undefined && localStorage.getItem("token")) {
-        precargaRubros();
         precargaMovimientos();
+        precargaRubros();
         menuRuteo('/');
+
         document.querySelectorAll('.menu-log-in').forEach((el) => el.style.display = 'none');
         document.querySelector('.menu-log-out').style.display = 'block';
     }
@@ -56,13 +93,15 @@ function verificarSiEstaLogueado() {
         document.querySelectorAll('.menu-log-in').forEach((el) => el.style.display = 'block');
         document.querySelector('.menu-log-out').style.display = 'none';
         menuRuteo("/login");
-        
     }
 }
 
 function localizarCajeros() {
     let distancia = parseInt(document.querySelector('#distanciaCajero').value);
     if (distancia > 0) getCajeros(distancia);
+    else {
+        mostrarMensaje('mensajeFiltrarCajeros', 'La distancia debe ser superior a cero');
+    }
 }
 
 function Login() {
@@ -97,10 +136,10 @@ function Login() {
 
             verificarSiEstaLogueado();
         })
-        .catch((error) => console.error('Error', error));
+        .catch((error) => mostrarMensaje('mensajeLogin', error.message));
     }
     catch (Error) {
-        document.querySelector("#mensajeLogin").innerHTML = Error.message;
+        mostrarMensaje('mensajeLogin', Error.message);
     }
 }
 
@@ -141,21 +180,20 @@ function Registro() {
         })
         .then((response) => {
             if(response.ok) {
-                document.querySelector("#mensajeRegistro").innerHTML = "Registro exitoso";
+                mostrarMensaje('mensajeRegistro', "Registro exitoso");
                 verificarSiEstaLogueado();
                 return response.json();
             }
             else {
-                console.log(response.status);
-                throw new Error("Ya existe usuario.");
+                mostrarMensaje('mensajeRegistro', "Ya existe usuario");
             }
         })
         .catch((data) => {
-            document.querySelector("#mensajeRegistro").innerHTML = data.message
+            mostrarMensaje('mensajeRegistro', data.message);
         });
     }
     catch (Error) {
-        document.querySelector("#mensajeRegistro").innerHTML = Error.message;
+        mostrarMensaje('mensajeLogin', Error.message);
     }
 }
 /* Movimientos INI */
@@ -179,69 +217,119 @@ function obtenerRubroDelGasto(tipo) {
             }
         });
     }
+
+    let imprimir ="";
+    if(tipo === "ingreso") {
+        imprimir = `<ion-select-option value="Efectivo">Efectivo</ion-select-option>
+                    <ion-select-option value="Banco">Banco</ion-select-option>`;
+    }
+    else if(tipo === "gasto") {
+        imprimir = `<ion-select-option value="Efectivo">Efectivo</ion-select-option>
+                    <ion-select-option value="Tarjeta de debito">Tarjeta de debito</ion-select-option>;
+                    <ion-select-option value="Tarjeta credito">Tarjeta credito</ion-select-option>`;
+    }
+    document.querySelector("#selPago").innerHTML = imprimir;
 }
 
 function agregarGasto() {
     let concepto = document.querySelector("#idConcepto").value.trim();
-    let total = document.querySelector("#precio").value.trim();
+    let total = parseInt(document.querySelector("#precio").value);
     let medio = document.querySelector("#selPago").value.trim();
     let fecha = document.querySelector("#fecha").value.trim();
     let rubro = parseInt(document.querySelector("#idRubros").value);
 
-    console.log(`concepto ${concepto} total ${total} medio ${medio} fecha ${fecha} rubro ${rubro}`);
+    try {
+        if (concepto === '') throw new Error('El concepto no puede quedar vacio');
 
-    fetch(`${BaseURL}/movimientos.php`,
-    {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "apikey": localStorage.getItem("token")
-        },
-        body: JSON.stringify({
-            "idUsuario": localStorage.getItem("id"),
-            "concepto": concepto,
-            "categoria": rubro,
-            "total": total,
-            "medio": medio,
-            "fecha": fecha
+        if (total <= 0) throw new Error('El precio debe ser mayor a cero');
+
+        if (medio === '') throw new Error('El medio no puede quedar vacio');
+
+        if (fecha === '') throw new Error('Seleccione una fecha valida');
+
+        if (rubro === '') throw new Error('El rubro nuo puede quedar vacio');
+
+        fetch(`${BaseURL}/movimientos.php`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "apikey": localStorage.getItem("token")
+            },
+            body: JSON.stringify({
+                "idUsuario": localStorage.getItem("id"),
+                "concepto": concepto,
+                "categoria": rubro,
+                "total": total,
+                "medio": medio,
+                "fecha": fecha
+            })
         })
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        localStorage.setItem('movimientos', data.movimientos);
-    })
-    .catch((error) => console.error('Error', error));
+        .then((response) => response.json())
+        .then((data) => {
+            precargaMovimientos();
+        })
+        .catch((error) => mostrarMensaje('mensajeGasto', error.message));
 
-    document.querySelector("#mensajeGasto").innerHTML = "Gasto guardado";
+        mostrarMensaje('mensajeGasto', "Gasto guardado");
+    }
+    catch(Error) {
+        mostrarMensaje('mensajeGasto', Error.message);
+    }
 }
 
-function mostrarMovimientos() {
-    let movimientosJSON = JSON.parse(localStorage.getItem('movimientos'));
+function mostrarMovimientos(movimientosJSON) {
 
+    document.querySelector('#movimientos .row.movimientos').innerHTML = "";
     //Si tengo el listado de rubros continuo.
     if (movimientosJSON !== null) {
 
         let html = '';
-
-        movimientosJSON.forEach((mov) => {
-
+        movimientosJSON.forEach((movimiento) => {
             html += 
-            `<ion-col>
-                <ion-card id="movimiento-${mov.id}">
-                    <img src="${BaseImgURL}/${mov.imagen}" />
+            `<ion-col size="12">
+                <ion-card id="rubro-${movimiento.id}">
                     <ion-card-header>
-                        <ion-card-subtitle>${mov.id}</ion-card-subtitle>
-                        <ion-card-title>${mov.nombre}</ion-card-title>
+                        <ion-card-subtitle>Concepto : ${movimiento.concepto}</ion-card-subtitle>
+                        <ion-card-title>Medio de pago : ${movimiento.medio}</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
-                        Tipo: ${mov.tipo}
+                        Id movimiento : ${movimiento.id} <br>
+                        Monto : $ ${movimiento.total} <br>
+                        Categoria : ${movimiento.categoria} <br>
+                        Fecha : ${movimiento.fecha} <br>
+                        Id del Usuario : ${movimiento.idUsuario}
                     </ion-card-content>
+                    <ion-button class="btnEliminarMovimiento" data-id="${movimiento.id}">Eliminar</ion-button>
                 </ion-card>
             </ion-col>`;
         });
-
-        document.querySelector('#rubros .row').innerHTML = html;
+        document.querySelector('#movimientos .row.movimientos').innerHTML = html;
     }
+    document.querySelectorAll('.btnEliminarMovimiento').forEach((btn) => btn.addEventListener('click', eliminarMovimiento));
+}
+
+function eliminarMovimiento() {
+    let idMov = this.getAttribute('data-id');
+    fetch(`${BaseURL}/movimientos.php`,
+    {
+        method : "DELETE",
+        headers: {
+            "Content-type":"application/json",
+            "apikey": localStorage.getItem("token")
+        },
+        body: JSON.stringify({
+            "idMovimiento": idMov
+        })
+    })
+    .then((response) => response.json())
+    .then(() => {
+        precargaMovimientos();
+        menuRuteo('/movimientos');
+        mostrarMensaje('mensajeMovimiento', "Se eliminó el movimiento correctamente");
+    })
+    .catch((error) => mostrarMensaje('mensajeMovimiento', error.message));
+    inicializar();
 }
 /* Movimientos END */
 
@@ -299,12 +387,27 @@ function precargaMovimientos() {
         //Guardo el objeto en el localStorage
         localStorage.setItem('movimientos', JSON.stringify(data.movimientos));
 
-        for(let i = 0; i < data.movimientos.length; i++) {
-            document.querySelector("#idRubro").innerHTML +=`<ion-select-option value="${data.movimientos[i].id}">${data.movimientos[i].nombre}</ion-select-option>`;
-        }
+        let movimientosJSON = JSON.parse(localStorage.getItem('movimientos'));
+        let movimientosIngresos = [];
+        let movimientosGastos = [];
+
+        //Recorro los movimientos y filtro por tipos.
+        movimientosJSON.forEach((movimiento) => {
+            if (movimiento.categoria < 7) movimientosGastos.push(movimiento);
+            else if (movimiento.categoria > 6) movimientosIngresos.push(movimiento);
+        });
+
+        localStorage.setItem('movimientosIngresos', JSON.stringify(movimientosIngresos));
+        localStorage.setItem('movimientosGastos', JSON.stringify(movimientosGastos));
+
+        mostrarMovimientos(movimientosJSON);
+        document.querySelectorAll('.btnEliminarMovimiento').forEach((btn) => btn.addEventListener('click', eliminarMovimiento));
+
+        calcularGastosTotales();
     })
     .catch((error) => console.error('Error', error));
 }
+
 function precargaRubros() {
     fetch(`${BaseURL}/rubros.php`, 
     {
@@ -368,13 +471,30 @@ function navegar(event) {
 }
 
 function ocultarSecciones() {
+    //Oculta todas las secciones cuyo id comience con 'page-'.
     document.querySelectorAll('ion-page[id*="page-"]').forEach((page) => {
         page.style.display = 'none';
     });
 }
 
+function limpiarMensajes() {
+    //Limpia todos los campos cuyo id comience con 'mensaje'.
+    document.querySelectorAll('p[id*="mensaje"]').forEach((p) => {
+        p.innerHTML = '';
+    });
+}
+
+function mostrarMensaje(id, msg) {
+    //Esta función recibe el id del elemento donde se debe aplicar y el mensaje a mostar.
+    document.querySelector(`#${id}`).innerHTML = msg;
+}
+
 function cerrarMenu() {
     menu.close();
+}
+
+function home() {
+    menuRuteo('/');
 }
 
 function menuRuteo(url) {
@@ -382,6 +502,8 @@ function menuRuteo(url) {
     document.querySelectorAll('.field').forEach((field) => {
         field.value = '';
     });
+    //Limpio los mensajes de error antes de cambiar de vista.
+    limpiarMensajes();
     url = url === '' ? '/' : url;
     menu_ruteo.push(url);
 }

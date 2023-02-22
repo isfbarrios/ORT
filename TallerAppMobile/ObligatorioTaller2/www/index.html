@@ -33,6 +33,7 @@
             <ion-route url="/gastos" component="page-gastos"></ion-route>
             <ion-route url="/tipoMovimiento" component="page-tipoMovimiento"></ion-route>
             <ion-route url="/movimientos" component="page-movimientos"></ion-route>
+            <ion-route url="/montos" component="page-montos"></ion-route>
         </ion-router>
         <!-- Barra de navegación usada por Ionic -->
         <ion-nav></ion-nav>
@@ -40,9 +41,8 @@
         <ion-menu side="start" menu-id="first" content-id="main" id="menu">
             <ion-header>
                 <ion-toolbar color="primary">
-                    <ion-title>Menú principal</ion-title>
+                    <ion-title>Menú</ion-title>
                 </ion-toolbar>
-                
             </ion-header>
             <ion-content>
                 <ion-list>
@@ -53,7 +53,6 @@
             </ion-content>
         </ion-menu>
         <div id="main"></div>
-
         <!-- Sección Home -->
         <ion-page class="ion-page" id="page-home">
             <ion-header>
@@ -61,12 +60,15 @@
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
                     </ion-buttons>
+                    <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </ion-buttons>
                     <ion-title>Home</ion-title>
                 </ion-toolbar>
                 <ion-item class="menu-item" style="display: inline-block;" href="/filtroCajeros">Cajeros</ion-item>
-                <ion-item class="menu-item" style="display: inline-block;" href="/rubros">Rubros</ion-item>
-                <!--<ion-item class="menu-item" style="display: inline-block;" href="/gastos">Agregar Gastos</ion-item>-->
+                <ion-item class="menu-item" style="display: inline-block;" href="/movimientos">Movimientos</ion-item>
                 <ion-item class="menu-item" style="display: inline-block;" href="/tipoMovimiento">Transferencia</ion-item>
+                <ion-item class="menu-item" style="display: inline-block;" href="/montos">Saldo</ion-item>
             </ion-header>
             <ion-content>
                 <div id="inicio">
@@ -82,6 +84,9 @@
         <ion-page class="ion-page" id="page-filtroCajeros">
             <ion-header>
                 <ion-toolbar>
+                    <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </ion-buttons>
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
                     </ion-buttons>
@@ -107,6 +112,9 @@
         <ion-page class="ion-page" id="page-tipoMovimiento">
             <ion-header>
                 <ion-toolbar>
+                    <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </ion-buttons>
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
                     </ion-buttons>
@@ -131,28 +139,13 @@
                 </ion-grid>
             </ion-content>
         </ion-page>
-        <!-- Sección Rubros -->
-        <ion-page class="ion-page" id="page-rubros">
-            <ion-header>
-                <ion-toolbar>
-                    <ion-buttons slot="end">
-                        <ion-menu-button></ion-menu-button>
-                    </ion-buttons>
-                    <ion-title>Rubros</ion-title>
-                </ion-toolbar>
-            </ion-header>
-            <ion-content>
-                <ion-grid id="rubros">
-                    <ion-row class="row">
-
-                    </ion-row>
-                </ion-grid>
-            </ion-content>
-        </ion-page>
         <!-- Sección Movimientos -->
         <ion-page class="ion-page" id="page-movimientos">
             <ion-header>
                 <ion-toolbar>
+                    <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </ion-buttons>
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
                     </ion-buttons>
@@ -160,17 +153,61 @@
                 </ion-toolbar>
             </ion-header>
             <ion-content>
-                <ion-grid id="movimientos">
-                    <ion-row class="row">
-
+                <ion-grid id="movimientos" style="margin: 1rem 0;">
+                    <ion-row class="row filtroMovimientos">
+                        <ion-col size="12">
+                            <ion-item>
+                                <ion-label>Filtro por tipo</ion-label>
+                                <ion-select id="filtroMovimiento" class="field" value="" placeholder="Seleccionar..." interface="action-sheet">
+                                    <ion-select-option value="0">Todos</ion-select-option>
+                                    <ion-select-option value="1">Gastos</ion-select-option>
+                                    <ion-select-option value="7">Ingresos</ion-select-option>
+                                </ion-select>
+                                <p id="mensajeMovimiento"></p>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="row movimientos">
+                        
                     </ion-row>
                 </ion-grid>
             </ion-content>
         </ion-page>
+                <!-- Sección Montos totales -->
+                <ion-page class="ion-page" id="page-montos">
+                    <ion-header>
+                        <ion-toolbar>
+                            <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
+                                <ion-icon name="home-outline"></ion-icon>
+                            </ion-buttons>
+                            <ion-buttons slot="end">
+                                <ion-menu-button></ion-menu-button>
+                            </ion-buttons>
+                            <ion-title>Montos totales</ion-title>
+                        </ion-toolbar>
+                    </ion-header>
+                    <ion-content>
+                        <ion-grid id="montos" style="margin: 1rem 0;">
+                            <ion-row class="row">
+                                <ion-col size="12">
+                                    <ion-item id="totalIngresos">
+                                    </ion-item>
+                                    <ion-item id="totalGastos">
+                                    </ion-item>
+                                    <ion-item id="totalRestante">
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-content>
+                </ion-page>
         <!-- Seccion agregar gastos-->
         <ion-page class="ion-page" id="page-gastos">
             <ion-header>
                 <ion-toolbar>
+                    <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </ion-buttons>
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
                     </ion-buttons>
@@ -184,7 +221,7 @@
                     <ion-col>
                         <ion-item>
                             <ion-label>Concepto</ion-label>
-                            <ion-textarea class="field" placeholder="Descripcion del gasto" id="idConcepto" type="text" ></ion-textarea>
+                            <ion-textarea class="field" placeholder="Descripcion del movimiento" id="idConcepto" type="text" ></ion-textarea>
                         </ion-item>
                         <ion-item>
                             <ion-label>Rubro</ion-label>
@@ -195,9 +232,6 @@
                         </ion-item>
                         <ion-item>
                             <ion-select class="field" value="" placeholder="Medio de pago" id="selPago">
-                                <ion-select-option value="Efectivo">Efectivo</ion-select-option>
-                                <ion-select-option value="Tarjeta de debito">Tarjeta de debito</ion-select-option>
-                                <ion-select-option value="Tarjeto credito">Tarjeta credito</ion-select-option>
                             </ion-select>
                         </ion-item>
                         <ion-item>
@@ -208,8 +242,8 @@
                             <ion-datetime class="field" id="fecha">
                             </ion-datetime>
                         </ion-item>
-                        <ion-button id="btnAgregarGasto" color="primary">Agregar</ion-button>
                         <p id="mensajeGasto"></p>
+                        <ion-button id="btnAgregarGasto" color="primary">Agregar</ion-button>
                     </ion-col>
                 </ion-grid>
             </ion-content>
@@ -218,6 +252,9 @@
         <ion-page class="ion-page" id="page-login">
             <ion-header>
                 <ion-toolbar>
+                    <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </ion-buttons>
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
                     </ion-buttons>
@@ -247,6 +284,9 @@
         <ion-page class="ion-page" id="page-registro">
             <ion-header>
                 <ion-toolbar>
+                    <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </ion-buttons>
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
                     </ion-buttons>
@@ -264,13 +304,11 @@
                             <ion-item>
                                 <ion-label>Departamento</ion-label>
                                 <ion-select id="idDepartamento" class="field" placeholder="Seleccionar..." value="" interface="popover">
-                                    
                                 </ion-select>
                             </ion-item>
                             <ion-item>
                                 <ion-label>Ciudad</ion-label>
                                 <ion-select id="idCiudad" class="field" value="" placeholder="Seleccionar..." interface="action-sheet">
-                                    
                                 </ion-select>
                             </ion-item>
                             <ion-item>
@@ -292,6 +330,9 @@
         <ion-page class="ion-page" id="page-cajeros">
             <ion-header>
                 <ion-toolbar>
+                    <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </ion-buttons>
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
                     </ion-buttons>
