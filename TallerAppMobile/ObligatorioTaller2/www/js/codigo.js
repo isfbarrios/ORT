@@ -2,6 +2,7 @@ const BaseURL = 'https://dwallet.develotion.com';
 const BaseImgURL = `${BaseURL}/imgs`;
 const menu = document.querySelector('#menu');
 const menu_ruteo = document.querySelector('#menu-ruteo');
+const infiniteScroll = document.getElementById('infinite-scroll');
 let map = null;
 let ubicacionActual;
 
@@ -85,11 +86,12 @@ function verificarSiEstaLogueado() {
         precargaMovimientos();
         precargaRubros();
         menuRuteo('/');
-
+        document.querySelectorAll('.btnHome').forEach((btnHome) => btnHome.style.display = 'block');
         document.querySelectorAll('.menu-log-in').forEach((el) => el.style.display = 'none');
         document.querySelector('.menu-log-out').style.display = 'block';
     }
     else {
+        document.querySelectorAll('.btnHome').forEach((btnHome) => btnHome.style.display = 'none');
         document.querySelectorAll('.menu-log-in').forEach((el) => el.style.display = 'block');
         document.querySelector('.menu-log-out').style.display = 'none';
         menuRuteo("/login");
@@ -280,31 +282,29 @@ function agregarGasto() {
 
 function mostrarMovimientos(movimientosJSON) {
 
-    document.querySelector('#movimientos .row.movimientos').innerHTML = "";
+    document.querySelector('#movimientos #lista-movimientos').innerHTML = "";
     //Si tengo el listado de rubros continuo.
     if (movimientosJSON !== null) {
 
         let html = '';
         movimientosJSON.forEach((movimiento) => {
             html += 
-            `<ion-col size="12">
-                <ion-card id="rubro-${movimiento.id}">
-                    <ion-card-header>
-                        <ion-card-subtitle>Concepto : ${movimiento.concepto}</ion-card-subtitle>
-                        <ion-card-title>Medio de pago : ${movimiento.medio}</ion-card-title>
-                    </ion-card-header>
-                    <ion-card-content>
-                        Id movimiento : ${movimiento.id} <br>
-                        Monto : $ ${movimiento.total} <br>
-                        Categoria : ${movimiento.categoria} <br>
-                        Fecha : ${movimiento.fecha} <br>
-                        Id del Usuario : ${movimiento.idUsuario}
-                    </ion-card-content>
-                    <ion-button class="btnEliminarMovimiento" data-id="${movimiento.id}">Eliminar</ion-button>
-                </ion-card>
-            </ion-col>`;
+            `<ion-card id="rubro-${movimiento.id}">
+                <ion-card-header>
+                    <ion-card-subtitle>Concepto : ${movimiento.concepto}</ion-card-subtitle>
+                    <ion-card-title>Medio de pago : ${movimiento.medio}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                    Id movimiento : ${movimiento.id} <br>
+                    Monto : $ ${movimiento.total} <br>
+                    Categoria : ${movimiento.categoria} <br>
+                    Fecha : ${movimiento.fecha} <br>
+                    Id del Usuario : ${movimiento.idUsuario}
+                </ion-card-content>
+                <ion-button class="btnEliminarMovimiento" data-id="${movimiento.id}">Eliminar</ion-button>
+            </ion-card>`;
         });
-        document.querySelector('#movimientos .row.movimientos').innerHTML = html;
+        document.querySelector('#movimientos #lista-movimientos').innerHTML = html;
     }
     document.querySelectorAll('.btnEliminarMovimiento').forEach((btn) => btn.addEventListener('click', eliminarMovimiento));
 }
@@ -387,25 +387,36 @@ function precargaMovimientos() {
         //Guardo el objeto en el localStorage
         localStorage.setItem('movimientos', JSON.stringify(data.movimientos));
 
-        let movimientosJSON = JSON.parse(localStorage.getItem('movimientos'));
-        let movimientosIngresos = [];
-        let movimientosGastos = [];
-
-        //Recorro los movimientos y filtro por tipos.
-        movimientosJSON.forEach((movimiento) => {
-            if (movimiento.categoria < 7) movimientosGastos.push(movimiento);
-            else if (movimiento.categoria > 6) movimientosIngresos.push(movimiento);
-        });
-
-        localStorage.setItem('movimientosIngresos', JSON.stringify(movimientosIngresos));
-        localStorage.setItem('movimientosGastos', JSON.stringify(movimientosGastos));
-
-        mostrarMovimientos(movimientosJSON);
-        document.querySelectorAll('.btnEliminarMovimiento').forEach((btn) => btn.addEventListener('click', eliminarMovimiento));
-
-        calcularGastosTotales();
+        if (localStorage.getItem('movimientos') != undefined) {
+            let movimientosJSON = JSON.parse(localStorage.getItem('movimientos'));
+            let movimientosIngresos = [];
+            let movimientosGastos = [];
+    
+            //Recorro los movimientos y filtro por tipos.
+            movimientosJSON.forEach((movimiento) => {
+                if (movimiento.categoria < 7) movimientosGastos.push(movimiento);
+                else if (movimiento.categoria > 6) movimientosIngresos.push(movimiento);
+            });
+    
+            localStorage.setItem('movimientosIngresos', JSON.stringify(movimientosIngresos));
+            localStorage.setItem('movimientosGastos', JSON.stringify(movimientosGastos));
+    
+            mostrarMovimientos(movimientosJSON);
+            document.querySelectorAll('.btnEliminarMovimiento').forEach((btn) => btn.addEventListener('click', eliminarMovimiento));
+    
+            calcularGastosTotales();
+        }
     })
     .catch((error) => console.error('Error', error));
+}
+async function share() {
+    await Capacitor.Plugins.Share.share({
+
+        title: 'Compartir',
+        text: 'Comparte este contenido con tus contactos',
+        url: 'http://ionicframework.com/',
+        dialogTitle: 'Comparte con tus contactos'
+    });
 }
 
 function precargaRubros() {
@@ -515,3 +526,15 @@ function cerrarSesion() {
     cerrarMenu();
     inicializar();
 }
+
+//Funciones de Ionic para navegación y funcionalidad
+infiniteScroll.addEventListener('ionInfinite', function (event) {
+    setTimeout(function () {
+        event.target.complete();
+        // App logic to determine if all data is loaded
+        // and disable the infinite scroll
+        if (data.length == 1000) {
+            event.target.disabled = true;
+        }
+    }, 500);
+});

@@ -15,7 +15,7 @@
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="crossorigin=""></script>
     
     <script src="js/codigo.js" defer></script>
-
+    <script src="capacitor.js" defer></script>
     <style>
         #map { height: 180px; }
     </style>
@@ -63,6 +63,9 @@
                     <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
                         <ion-icon name="home-outline"></ion-icon>
                     </ion-buttons>
+                    <ion-buttons class="btnShare" slot="start" style="margin: 0 .5rem; font-size: 18px;" onclick="share()">
+                        <ion-icon name="share-outline"></ion-icon>
+                    </ion-buttons>
                     <ion-title>Home</ion-title>
                 </ion-toolbar>
                 <ion-item class="menu-item" style="display: inline-block;" href="/filtroCajeros">Cajeros</ion-item>
@@ -73,9 +76,7 @@
             <ion-content>
                 <div id="inicio">
                     <ion-grid id="home">
-                        <ion-row class="row">
-
-                        </ion-row>
+                        <ion-row class="row"></ion-row>
                     </ion-grid>
                 </div>
             </ion-content>
@@ -86,6 +87,9 @@
                 <ion-toolbar>
                     <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
                         <ion-icon name="home-outline"></ion-icon>
+                    </ion-buttons>
+                    <ion-buttons class="btnShare" slot="start" style="margin: 0 .5rem; font-size: 18px;" onclick="share()">
+                        <ion-icon name="share-outline"></ion-icon>
                     </ion-buttons>
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
@@ -101,19 +105,22 @@
                                 <ion-label>Distancia</ion-label>
                                 <ion-input id="distanciaCajero" type="number" clear-input="true" class="field"></ion-input>
                             </ion-item>
-                            <ion-button id="btnFiltrarCajeros" color="primary">Mostrar cajeros</ion-button>
+                            <ion-button id="btnFiltrarCajeros" color="primary">Mostrar cajeros</ion-buttons>
                             <p id="mensajeFiltrarCajeros"></p>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
             </ion-content>
         </ion-page>
-        <!-- Sección Filtros cajeros -->
+        <!-- Sección Filtro movimiento -->
         <ion-page class="ion-page" id="page-tipoMovimiento">
             <ion-header>
                 <ion-toolbar>
                     <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
                         <ion-icon name="home-outline"></ion-icon>
+                    </ion-buttons>
+                    <ion-buttons class="btnShare" slot="start" style="margin: 0 .5rem; font-size: 18px;" onclick="share()">
+                        <ion-icon name="share-outline"></ion-icon>
                     </ion-buttons>
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
@@ -132,7 +139,7 @@
                                     <ion-select-option value="gasto">Gasto</ion-select-option>
                                 </ion-select>
                             </ion-item>
-                            <ion-button id="btnTipoTransferencia" color="primary">Confirmar</ion-button>
+                            <ion-buttons id="btnTipoTransferencia" color="primary">Confirmar</ion-buttons>
                             <p id="mensajeTipoTransferencia"></p>
                         </ion-col>
                     </ion-row>
@@ -146,61 +153,65 @@
                     <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
                         <ion-icon name="home-outline"></ion-icon>
                     </ion-buttons>
+                    <ion-buttons class="btnShare" slot="start" style="margin: 0 .5rem; font-size: 18px;" onclick="share()">
+                        <ion-icon name="share-outline"></ion-icon>
+                    </ion-buttons>
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
                     </ion-buttons>
                     <ion-title>Movimientos</ion-title>
                 </ion-toolbar>
             </ion-header>
+            <ion-content id="movimientos" style="margin: 1rem 0;">
+                <ion-item>
+                    <ion-label>Filtro por tipo</ion-label>
+                    <ion-select id="filtroMovimiento" class="field" value="" placeholder="Seleccionar..." interface="action-sheet">
+                        <ion-select-option value="0">Todos</ion-select-option>
+                        <ion-select-option value="1">Gastos</ion-select-option>
+                        <ion-select-option value="7">Ingresos</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <p id="mensajeMovimiento"></p>
+                <div id="lista-movimientos">
+                
+                </div>
+                <ion-infinite-scroll threshold="100px" id="infinite-scroll">
+                    <ion-infinite-scroll-content loading-spinner="bubbles" loading-text="Loading more data...">
+                    </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+            </ion-content>
+        </ion-page>
+        <!-- Sección Montos totales -->
+        <ion-page class="ion-page" id="page-montos">
+            <ion-header>
+                <ion-toolbar>
+                    <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </ion-buttons>
+                    <ion-buttons class="btnShare" slot="start" style="margin: 0 .5rem; font-size: 18px;" onclick="share()">
+                        <ion-icon name="share-outline"></ion-icon>
+                    </ion-buttons>
+                    <ion-buttons slot="end">
+                        <ion-menu-button></ion-menu-button>
+                    </ion-buttons>
+                    <ion-title>Montos totales</ion-title>
+                </ion-toolbar>
+            </ion-header>
             <ion-content>
-                <ion-grid id="movimientos" style="margin: 1rem 0;">
-                    <ion-row class="row filtroMovimientos">
+                <ion-grid id="montos" style="margin: 1rem 0;">
+                    <ion-row class="row">
                         <ion-col size="12">
-                            <ion-item>
-                                <ion-label>Filtro por tipo</ion-label>
-                                <ion-select id="filtroMovimiento" class="field" value="" placeholder="Seleccionar..." interface="action-sheet">
-                                    <ion-select-option value="0">Todos</ion-select-option>
-                                    <ion-select-option value="1">Gastos</ion-select-option>
-                                    <ion-select-option value="7">Ingresos</ion-select-option>
-                                </ion-select>
-                                <p id="mensajeMovimiento"></p>
+                            <ion-item id="totalIngresos">
+                            </ion-item>
+                            <ion-item id="totalGastos">
+                            </ion-item>
+                            <ion-item id="totalRestante">
                             </ion-item>
                         </ion-col>
-                    </ion-row>
-                    <ion-row class="row movimientos">
-                        
                     </ion-row>
                 </ion-grid>
             </ion-content>
         </ion-page>
-                <!-- Sección Montos totales -->
-                <ion-page class="ion-page" id="page-montos">
-                    <ion-header>
-                        <ion-toolbar>
-                            <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
-                                <ion-icon name="home-outline"></ion-icon>
-                            </ion-buttons>
-                            <ion-buttons slot="end">
-                                <ion-menu-button></ion-menu-button>
-                            </ion-buttons>
-                            <ion-title>Montos totales</ion-title>
-                        </ion-toolbar>
-                    </ion-header>
-                    <ion-content>
-                        <ion-grid id="montos" style="margin: 1rem 0;">
-                            <ion-row class="row">
-                                <ion-col size="12">
-                                    <ion-item id="totalIngresos">
-                                    </ion-item>
-                                    <ion-item id="totalGastos">
-                                    </ion-item>
-                                    <ion-item id="totalRestante">
-                                    </ion-item>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
-                    </ion-content>
-                </ion-page>
         <!-- Seccion agregar gastos-->
         <ion-page class="ion-page" id="page-gastos">
             <ion-header>
@@ -208,44 +219,45 @@
                     <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
                         <ion-icon name="home-outline"></ion-icon>
                     </ion-buttons>
+                    <ion-buttons class="btnShare" slot="start" style="margin: 0 .5rem; font-size: 18px;" onclick="share()">
+                        <ion-icon name="share-outline"></ion-icon>
+                    </ion-buttons>
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
                     </ion-buttons>
                     <ion-title>Transferencia</ion-title>
                 </ion-toolbar>
             </ion-header>
-            <ion-content>
-                <ion-grid id="gastos">
-                    <ion-row class="row">
-                    </ion-row>
-                    <ion-col>
-                        <ion-item>
-                            <ion-label>Concepto</ion-label>
-                            <ion-textarea class="field" placeholder="Descripcion del movimiento" id="idConcepto" type="text" ></ion-textarea>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label>Rubro</ion-label>
-                            <ion-select id="idRubros" class="field" value="" placeholder="Seleccionar..." interface="action-sheet">
-                                
-                            </ion-select>
-                            <p id="mensajeRubro"></p>
-                        </ion-item>
-                        <ion-item>
-                            <ion-select class="field" value="" placeholder="Medio de pago" id="selPago">
-                            </ion-select>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label>Importa en pesos $</ion-label>
-                            <ion-input class="field" type="number" placeholder="000" id="precio"></ion-input>
-                        </ion-item>
-                        <ion-item>
-                            <ion-datetime class="field" id="fecha">
-                            </ion-datetime>
-                        </ion-item>
-                        <p id="mensajeGasto"></p>
-                        <ion-button id="btnAgregarGasto" color="primary">Agregar</ion-button>
-                    </ion-col>
-                </ion-grid>
+            <ion-content id="gastos">
+                <ion-item>
+                    <ion-label>Concepto</ion-label>
+                    <ion-textarea class="field" placeholder="Descripcion del movimiento" id="idConcepto" type="text" ></ion-textarea>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Rubro</ion-label>
+                    <ion-select id="idRubros" class="field" value="" placeholder="Seleccionar..." interface="action-sheet">
+                        
+                    </ion-select>
+                    <p id="mensajeRubro"></p>
+                </ion-item>
+                <ion-item>
+                    <ion-select class="field" value="" placeholder="Medio de pago" id="selPago">
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Importa en pesos $</ion-label>
+                    <ion-input class="field" type="number" placeholder="000" id="precio"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-datetime class="field" id="fecha">
+                    </ion-datetime>
+                </ion-item>
+                <p id="mensajeGasto"></p>
+                <ion-buttons id="btnAgregarGasto" color="primary">Agregar</ion-buttons>
+                <ion-infinite-scroll threshold="100px" id="infinite-scroll">
+                    <ion-infinite-scroll-content loading-spinner="bubbles" loading-text="Loading more data...">
+                    </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
             </ion-content>
         </ion-page>
         <!-- Sección Login -->
@@ -254,6 +266,9 @@
                 <ion-toolbar>
                     <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
                         <ion-icon name="home-outline"></ion-icon>
+                    </ion-buttons>
+                    <ion-buttons class="btnShare" slot="start" style="margin: 0 .5rem; font-size: 18px;" onclick="share()">
+                        <ion-icon name="share-outline"></ion-icon>
                     </ion-buttons>
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
@@ -273,7 +288,7 @@
                                 <ion-label>Contraseña</ion-label>
                                 <ion-input id="loginPassword" class="field" type="password" clear-input="true"></ion-input>
                             </ion-item>
-                            <ion-button id="btnLogin" color="primary">Iniciar sesión</ion-button>
+                            <ion-button id="btnLogin" color="primary">Iniciar sesión</ion-buttons>
                             <p id="mensajeLogin"></p>
                         </ion-col>
                     </ion-row>
@@ -286,6 +301,9 @@
                 <ion-toolbar>
                     <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
                         <ion-icon name="home-outline"></ion-icon>
+                    </ion-buttons>
+                    <ion-buttons class="btnShare" slot="start" style="margin: 0 .5rem; font-size: 18px;" onclick="share()">
+                        <ion-icon name="share-outline"></ion-icon>
                     </ion-buttons>
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
@@ -319,7 +337,7 @@
                                 <ion-label>Repetir Contraseña</ion-label>
                                 <ion-input id="repeatePassword" class="field" type="password" clear-input="true"></ion-input>
                             </ion-item>
-                            <ion-button id="btnRegistroUsuario" color="primary">Registrarse</ion-button>
+                            <ion-buttons id="btnRegistroUsuario" color="primary">Registrarse</ion-buttons>
                             <p id="mensajeRegistro"></p>
                         </ion-col>
                     </ion-row>
@@ -332,6 +350,9 @@
                 <ion-toolbar>
                     <ion-buttons class="btnHome" slot="start" style="margin: 0 .5rem; font-size: 18px;">
                         <ion-icon name="home-outline"></ion-icon>
+                    </ion-buttons>
+                    <ion-buttons class="btnShare" slot="start" style="margin: 0 .5rem; font-size: 18px;" onclick="share()">
+                        <ion-icon name="share-outline"></ion-icon>
                     </ion-buttons>
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
