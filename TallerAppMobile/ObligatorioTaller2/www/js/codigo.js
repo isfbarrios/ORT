@@ -87,11 +87,13 @@ function verificarSiEstaLogueado() {
         precargaRubros();
         menuRuteo('/');
         document.querySelectorAll('.btnHome').forEach((btnHome) => btnHome.style.display = 'block');
+        document.querySelectorAll('.btnShare').forEach((btnHome) => btnHome.style.display = 'block');
         document.querySelectorAll('.menu-log-in').forEach((el) => el.style.display = 'none');
         document.querySelector('.menu-log-out').style.display = 'block';
     }
     else {
         document.querySelectorAll('.btnHome').forEach((btnHome) => btnHome.style.display = 'none');
+        document.querySelectorAll('.btnShare').forEach((btnHome) => btnHome.style.display = 'none');
         document.querySelectorAll('.menu-log-in').forEach((el) => el.style.display = 'block');
         document.querySelector('.menu-log-out').style.display = 'none';
         menuRuteo("/login");

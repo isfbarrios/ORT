@@ -94,7 +94,7 @@
                     <ion-buttons slot="end">
                         <ion-menu-button></ion-menu-button>
                     </ion-buttons>
-                    <ion-title>Filtrar cajeros por distancia</ion-title>
+                    <ion-title>Cajeros</ion-title>
                 </ion-toolbar>
             </ion-header>
             <ion-content>
@@ -105,7 +105,7 @@
                                 <ion-label>Distancia</ion-label>
                                 <ion-input id="distanciaCajero" type="number" clear-input="true" class="field"></ion-input>
                             </ion-item>
-                            <ion-button id="btnFiltrarCajeros" color="primary">Mostrar cajeros</ion-buttons>
+                            <ion-button id="btnFiltrarCajeros" color="primary">Mostrar cajeros</ion-button>
                             <p id="mensajeFiltrarCajeros"></p>
                         </ion-col>
                     </ion-row>
@@ -139,7 +139,7 @@
                                     <ion-select-option value="gasto">Gasto</ion-select-option>
                                 </ion-select>
                             </ion-item>
-                            <ion-buttons id="btnTipoTransferencia" color="primary">Confirmar</ion-buttons>
+                            <ion-button id="btnTipoTransferencia" color="primary">Confirmar</ion-button>
                             <p id="mensajeTipoTransferencia"></p>
                         </ion-col>
                     </ion-row>
@@ -253,7 +253,7 @@
                     </ion-datetime>
                 </ion-item>
                 <p id="mensajeGasto"></p>
-                <ion-buttons id="btnAgregarGasto" color="primary">Agregar</ion-buttons>
+                <ion-button id="btnAgregarGasto" color="primary">Agregar</ion-button>
                 <ion-infinite-scroll threshold="100px" id="infinite-scroll">
                     <ion-infinite-scroll-content loading-spinner="bubbles" loading-text="Loading more data...">
                     </ion-infinite-scroll-content>
@@ -288,7 +288,7 @@
                                 <ion-label>Contraseña</ion-label>
                                 <ion-input id="loginPassword" class="field" type="password" clear-input="true"></ion-input>
                             </ion-item>
-                            <ion-button id="btnLogin" color="primary">Iniciar sesión</ion-buttons>
+                            <ion-button id="btnLogin" color="primary">Iniciar sesión</ion-button>
                             <p id="mensajeLogin"></p>
                         </ion-col>
                     </ion-row>
